@@ -12,8 +12,10 @@
 > **Alex** [10:17]
 > Ping Sarah directly. She might not be checking this channel.
 >
-> **Fan** [10:18]
-> @sarah Hey, are you around? Got a sec about the payment API?
+> ---
+>
+> **Fan** [10:18] (DM to Sarah)
+> Hey, are you around? Got a sec about the payment API?
 >
 > **Sarah** [10:45]
 > Sorry, was in a meeting. What's up?
@@ -40,11 +42,10 @@
 >
 > ---
 >
-> **#random**
+> **#general**
 >
 > **Tom** [16:00]
-> (screenshot of error)
-> Anyone seen this before?
+> (screenshot of error) Anyone seen this before?
 >
 > **Fan** [16:05]
 > I had the same issue last week. Try clearing your cache.
@@ -66,3 +67,39 @@
 >
 > **Fan** [16:13]
 > No problem.
+>
+> ---
+>
+> **#random**
+>
+> **Lisa** [09:30]
+> Does anyone have the design specs for the checkout page?
+> (no response for 3 hours)
+>
+> **Lisa** [12:15]
+> Jumping in here — I know everyone's busy but I really need those specs to proceed.
+>
+> ---
+>
+> **Alex** [17:55]
+> (voice message 0:32) Here's how I fixed this last time
+>
+> **Tom** [18:02]
+> Can you type it? Can't listen right now.
+>
+> **Alex** [18:03]
+> Sure. Debug steps: 1) clear cache 2) restart server
+>
+> ---
+>
+> **#random**
+>
+> **Mark** [22:14]
+> Anyone know how to fix this error? (screenshot)
+> (message deleted)
+>
+> **Fan** [22:15]
+> I saw that. 😄
+>
+> **Mark** [22:16]
+> Wrong channel. Meant to DM you.
