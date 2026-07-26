@@ -1,7 +1,7 @@
 ### "I fixed a login bug yesterday"
 QA 提了一个已经修过的 bug。
 
-还可以说：
+Also say：
 - I already fixed that
 - That should be resolved already
 - Can you check the latest build?
@@ -10,7 +10,7 @@ QA 提了一个已经修过的 bug。
 ### "Can you send me the steps to reproduce?"
 让 QA 提供精确的复现步骤。
 
-还可以说：
+Also say：
 - Can you give me the exact steps?
 - What's the STR? (Steps To Reproduce)
 - Can you write it up in a ticket?
@@ -19,7 +19,7 @@ QA 提了一个已经修过的 bug。
 ### "I can't reproduce it"
 复现不出来。
 
-还可以说：
+Also say：
 - It works on my machine
 - Can you show me?
 - Can you record it?
@@ -28,7 +28,7 @@ QA 提了一个已经修过的 bug。
 ### "That's existing behavior"
 不是新 bug，之前就有。
 
-还可以说：
+Also say：
 - This was like this before my change
 - It's not related to my PR
 - This is pre-existing
@@ -37,7 +37,7 @@ QA 提了一个已经修过的 bug。
 ### "Config issue"
 不是代码问题，是配置问题。
 
-还可以说：
+Also say：
 - It's not a code issue
 - The config is wrong
 - Environment difference

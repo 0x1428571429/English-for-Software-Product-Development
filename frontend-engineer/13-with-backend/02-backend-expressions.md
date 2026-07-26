@@ -1,7 +1,7 @@
 ### "That field is deprecated"
 字段废弃了但不通知。
 
-还可以说：
+Also say：
 - We renamed it
 - That field no longer exists
 - It was replaced by X
@@ -10,7 +10,7 @@
 ### "Works on my end"
 后端说没问题。
 
-还可以说：
+Also say：
 - It works on my machine
 - I can't reproduce it
 - Let me check your request
@@ -19,7 +19,7 @@
 ### "That's a legacy thing"
 历史遗留问题，谁都不想碰。
 
-还可以说：
+Also say：
 - It's technical debt
 - We should fix it but it's not priority
 - It's been like that for a while
@@ -28,7 +28,7 @@
 ### "The database is under load"
 响应慢的各种原因。
 
-还可以说：
+Also say：
 - We're adding indexes next week
 - Query is slow
 - Need to optimize

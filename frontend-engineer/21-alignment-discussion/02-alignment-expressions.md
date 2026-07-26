@@ -1,7 +1,7 @@
 ### "I thought we agreed on Wednesday"
 信息不对称，每个人听到的不一样。
 
-还可以说：
+Also say：
 - That's not what we discussed
 - I remember it differently
 - Was that decided?
@@ -10,7 +10,7 @@
 ### "No one told me"
 没人收到通知。
 
-还可以说：
+Also say：
 - I wasn't informed
 - I didn't get that message
 - No one communicated that
@@ -19,7 +19,7 @@
 ### "Let's get on the same page"
 对齐信息。
 
-还可以说：
+Also say：
 - Let's align on this
 - We need to be on the same page
 - Let's clarify expectations
@@ -28,7 +28,7 @@
 ### "You shouldn't have committed without checking"
 不允许对外承诺。
 
-还可以说：
+Also say：
 - Don't promise dates without asking
 - Check with the team first
 - We need team consensus
@@ -37,7 +37,7 @@
 ### "We don't ship broken code"
 不发布有问题的代码。
 
-还可以说：
+Also say：
 - Quality over speed
 - We don't rush releases
 - We test before shipping

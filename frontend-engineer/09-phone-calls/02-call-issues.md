@@ -1,7 +1,7 @@
 ### "Can you hear me?"
 电话开场确认能不能听到。
 
-还可以说：
+Also say：
 - Are you there?
 - Can you hear me OK?
 - You're breaking up
@@ -10,7 +10,7 @@
 ### "You cut out"
 信号断了/卡顿。
 
-还可以说：
+Also say：
 - You cut out for a second
 - Your audio is choppy
 - You froze
@@ -19,7 +19,7 @@
 ### "Let me turn off the video"
 关视频改善网络。
 
-还可以说：
+Also say：
 - Video is killing my bandwidth
 - Let me go audio only
 - Can we turn off cameras?
@@ -27,7 +27,7 @@
 ### "Bear with me"
 找东西/准备中。
 
-还可以说：
+Also say：
 - Bear with me, let me find it
 - One sec, I'm looking for it
 - Give me a moment
@@ -36,7 +36,7 @@
 ### "What did I miss?"
 中途加入。
 
-还可以说：
+Also say：
 - Sorry I'm late. What did I miss?
 - Can you catch me up?
 - I just joined. What's the context?

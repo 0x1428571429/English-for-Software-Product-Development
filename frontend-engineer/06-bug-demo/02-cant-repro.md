@@ -1,7 +1,7 @@
 ### "Can you repro it on staging?"
 复现不出来。
 
-还可以说：
+Also say：
 - I can't reproduce it locally
 - It only happens in production
 - It's intermittent — about 60% of the time
@@ -10,7 +10,7 @@
 ### "Let me record my screen"
 录屏演示 bug。
 
-还可以说：
+Also say：
 - Let me record it and show you
 - I'll take a video
 - Let me capture it before it goes away
@@ -18,7 +18,7 @@
 ### "This affects all users"
 跟 PM 解释严重性。
 
-还可以说：
+Also say：
 - This is a data integrity issue
 - Users might think they're being overcharged
 - It's a pretty big deal
@@ -27,7 +27,7 @@
 ### "I'd argue this is urgent"
 PM 说这个不紧急时的反驳。
 
-还可以说：
+Also say：
 - I think this is more serious than it looks
 - This could escalate quickly
 - We should prioritize this
@@ -35,7 +35,7 @@ PM 说这个不紧急时的反驳。
 ### "Is this frontend or backend?"
 不确定责任方。
 
-还可以说：
+Also say：
 - Let's check the network tab
 - The API returns the correct data
 - It's probably a frontend issue

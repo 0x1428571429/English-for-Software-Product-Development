@@ -1,7 +1,7 @@
 ### "Got a sec?"
 找人。
 
-还可以说：
+Also say：
 - Are you around?
 - You free?
 - Can I ask you something?
@@ -10,7 +10,7 @@
 ### "Bumping this"
 催一下之前发的消息。
 
-还可以说：
+Also say：
 - Any update on this?
 - Just following up
 - Ping
@@ -19,7 +19,7 @@
 ### "I see you're online"
 看到对方在线但不回消息。
 
-还可以说：
+Also say：
 - Hey, did you see my message?
 - Not urgent, just checking
 - Let me know when you're free
@@ -27,7 +27,7 @@
 ### "No rush"
 不着急。
 
-还可以说：
+Also say：
 - Whenever you get a chance
 - Take your time
 - No hurry
@@ -50,7 +50,7 @@
 ### "That was it"
 问题解决了。
 
-还可以说：
+Also say：
 - That fixed it
 - Works now
 - Thanks!

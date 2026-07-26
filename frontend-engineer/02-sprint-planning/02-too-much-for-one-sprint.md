@@ -2,19 +2,19 @@
 
 PM 想塞太多事，开发说做不完。
 
-还可以说：
+Also say：
 - This is way too much for one sprint
 - We can't fit all of this in
 - This is unrealistic for two weeks
 - There's no way we can deliver all of this
 
-### 常见错误
+### Common mistakes
 
 ❌ This sprint have too many tasks — 语法错，have 应该是 has
 
 ❌ We can't finish so many works — works 不可数，应该说 so much work
 
-### 关联对话
+### Related conversation
 
 > B: Well, we need all of them by end of next month.
 > C: Doesn't mean we can do them all in one sprint.
@@ -44,7 +44,7 @@ PM 说 deadline 时的回应：
 - Which one do you want to drop?
 - You need to choose.
 
-### 什么时候说
+### When to use
 
 - PM 给太多需求时
 - sprint 容量不够时

@@ -2,7 +2,7 @@
 
 QA 提到了你没想到的 case。
 
-还可以说：
+Also say：
 - Good catch — 好发现
 - I missed that — 我漏了
 - Thanks, I'll add it
@@ -27,7 +27,7 @@ QA 提到了你没想到的 case。
 - Edge cases can wait
 - We'll test the happy path first
 
-### 什么时候说
+### When to use
 
 - QA 发现你漏了 case 时
 - 需要排测试优先级时

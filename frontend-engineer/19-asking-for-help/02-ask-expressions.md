@@ -1,7 +1,7 @@
 ### "Quick question"
 表示就问一个快的问题。
 
-还可以说：
+Also say：
 - Got a sec?
 - Can I ask you something quick?
 - One quick thing
@@ -11,7 +11,7 @@
 ### "This might be a stupid question"
 觉得问题很蠢。
 
-还可以说：
+Also say：
 - This might be obvious but...
 - I'm probably missing something...
 - Sorry if this is a dumb question...
@@ -20,7 +20,7 @@
 ### "Never mind, I figured it out"
 问完自己解决了。
 
-还可以说：
+Also say：
 - Don't worry, I got it
 - I figured it out
 - Solved it

@@ -2,7 +2,7 @@
 
 还没做完，快好了。但说了好几天了，实际还差得远。
 
-还可以说：
+Also say：
 - Still working through it
 - Not done yet. Getting close.
 - Ran into something unexpected.
@@ -26,7 +26,7 @@
 - Nothing major, I can handle it — 不严重，我能处理
 - Just need a bit more time — 再给我点时间
 
-### 什么时候说
+### When to use
 
 - 任务还没做完时
 - 不想承认自己搞不定时

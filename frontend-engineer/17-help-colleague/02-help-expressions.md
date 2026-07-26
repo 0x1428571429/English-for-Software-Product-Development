@@ -1,7 +1,7 @@
 ### "Do you have a sec?"
 求助开场。
 
-还可以说：
+Also say：
 - Got a minute?
 - Are you free?
 - Can I ask you something?
@@ -10,7 +10,7 @@
 ### "Let me take a look"
 愿意帮忙。
 
-还可以说：
+Also say：
 - Let me see
 - Show me what's happening
 - Can you share your screen?
@@ -19,7 +19,7 @@
 ### "I tried asking AI"
 先试过了 AI 再来找人。
 
-还可以说：
+Also say：
 - AI suggested something but it wasn't right
 - I already asked AI
 - AI wasn't helpful
@@ -28,7 +28,7 @@
 ### "I owe you one"
 欠人情。
 
-还可以说：
+Also say：
 - Thanks, I appreciate it
 - You saved me
 - Thanks for your help
@@ -37,7 +37,7 @@
 ### "That's what I'm here for"
 同事间互帮。
 
-还可以说：
+Also say：
 - No problem
 - Happy to help
 - Anytime

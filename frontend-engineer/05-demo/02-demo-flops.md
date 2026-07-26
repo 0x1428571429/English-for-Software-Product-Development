@@ -1,7 +1,7 @@
 ### "It was working earlier"
 演示翻车现场。最经典的 demo 翻车台词。
 
-还可以说：
+Also say：
 - It worked fine yesterday
 - Something must have changed
 - Let me try again
@@ -10,7 +10,7 @@
 ### "Is that the final design?"
 效果跟预期不一样。
 
-还可以说：
+Also say：
 - That looks different from what I expected
 - The spacing is off
 - The colors don't match the brand
@@ -19,7 +19,7 @@
 ### "I don't have the answer off the top of my head"
 答不上来。
 
-还可以说：
+Also say：
 - Good question. I'll need to check.
 - I'm not sure. Let me get back to you.
 - That's outside my scope. Let me find out.
@@ -28,7 +28,7 @@
 ### "It's mocked"
 大部分功能还没做。
 
-还可以说：
+Also say：
 - The data is mocked
 - The real integration isn't done yet
 - This is just the UI placeholder

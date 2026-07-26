@@ -2,13 +2,13 @@
 
 PM 说"很简单"，但实际很复杂。
 
-还可以说：
+Also say：
 - That's not as simple as it sounds
 - There's more to it than you think
 - It looks simple on the surface
 - That requires a lot of backend work
 
-### 关联对话
+### Related conversation
 
 > B: Sure. Users want to search by product name, category, and price range. Simple.
 > C: Simple? The search backend doesn't support price range yet.
@@ -29,7 +29,7 @@ Everything is possible — 什么都能做，但...
 - That shouldn't take long — 应该不用多久
 - It's just a small change — 只是个小改动
 
-### 什么时候说
+### When to use
 
 - PM 低估了开发工作量时
 - 需要给 PM 解释复杂度时
