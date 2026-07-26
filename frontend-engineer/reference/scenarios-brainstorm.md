@@ -1,6 +1,6 @@
 # Scenarios Brainstorm — 幺蛾子清单
 
-> 这是本书所有章节的幺蛾子汇总，是核心资产。每个条目将来会被展开成完整的"对话 + 解析"。
+> 这是本书所有章节的典型场景汇总，是核心资产。每个条目将来会被展开成完整的"对话 + 解析"。
 > 
 > **规则**：发现新场景必须同时更新这里和对应章节文件。
 > 
@@ -498,7 +498,7 @@
 
 | 日期 | 章节 | 新增内容 | 更新文件 |
 |------|------|---------|---------|
-| 2026-07-26 | 全部 | 大规模扩充幺蛾子清单 | scenarios-brainstorm.md |
+| 2026-07-26 | 全部 | 大规模扩充场景清单 | scenarios-brainstorm.md |
 | 2026-07-26 | 02-sprint-planning | 已写标记 [x] | scenarios-brainstorm.md |
 | 2026-07-26 | 03-refinement | 已写标记 [x] | scenarios-brainstorm.md |
 | 2026-07-26 | 04-test-review | 已写标记 [x] | scenarios-brainstorm.md |
