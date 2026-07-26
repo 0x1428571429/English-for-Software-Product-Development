@@ -1,0 +1,13 @@
+- production — 生产环境
+- incident — 事故
+- alert — 告警
+- rollback — 回滚
+- hotfix — 紧急修复
+- deploy — 部署
+- memory leak — 内存泄漏
+- logs — 日志
+- monitoring — 监控
+- postmortem — 事后复盘
+- on-call — 值班
+- VPN — 虚拟专用网络
+- 503 — HTTP 服务不可用错误码

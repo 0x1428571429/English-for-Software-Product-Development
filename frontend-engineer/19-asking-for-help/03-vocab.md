@@ -1,0 +1,8 @@
+- sandbox — 沙箱/测试模式
+- config — 配置
+- .env — 环境变量文件
+- status code — HTTP 状态码
+- implement — 实现
+- integration — 集成
+- locally — 本地
+- staging — 测试环境

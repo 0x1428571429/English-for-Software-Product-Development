@@ -1,0 +1,8 @@
+- capacity — 容量/精力
+- bandwidth — 带宽/负荷
+- priority — 优先级
+- urgent — 紧急
+- mentor — 指导
+- pair — 结对
+- migration — 迁移任务
+- on my plate — 手上的活

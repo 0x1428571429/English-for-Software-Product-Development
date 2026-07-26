@@ -1,0 +1,9 @@
+- git log — git 提交历史
+- blame — git blame 看谁改了代码
+- revert — 回滚
+- comment out — 注释掉
+- isolate — 隔离
+- narrow down — 缩小范围
+- hotfix — 紧急修复
+- unit test — 单元测试
+- diagnosis — 诊断

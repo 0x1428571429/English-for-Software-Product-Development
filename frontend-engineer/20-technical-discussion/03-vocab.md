@@ -1,0 +1,10 @@
+- GraphQL — 一种 API 查询语言
+- REST — 传统 API 风格
+- spike — 技术原型
+- prototype — 原型
+- over-engineered — 过度设计
+- complexity — 复杂度
+- tooling — 工具链
+- managed service — 托管服务
+- refactor — 重构
+- POC — Proof of Concept 概念验证

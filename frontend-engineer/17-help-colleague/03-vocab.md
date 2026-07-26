@@ -1,0 +1,8 @@
+- stuck — 卡住了
+- debug — 调试
+- share screen — 共享屏幕
+- dependency — 依赖
+- console — 控制台
+- error — 错误
+- fix — 修复
+- review — 审查
