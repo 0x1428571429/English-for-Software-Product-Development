@@ -1,0 +1,13 @@
+- happy path — 正常流程
+- edge case — 边界情况
+- E2E — End to End 端到端测试
+- unit test — 单元测试
+- CI — Continuous Integration
+- flaky test — 不稳定的测试
+- false negative — 误报（测试说挂了但其实没问题）
+- critical path — 关键路径
+- emulator — 模拟器
+- mock data — 模拟数据
+- test coverage — 测试覆盖率
+- regression — 回归测试
+- repro — reproduce 复现

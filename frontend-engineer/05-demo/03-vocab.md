@@ -1,0 +1,10 @@
+- demo — 演示。"Let me walk you through"
+- mock — 模拟数据。"It's mocked"
+- share screen — 共享屏幕
+- recording — 录屏
+- off the top of my head — 当场回答。"I don't know off the top of my head"
+- follow up — 跟进。"I'll follow up after"
+- brand guidelines — 品牌规范
+- timeline — 时间线
+- scope — 范围。"It wasn't in scope"
+- defer — 推迟。"We deferred it"

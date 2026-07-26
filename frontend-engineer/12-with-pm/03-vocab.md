@@ -1,0 +1,10 @@
+- timeline — 时间线
+- scope — 范围
+- scope creep — 范围蔓延
+- deadline — 截止日期
+- deliver — 交付
+- backlog — 需求列表
+- requirement — 需求
+- stakeholder — 利益相关者
+- sustainable — 可持续的
+- prioritize — 排优先级

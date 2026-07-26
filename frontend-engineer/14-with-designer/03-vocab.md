@@ -1,0 +1,9 @@
+- design system — 设计系统
+- component — 组件
+- spacing — 间距
+- theme — 主题
+- touch target — 触控区域
+- mobile spec — 移动端设计稿
+- animation — 动效
+- SVG — 矢量图
+- Lottie — 动效库

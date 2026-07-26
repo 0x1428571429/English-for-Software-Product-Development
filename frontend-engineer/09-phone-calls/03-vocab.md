@@ -1,0 +1,7 @@
+- choppy — 卡顿。"Your audio is choppy"
+- cut out — 断掉。"You cut out"
+- mute — 静音。"You're on mute"
+- break up — 断断续续。"You're breaking up"
+- bear with me — 稍等/忍耐一下
+- catch up — 补进度。"Catch me up"
+- sync — 同步。"Let's sync on Thursday"

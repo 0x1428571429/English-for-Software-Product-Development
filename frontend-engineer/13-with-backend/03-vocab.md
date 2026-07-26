@@ -1,0 +1,9 @@
+- endpoint — 接口
+- deprecated — 已废弃
+- payload — 请求数据
+- response — 响应
+- index — 数据库索引
+- legacy — 历史遗留
+- type coercion — 类型转换
+- network tab — 网络面板
+- screenshot — 截图

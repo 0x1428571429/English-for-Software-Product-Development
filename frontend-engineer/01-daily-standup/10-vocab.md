@@ -1,0 +1,19 @@
+- wrap up — 完成。"I wrapped up the dashboard"
+- blocker — 阻塞。"Any blockers?" 站会经典提问
+- PR is up — PR 已经提了
+- rabbit hole — 越搞越复杂
+- cut scope — 砍需求
+- take offline — 私下聊
+- edge case — 边界情况
+- catch up — 补进度。"Catching up this morning"
+- ping — 发消息催。"Did you ping them?"
+- nudge — 稍微提醒。"I'll nudge them again"
+- keep me posted — 有进展告诉我
+- on my plate — 手上的活。"Too much on my plate"
+- bandwidth — 精力/容量。"I don't have bandwidth"
+- push back — 拒绝/反驳。"I don't want to push back"
+- merge conflict — 合并冲突
+- flaky test — 不稳定的测试
+- fill someone in — 同步信息。"Did anyone fill her in?"
+- get back to you — 回头再回复。"Let me check and get back to you"
+- by EOD — 今天下班前

@@ -1,0 +1,10 @@
+- repro — reproduce 复现
+- STR — Steps To Reproduce
+- staging — 预发布环境
+- config — 配置
+- cache — 缓存
+- bug — 缺陷
+- ticket — 工单
+- sprint — 迭代
+- existing behavior — 已有行为
+- pre-existing — 预先存在的

@@ -1,0 +1,10 @@
+- repro — reproduce 复现。"Can you repro it?"
+- staging — 预发布环境
+- production / prod — 生产环境
+- intermittent — 间歇性。"It's intermittent"
+- data integrity — 数据一致性
+- network tab — 浏览器开发者工具的网络面板
+- stale state — 过期状态
+- reducer — 状态管理中的 reducer（React）
+- urgent — 紧急
+- escalate — 升级

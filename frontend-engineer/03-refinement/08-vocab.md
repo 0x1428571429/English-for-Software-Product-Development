@@ -1,0 +1,16 @@
+- scope — 范围。"Let's keep the scope focused"
+- spec — 需求文档。"We need a clear spec"
+- stakeholder — 利益相关者
+- MVP — Minimum Viable Product 最小可行产品
+- iterate — 迭代。"We can iterate"
+- edge case — 边界情况
+- empty state — 空状态
+- loading state — 加载状态
+- error state — 错误状态
+- autocomplete — 自动补全（跟 search 不同）
+- backend — 后端
+- endpoint — 接口
+- commit — 承诺。"You committed without asking us"
+- push back — 反驳。"I'm going to push back on that"
+- ship — 发布。"Let's ship the basic version"
+- polish — 优化。"We can polish later"

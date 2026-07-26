@@ -1,0 +1,15 @@
+- capacity — sprint 容量。"We don't have enough capacity"
+- in scope — 在范围内。"Not in scope"
+- scope creep — 范围蔓延。"Let's not scope creep"
+- backlog — 需求列表。"Put it in the backlog"
+- estimate — 估点。"Hard to estimate"
+- ballpark — 大概。"Ballpark figure"
+- sprint — 迭代。"This sprint"
+- commit — 承诺。"Can't commit to that"
+- push / defer — 推迟。"We can push it"
+- priority — 优先级。"What's the priority?"
+- risk — 风险。"Migration has the highest risk"
+- technical debt — 技术债
+- bite us later — 以后反噬
+- break it down — 拆分任务
+- capacity — 容量/人力

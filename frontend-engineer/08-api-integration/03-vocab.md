@@ -1,0 +1,11 @@
+- CORS — 跨域问题
+- whitelist — 白名单
+- timeout — 超时
+- payload — 请求体
+- endpoint — 接口地址
+- mock — 模拟服务器
+- integration — 联调
+- deployment — 部署
+- camelCase / snake_case — 两种命名规范
+- debug — 调试
+- pair — 结对编程/联调

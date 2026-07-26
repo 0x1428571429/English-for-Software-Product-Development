@@ -1,0 +1,8 @@
+- bumping — 催消息。"Bumping this"
+- ping — 找/催人。"Ping me when it's ready"
+- thread — Slack 的回复线程
+- share screen — 共享屏幕
+- snippet — 代码片段。"Here's a snippet"
+- log — 日志。"Full error log"
+- node_modules — 前端依赖文件夹
+- reinstall — 重新安装

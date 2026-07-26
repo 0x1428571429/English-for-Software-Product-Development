@@ -1,0 +1,12 @@
+- nit — 小问题。"It's a nit"
+- LGTM — Looks Good To Me 通过
+- blocker — 阻塞。"Not a blocker"
+- approve — 通过审批
+- merge — 合并代码
+- PR — Pull Request
+- review — 审查
+- comment — 评论
+- naming convention — 命名规范
+- maintainable — 可维护的
+- edge case — 边界情况
+- follow-up PR — 后续修复的 PR
