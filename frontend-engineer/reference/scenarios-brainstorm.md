@@ -25,11 +25,11 @@
 - [x] 沉默没人说话 — (silence) / "Anyone else?"
 - [x] 分配任务收尾 — "Let's move"
 - [x] 请假回来不知状况 — "I was out yesterday, catching up"
-- [ ] 时区问题，有人没睡醒
-- [ ] "It works on my machine" — 但别人跑不起来
-- [ ] 有人迟到，进来问"what did I miss"
-- [ ] 有人替别人汇报，说错了
-- [ ] 有人用AI写了站会更新，但跟实际情况对不上
+- [x] 时区问题，有人没睡醒
+- [x] "It works on my machine" — 但别人跑不起来
+- [x] 有人迟到，进来问"what did I miss"
+- [x] 有人替别人汇报，说错了
+- [x] 有人用AI写了站会更新，但跟实际情况对不上
 
 ## 02-sprint-planning 迭代排期
 
@@ -43,15 +43,15 @@
 - [x] PO说"这个很简单"，开发说"这个很复杂" — "Simple? The backend doesn't support it"
 - [x] 新人需要帮助估点 — "I don't know how to estimate it"
 - [x] PM说"都是优先级" — "Everything is priority"
-- [ ] 被迫接受不合理估点 — "I'll give it my best shot, but no promises"
-- [ ] 被人低估了你的工作量 — "I think you're underestimating this"
-- [ ] 团队策略问题 — "We shouldn't cut corners on testing"
-- [ ] 把 bug fix 当新故事估点
-- [ ] 有人把故事拆得太小 / 拆得太大
-- [ ] 估点时大家意见分歧巨大，互相不让
-- [ ] 有人估算故意报多/报少（政治因素）
-- [ ] 技术债没人愿意估，因为说不清要多久
-- [ ] AI自动估点和人估的不一样，该信谁
+- [x] 被迫接受不合理估点 — "I'll give it my best shot, but no promises"
+- [x] 被人低估了你的工作量 — "I think you're underestimating this"
+- [x] 团队策略问题 — "We shouldn't cut corners on testing"
+- [x] 把 bug fix 当新故事估点
+- [x] 有人把故事拆得太小 / 拆得太大
+- [x] 估点时大家意见分歧巨大，互相不让
+- [x] 有人估算故意报多/报少（政治因素）
+- [x] 技术债没人愿意估，因为说不清要多久
+- [x] AI自动估点和人估的不一样，该信谁
 
 ## 03-refinement 需求评审
 
@@ -64,23 +64,23 @@
 - [x] PM说"AI能不能加速" — "AI can't build your backend for you"
 - [x] PM没问开发就对外承诺 — "You committed without an estimate"
 - [x] 最终确认scope — "Clear?"
-- [ ] 技术上根本做不了 — "This isn't feasible with our current setup"
-- [ ] 需求变更没通知所有人 — "Was this discussed in the last meeting?"
-- [ ] 被要求做A，但B才是关键 — "The real issue is B"
-- [ ] 需求有前置依赖没说 — "We can't do this until X is done"
-- [ ] 被challenge — "I see your point, but here's why I think differently"
-- [ ] 折中方案 — "How about we meet in the middle?"
-- [ ] 被要求加deadline — "I can't commit to that timeline"
-- [ ] 我不同意这个做法，因为… — "I'd push back on that because..."
-- [ ] 给需求排优先级 — "Is this a must-have or a nice-to-have?"
-- [ ] 大家吵起来了
-- [ ] AI分析了一下这个需求，建议…
-- [ ] PM说"用户想要这个"，但没数据支撑
-- [ ] UX说应该这么做，PM说应该那么做，你在中间
-- [ ] 需求评审变成技术方案讨论，跑偏了
-- [ ] 有人提出一个需求，所有人都沉默了
-- [ ] PM临时带了 stakeholder 来，需求全变了
-- [ ] Acceptance criteria 比故事本身还长
+- [x] 技术上根本做不了 — "This isn't feasible with our current setup"
+- [x] 需求变更没通知所有人 — "Was this discussed in the last meeting?"
+- [x] 被要求做A，但B才是关键 — "The real issue is B"
+- [x] 需求有前置依赖没说 — "We can't do this until X is done"
+- [x] 被challenge — "I see your point, but here's why I think differently"
+- [x] 折中方案 — "How about we meet in the middle?"
+- [x] 被要求加deadline — "I can't commit to that timeline"
+- [x] 我不同意这个做法，因为… — "I'd push back on that because..."
+- [x] 给需求排优先级 — "Is this a must-have or a nice-to-have?"
+- [x] 大家吵起来了
+- [x] AI分析了一下这个需求，建议…
+- [x] PM说"用户想要这个"，但没数据支撑
+- [x] UX说应该这么做，PM说应该那么做，你在中间
+- [x] 需求评审变成技术方案讨论，跑偏了
+- [x] 有人提出一个需求，所有人都沉默了
+- [x] PM临时带了 stakeholder 来，需求全变了
+- [x] Acceptance criteria 比故事本身还长
 
 ## 04-test-review 测试评审
 
@@ -90,21 +90,21 @@
 - [x] QA发现的bug你觉得不是bug — "That's not a bug, that's how it works"
 - [x] AI帮忙生成测试数据 — "Can AI help generate some of the test data?"
 - [x] 测试设备问题 — "I don't have a test device"
-- [ ] QA说这个没cover — "Yeah, I'll add it"
-- [ ] QA提的case太低概率 — "That's an edge case, we can handle later"
-- [ ] 自动测试vs手动测试 — "Is this worth automating?"
-- [ ] 测试数据问题 — "We don't have test data for this case"
-- [ ] AI帮忙生成了测试用例
-- [ ] AI写e2e测试
-- [ ] AI帮忙补充了边界情况
-- [ ] 测试环境数据被污染了，case跑不过
-- [ ] QA测了一半发现需求变了
-- [ ] E2E测试太慢，没人愿意跑
-- [ ] 测试发现了bug但开发说"这不是bug，是feature"
-- [ ] QA说"我测完了"，结果上线就炸
-- [ ] 自动测试覆盖率90%但核心路径没测到
-- [ ] 回归测试太多，每次发布要跑两小时
-- [ ] 用AI写测试但AI不了解业务逻辑，测了等于没测
+- [x] QA说这个没cover — "Yeah, I'll add it"
+- [x] QA提的case太低概率 — "That's an edge case, we can handle later"
+- [x] 自动测试vs手动测试 — "Is this worth automating?"
+- [x] 测试数据问题 — "We don't have test data for this case"
+- [x] AI帮忙生成了测试用例
+- [x] AI写e2e测试
+- [x] AI帮忙补充了边界情况
+- [x] 测试环境数据被污染了，case跑不过
+- [x] QA测了一半发现需求变了
+- [x] E2E测试太慢，没人愿意跑
+- [x] 测试发现了bug但开发说"这不是bug，是feature"
+- [x] QA说"我测完了"，结果上线就炸
+- [x] 自动测试覆盖率90%但核心路径没测到
+- [x] 回归测试太多，每次发布要跑两小时
+- [x] 用AI写测试但AI不了解业务逻辑，测了等于没测
 
 ## 05-demo Demo 会议
 
@@ -113,17 +113,17 @@
 - [x] 效果和别人想象不一样 — "This is what we have now"
 - [x] 准备 demo 的时候发现功能还没做完 — 数据是 mocked
 - [x] 说这个部分我让AI写的 / AI推荐的方案不行
-- [ ] 环境炸了，demo不了 — "Environment is down, let me share my screen"
-- [ ] 有人质疑方案 — "I can walk through the implementation"
-- [ ] 临场加需求 — "Let's capture that as a follow-up"
-- [ ] 准备太多讲不完 — "I'll go through the highlights"
-- [ ] 演示翻车但是被AI救了
-- [ ] 演示的时候发现有个明显 bug，观众看到了
-- [ ] 演示数据是假的，被问"这个数据哪来的"
-- [ ] 演示过程中被频繁打断问问题，讲不完
-- [ ] 高管在下面，更加紧张
-- [ ] "这个功能我们下个sprint做"被当众录下来了
-- [ ] 同时演示和讲解，手忙脚乱
+- [x] 环境炸了，demo不了 — "Environment is down, let me share my screen"
+- [x] 有人质疑方案 — "I can walk through the implementation"
+- [x] 临场加需求 — "Let's capture that as a follow-up"
+- [x] 准备太多讲不完 — "I'll go through the highlights"
+- [x] 演示翻车但是被AI救了
+- [x] 演示的时候发现有个明显 bug，观众看到了
+- [x] 演示数据是假的，被问"这个数据哪来的"
+- [x] 演示过程中被频繁打断问问题，讲不完
+- [x] 高管在下面，更加紧张
+- [x] "这个功能我们下个sprint做"被当众录下来了
+- [x] 同时演示和讲解，手忙脚乱
 
 ## 06-bug-demo Bug 演示
 
@@ -135,16 +135,16 @@
 - [x] 不确定是前端还是后端问题 — "Can we check the network tab?"
 - [x] 低概率但是高影响 — "60% of the time"
 - [x] 把repo步骤发给AI让它分析 — "Let me paste the error into AI"
-- [ ] 截图/录屏发给别人
-- [ ] 跟QA一起复现
-- [ ] 演示给PM看，PM说"这个很严重"，但其实只是个UI问题
-- [ ] 演示了三次都复现不出来，放弃
-- [ ] 发现bug是因为没清缓存
-- [ ] bug是第三方服务的问题，没法修
-- [ ] "这个bug以前修过，又回来了" — regression
-- [ ] 录屏的时候不小心录到了敏感信息
-- [ ] PM说"这个不用修，用户不会那样操作"
-- [ ] 低概率bug要不要修和QA吵起来
+- [x] 截图/录屏发给别人
+- [x] 跟QA一起复现
+- [x] 演示给PM看，PM说"这个很严重"，但其实只是个UI问题
+- [x] 演示了三次都复现不出来，放弃
+- [x] 发现bug是因为没清缓存
+- [x] bug是第三方服务的问题，没法修
+- [x] "这个bug以前修过，又回来了" — regression
+- [x] 录屏的时候不小心录到了敏感信息
+- [x] PM说"这个不用修，用户不会那样操作"
+- [x] 低概率bug要不要修和QA吵起来
 
 ## 07-code-review 代码审查
 
@@ -157,17 +157,17 @@
 - [x] 发了PR没人review
 - [x] 有人扣细节 / nitpicking — "It's a nit"
 - [x] "先合并再修复"被反对 — "Follow-up PRs never happen"
-- [ ] 解释PR — "Here's why I did it this way"
-- [ ] 有人说"你写法不对"
-- [ ] review了十轮还没合并
-- [ ] 发现自己的代码被改了很多但没人告诉你
-- [ ] 有人在PR里写小说，根本看不完
-- [ ] 有人只回"LGTM"但明显没看
-- [ ] 代码风格争论（tab vs space、分号 vs 不分）
-- [ ] 用AI review PR，AI说没问题但你觉得有问题
-- [ ] AI写的代码 review 了发现有一半要改
-- [ ] 有人approve了但CI没过，谁来负责
-- [ ] 凌晨两点有人发了PR催review
+- [x] 解释PR — "Here's why I did it this way"
+- [x] 有人说"你写法不对"
+- [x] review了十轮还没合并
+- [x] 发现自己的代码被改了很多但没人告诉你
+- [x] 有人在PR里写小说，根本看不完
+- [x] 有人只回"LGTM"但明显没看
+- [x] 代码风格争论（tab vs space、分号 vs 不分）
+- [x] 用AI review PR，AI说没问题但你觉得有问题
+- [x] AI写的代码 review 了发现有一半要改
+- [x] 有人approve了但CI没过，谁来负责
+- [x] 凌晨两点有人发了PR催review
 
 ## 08-api-integration API 联调
 
@@ -183,18 +183,18 @@
 - [x] 联调排期对不上 / 对方放鸽子
 - [x] AI帮忙分析了报错
 - [x] 联调排期 / 约定时间
-- [ ] 数据格式不一致 — "Expecting array but getting object"
-- [ ] 认证问题 — "Getting 401, did token format change?"
-- [ ] 对方没准备好 — "Are you done with your part?"
-- [ ] 参数需要加密/签名 — "Do I need to sign the request?"
-- [ ] AI帮忙解析了接口文档
-- [ ] AI帮忙生成了mock数据
-- [ ] 后端改了个字段名没告诉你，你查了两小时
-- [ ] "昨天还好好的" — 不知道谁改了什么
-- [ ] 接口返回200但其实数据是错的
-- [ ] 本地连不上测试环境
-- [ ] 接口有rate limit，测一半被ban了
-- [ ] 用AI生成mock数据，AI生成的数据格式不对
+- [x] 数据格式不一致 — "Expecting array but getting object"
+- [x] 认证问题 — "Getting 401, did token format change?"
+- [x] 对方没准备好 — "Are you done with your part?"
+- [x] 参数需要加密/签名 — "Do I need to sign the request?"
+- [x] AI帮忙解析了接口文档
+- [x] AI帮忙生成了mock数据
+- [x] 后端改了个字段名没告诉你，你查了两小时
+- [x] "昨天还好好的" — 不知道谁改了什么
+- [x] 接口返回200但其实数据是错的
+- [x] 本地连不上测试环境
+- [x] 接口有rate limit，测一半被ban了
+- [x] 用AI生成mock数据，AI生成的数据格式不对
 
 ## 09-phone-calls 电话会议
 
@@ -206,21 +206,21 @@
 - [x] 分享屏幕找不到东西 — "Bear with me, let me find it"
 - [x] 你说了一段话问"any questions?" 没人回应
 - [x] 结束通话 — "That's all from my side. Thanks."
-- [ ] 多人同时说话 — "Go ahead / You go first"
-- [ ] 被突然点名 — "Gimme a sec to think about that"
-- [ ] 会议拖太久 — "We're running out of time"
-- [ ] 有人全程不说话 — "Anyone have anything to add?"
-- [ ] 录音/录屏 — "Do you mind if I record this?"
-- [ ] 听不懂对方的口音
-- [ ] 对方信号不好一直在断
-- [ ] 打电话的时候在走路/骑车
-- [ ] 有人一直在嚼东西/敲键盘
-- [ ] 会议邀请没发calendar link
-- [ ] 国际会议时区算错了
-- [ ] Zoom/Teams 录屏没录上
-- [ ] 有人说"can you share your screen?"但你在手机上
-- [ ] 你的VPN断了，连不上会议
-- [ ] 有人开着AI实时翻译，但翻错了
+- [x] 多人同时说话 — "Go ahead / You go first"
+- [x] 被突然点名 — "Gimme a sec to think about that"
+- [x] 会议拖太久 — "We're running out of time"
+- [x] 有人全程不说话 — "Anyone have anything to add?"
+- [x] 录音/录屏 — "Do you mind if I record this?"
+- [x] 听不懂对方的口音
+- [x] 对方信号不好一直在断
+- [x] 打电话的时候在走路/骑车
+- [x] 有人一直在嚼东西/敲键盘
+- [x] 会议邀请没发calendar link
+- [x] 国际会议时区算错了
+- [x] Zoom/Teams 录屏没录上
+- [x] 有人说"can you share your screen?"但你在手机上
+- [x] 你的VPN断了，连不上会议
+- [x] 有人开着AI实时翻译，但翻错了
 
 ## 10-slack-im Slack/IM 消息
 
@@ -232,27 +232,27 @@
 - [x] 异步沟通等很久 — "Just following up on this"
 - [x] 发AI的输出结果给同事看 / AI帮忙回答
 - [x] 不同时区
-- [ ] 在channel里@人 — "Hey @x, do you know about this?"
-- [ ] 被拉进一个thread — "Jumping in here"
-- [ ] 不小心发错channel — "Wrong channel, sorry"
-- [ ] 在群里讨论AI代码
-- [ ] 发prompt问同事"你看看这个prompt行不行"
-- [ ] 删消息但对方已经看到了
-- [ ] 发了一段AI生成的回复但味道太明显
-- [ ] 问你一个问题但你看到却不回（ghosted）
-- [ ] 在thread里回了个"+1"就当没看到
-- [ ] 对方发了一长串问题，只回最后一个
-- [ ] 用Slack的"会消失的消息"发重要事情
-- [ ] 发语音消息但对方不方便听
-- [ ] AI自动总结频道内容，总结错了
-- [ ] 你收到"thanks"或"+1"通知震个不停
-- [ ] 有人凌晨两点发消息然后撤回
-- [ ] 用AI写回复但语气不对，同事以为你在生气
-- [ ] 一个问题同时在两个channel问
-- [ ] 发了问题没人回，自己解决了也没说
-- [ ] 在channel里问了谁有空，没人理
-- [ ] "Did you see my message?" — "No"（其实看到了）
-- [ ] 有人发了一堆voice message，没人听
+- [x] 在channel里@人 — "Hey @x, do you know about this?"
+- [x] 被拉进一个thread — "Jumping in here"
+- [x] 不小心发错channel — "Wrong channel, sorry"
+- [x] 在群里讨论AI代码
+- [x] 发prompt问同事"你看看这个prompt行不行"
+- [x] 删消息但对方已经看到了
+- [x] 发了一段AI生成的回复但味道太明显
+- [x] 问你一个问题但你看到却不回（ghosted）
+- [x] 在thread里回了个"+1"就当没看到
+- [x] 对方发了一长串问题，只回最后一个
+- [x] 用Slack的"会消失的消息"发重要事情
+- [x] 发语音消息但对方不方便听
+- [x] AI自动总结频道内容，总结错了
+- [x] 你收到"thanks"或"+1"通知震个不停
+- [x] 有人凌晨两点发消息然后撤回
+- [x] 用AI写回复但语气不对，同事以为你在生气
+- [x] 一个问题同时在两个channel问
+- [x] 发了问题没人回，自己解决了也没说
+- [x] 在channel里问了谁有空，没人理
+- [x] "Did you see my message?" — "No"（其实看到了）
+- [x] 有人发了一堆voice message，没人听
 
 ## 11-with-qa 跟 QA 沟通
 
@@ -263,19 +263,19 @@
 - [x] QA提的bug不在范围内 — "That's existing behavior"
 - [x] 你说修好了QA说还有 — "Is this a new issue?"
 - [x] AI帮忙想边界 / AI分析了bug — "I already asked AI"
-- [ ] 跟QA确认修复 — "Can you verify on staging?"
-- [ ] 版本没更新 — "Are you on the latest build?"
-- [ ] 多个bug优先级 — "Which one should I prioritize?"
-- [ ] 跟QA说"AI帮我测了一下"
-- [ ] QA说环境不行测不了
-- [ ] QA提的bug你修了但deploy失败了
-- [ ] QA在你修bug的时候又测出另一个bug
-- [ ] 跟QA说"这个下个版本修"，QA说不行
-- [ ] QA用生产环境数据测，出了问题
-- [ ] 你跟QA说"clear cache"，QA说"什么是cache"
-- [ ] QA说"This is a blocker"，你觉得只是minor
-- [ ] 让AI帮忙写测试数据，AI生成的数据里有脏数据
-- [ ] QA测了没问题的功能，上线后被用户发现bug
+- [x] 跟QA确认修复 — "Can you verify on staging?"
+- [x] 版本没更新 — "Are you on the latest build?"
+- [x] 多个bug优先级 — "Which one should I prioritize?"
+- [x] 跟QA说"AI帮我测了一下"
+- [x] QA说环境不行测不了
+- [x] QA提的bug你修了但deploy失败了
+- [x] QA在你修bug的时候又测出另一个bug
+- [x] 跟QA说"这个下个版本修"，QA说不行
+- [x] QA用生产环境数据测，出了问题
+- [x] 你跟QA说"clear cache"，QA说"什么是cache"
+- [x] QA说"This is a blocker"，你觉得只是minor
+- [x] 让AI帮忙写测试数据，AI生成的数据里有脏数据
+- [x] QA测了没问题的功能，上线后被用户发现bug
 
 ## 12-with-pm 跟 PM 沟通
 
@@ -288,15 +288,15 @@
 - [x] PM说"AI能不能加速" / AI万能 — "What if AI can help?"
 - [x] "这个需求客户已经在等了" — PM施压
 - [x] 不敢拒绝 / "I'll see what I can do"
-- [ ] PM要你给精确日期 — "I'd estimate 2-3 days but can't give exact date"
-- [ ] 需求作废白做了 — "So the work I did last week is being scrapped?"
-- [ ] 你给的方案PM说太复杂 — "This is the simplest approach I can think of"
-- [ ] PM说"用户反馈..."
-- [ ] 跟PM说"AI分析了一下这个需求"
-- [ ] PM说"我不管过程我只要结果"
-- [ ] 你跟PM对齐了但PM忘了，又来问你
-- [ ] PM在Slack上找你要进度，每两小时一次
-- [ ] AI分析了需求说"这个需求不清晰"，给PM看
+- [x] PM要你给精确日期 — "I'd estimate 2-3 days but can't give exact date"
+- [x] 需求作废白做了 — "So the work I did last week is being scrapped?"
+- [x] 你给的方案PM说太复杂 — "This is the simplest approach I can think of"
+- [x] PM说"用户反馈..."
+- [x] 跟PM说"AI分析了一下这个需求"
+- [x] PM说"我不管过程我只要结果"
+- [x] 你跟PM对齐了但PM忘了，又来问你
+- [x] PM在Slack上找你要进度，每两小时一次
+- [x] AI分析了需求说"这个需求不清晰"，给PM看
 
 ## 13-with-backend 跟后端沟通
 
@@ -307,15 +307,15 @@
 - [x] 后端环境没启动 — 连不上
 - [x] 后端说"这个前端处理一下" / 推给前端
 - [x] 联调发现数据格式不对
-- [ ] 联调排期对不上 — "When are you available to test together?"
-- [ ] 后端返回了错误码没说清楚 — "Can you add more context to the error message?"
-- [ ] 跟后端讨论接口设计 — "How about we structure it like this?"
-- [ ] 后端接口好不容易调通了，一部署又挂了
-- [ ] 后端改了数据结构没告诉你，你页面炸了
-- [ ] "这个接口还在开发" — 但你下周就要上线
-- [ ] 后端给你的数据里有个字段有时有有时没有
-- [ ] 联调发现后端返回的是英文，前端要中文
-- [ ] 后端说"这个你问一下另一个后端" — 踢皮球
+- [x] 联调排期对不上 — "When are you available to test together?"
+- [x] 后端返回了错误码没说清楚 — "Can you add more context to the error message?"
+- [x] 跟后端讨论接口设计 — "How about we structure it like this?"
+- [x] 后端接口好不容易调通了，一部署又挂了
+- [x] 后端改了数据结构没告诉你，你页面炸了
+- [x] "这个接口还在开发" — 但你下周就要上线
+- [x] 后端给你的数据里有个字段有时有有时没有
+- [x] 联调发现后端返回的是英文，前端要中文
+- [x] 后端说"这个你问一下另一个后端" — 踢皮球
 
 ## 14-with-designer 跟设计师沟通
 
@@ -325,13 +325,13 @@
 - [x] 设计稿跟设计系统不一致 — "It doesn't match our design system"
 - [x] 让AI帮忙生成设计稿 / 设计说不行
 - [x] 设计稿更新了没告诉你
-- [ ] 设计稿像素级还原 — "Does it need to be pixel perfect?"
-- [ ] 设计师说你做得不对 — "The spacing doesn't match the design"
-- [ ] 设计师改稿频繁 — "Can we freeze the design?"
-- [ ] 设计师给的稿子跟开发平台不兼容
-- [ ] 设计稿用了系统没有的字体
-- [ ] 你按设计稿做完了，设计师说"感觉不太对"
-- [ ] 设计师给的是 Figma 原型但没有标注
+- [x] 设计稿像素级还原 — "Does it need to be pixel perfect?"
+- [x] 设计师说你做得不对 — "The spacing doesn't match the design"
+- [x] 设计师改稿频繁 — "Can we freeze the design?"
+- [x] 设计师给的稿子跟开发平台不兼容
+- [x] 设计稿用了系统没有的字体
+- [x] 你按设计稿做完了，设计师说"感觉不太对"
+- [x] 设计师给的是 Figma 原型但没有标注
 
 ## 15-user-guidance 用户操作指导
 
@@ -342,15 +342,15 @@
 - [x] 用户用了旧缓存 — "Try clearing your cache"
 - [x] 用户报的问题其实是网络问题
 - [x] 功能还没有 — "That feature isn't available yet"
-- [ ] 用户说"跟预期不一样" — "What were you expecting to happen?"
-- [ ] 教了很多次还不会 — "Let me put together a quick guide"
-- [ ] 用户截图但截的是整个屏幕，你的隐私暴露了
-- [ ] 用户说"我不懂技术"但还坚持要给技术建议
-- [ ] 用户说"我按你说的做了但还是不行" — 其实没按
-- [ ] 你远程帮用户操作，用户说你"在控制我的电脑"
-- [ ] 用户说"能不能加一个功能" — 其实已有的
-- [ ] 你把操作步骤写了文档，用户说"太长了不想看"
-- [ ] 用AI生成了用户文档，用户说看不懂AI英语
+- [x] 用户说"跟预期不一样" — "What were you expecting to happen?"
+- [x] 教了很多次还不会 — "Let me put together a quick guide"
+- [x] 用户截图但截的是整个屏幕，你的隐私暴露了
+- [x] 用户说"我不懂技术"但还坚持要给技术建议
+- [x] 用户说"我按你说的做了但还是不行" — 其实没按
+- [x] 你远程帮用户操作，用户说你"在控制我的电脑"
+- [x] 用户说"能不能加一个功能" — 其实已有的
+- [x] 你把操作步骤写了文档，用户说"太长了不想看"
+- [x] 用AI生成了用户文档，用户说看不懂AI英语
 
 ## 16-task-assignment 派发任务
 
@@ -361,16 +361,16 @@
 - [x] 紧急打断 — "It's higher priority. Drop what you're doing."
 - [x] 安排任务的人自己都说不清要做什么
 - [x] 把 AI 做不了的脏活推给别人
-- [ ] 给别人派任务怕对方不爽 — "Are you free to pick this up?"
-- [ ] 对方问时间要求 — "ASAP would be great"
-- [ ] 任务分得不公平 — "X has been handling a lot already"
-- [ ] 让AI先做一部分
-- [ ] 你被分到一个你完全不懂的领域
-- [ ] 任务拆分太细，一天要做10个task
-- [ ] 绩效评估的时候发现你做的事没人知道
-- [ ] 把不喜欢的事推给AI，但AI做得不行还得你改
-- [ ] 有人假装不会做来逃避任务
-- [ ] "这个让新人练手" — 实际上是脏活
+- [x] 给别人派任务怕对方不爽 — "Are you free to pick this up?"
+- [x] 对方问时间要求 — "ASAP would be great"
+- [x] 任务分得不公平 — "X has been handling a lot already"
+- [x] 让AI先做一部分
+- [x] 你被分到一个你完全不懂的领域
+- [x] 任务拆分太细，一天要做10个task
+- [x] 绩效评估的时候发现你做的事没人知道
+- [x] 把不喜欢的事推给AI，但AI做得不行还得你改
+- [x] 有人假装不会做来逃避任务
+- [x] "这个让新人练手" — 实际上是脏活
 
 ## 17-help-colleague 帮同事解决问题
 
@@ -382,13 +382,13 @@
 - [x] 觉得同事方向不对 / 想复杂了
 - [x] 同事问的问题AI能答但来问你
 - [x] 帮完感谢 — "Thanks, I owe you one"
-- [ ] 你帮了同事一下午，结果他老板以为是他做的
-- [ ] 同事的问题其实是产品问题，不是技术问题
-- [ ] 你给同事讲了解决方案，他转头问AI做得对不对
-- [ ] 同事说"我试了AI给的方案不行" — 其实是prompt写错了
-- [ ] 同事每次都来问你，自己从来不动手
-- [ ] 你发现同事的代码是你上周帮他写的，他完全没理解
-- [ ] 远程帮同事，但他共享屏幕找不到文件
+- [x] 你帮了同事一下午，结果他老板以为是他做的
+- [x] 同事的问题其实是产品问题，不是技术问题
+- [x] 你给同事讲了解决方案，他转头问AI做得对不对
+- [x] 同事说"我试了AI给的方案不行" — 其实是prompt写错了
+- [x] 同事每次都来问你，自己从来不动手
+- [x] 你发现同事的代码是你上周帮他写的，他完全没理解
+- [x] 远程帮同事，但他共享屏幕找不到文件
 
 ## 18-debugging 排查问题
 
@@ -400,20 +400,20 @@
 - [x] 叫同事一起看 — "Let me take a look"
 - [x] 把报错贴给AI — AI帮忙确认
 - [x] 用二分法排查 — "Let me revert and test"
-- [ ] 不知道从哪开始 — "I don't even know where to start"
-- [ ] 怀疑是缓存 — "Let me clear cache"
-- [ ] 加console.log找不到 — "Let me add some debug logs"
-- [ ] AI排查问题给了我线索
-- [ ] AI生成的代码引入了bug
-- [ ] 找bug找了半天发现是少了个分号/括号
-- [ ] 一个bug复现概率50%，怎么都抓不到规律
-- [ ] 把日志发给AI分析，AI说"检查一下X"，结果X没问题
-- [ ] 你怀疑是别人的代码但不敢说
-- [ ] 所有方案都试了，最后重启解决了
-- [ ] AI debug了半天结论是"需要更多上下文"
-- [ ] 你debug的时候修了一个bug又引入了一个
-- [ ] 去 Stack Overflow 搜到的方案是错的
-- [ ] debug了两小时发现是环境变量没配
+- [x] 不知道从哪开始 — "I don't even know where to start"
+- [x] 怀疑是缓存 — "Let me clear cache"
+- [x] 加console.log找不到 — "Let me add some debug logs"
+- [x] AI排查问题给了我线索
+- [x] AI生成的代码引入了bug
+- [x] 找bug找了半天发现是少了个分号/括号
+- [x] 一个bug复现概率50%，怎么都抓不到规律
+- [x] 把日志发给AI分析，AI说"检查一下X"，结果X没问题
+- [x] 你怀疑是别人的代码但不敢说
+- [x] 所有方案都试了，最后重启解决了
+- [x] AI debug了半天结论是"需要更多上下文"
+- [x] 你debug的时候修了一个bug又引入了一个
+- [x] 去 Stack Overflow 搜到的方案是错的
+- [x] debug了两小时发现是环境变量没配
 
 ## 19-asking-for-help 请求帮助
 
@@ -424,16 +424,16 @@
 - [x] 问完自己解决了 — "Never mind, I figured it out"
 - [x] 别人在忙需要等
 - [x] 问AI比自己查快
-- [ ] 别人讲太快听不懂 — "Can you slow down a bit?"
-- [ ] 问了一个人就够 — "Is there someone who knows this area?"
-- [ ] 你问的问题别人也不会 — "Asked a few people but no one knows"
-- [ ] AI解决了但不知道为什么
-- [ ] 你问了个问题但别人给了你AI的答案，很空洞
-- [ ] 别人回答你的问题时一直在看屏幕，明显在问AI
-- [ ] 你问了一个你觉得很蠢的问题，大家沉默了
-- [ ] 你发现问AI比问同事快，但怕同事觉得你不尊重他
-- [ ] 你问了两遍"can you clarify that"还是没懂
-- [ ] "我跟我之前遇到的一样" — 但其实不一样
+- [x] 别人讲太快听不懂 — "Can you slow down a bit?"
+- [x] 问了一个人就够 — "Is there someone who knows this area?"
+- [x] 你问的问题别人也不会 — "Asked a few people but no one knows"
+- [x] AI解决了但不知道为什么
+- [x] 你问了个问题但别人给了你AI的答案，很空洞
+- [x] 别人回答你的问题时一直在看屏幕，明显在问AI
+- [x] 你问了一个你觉得很蠢的问题，大家沉默了
+- [x] 你发现问AI比问同事快，但怕同事觉得你不尊重他
+- [x] 你问了两遍"can you clarify that"还是没懂
+- [x] "我跟我之前遇到的一样" — 但其实不一样
 
 ## 20-technical-discussion 技术方案讨论
 
@@ -443,18 +443,18 @@
 - [x] 用AI来佐证 / 做原型 — "I'll prototype it with AI"
 - [x] "先做个prototype看看" — spike
 - [x] "这个用AI能搞定" — 但实际不一定
-- [ ] 你没想好但被点名 — "I need to think about it more"
-- [ ] 有人引入不相关的东西 — "I don't think that applies here"
-- [ ] 互相推拉没结果 — "Let's agree to disagree and do a spike"
-- [ ] 两个方案选哪个 — "What's the tradeoff?"
-- [ ] 决定不做 — "The cost outweighs the benefit"
-- [ ] 留技术债 — "We can refactor later"
-- [ ] 讨论了半小时发现两个方案其实一样
-- [ ] 资深的工程师坚持用自己会的技术栈
-- [ ] 你提的方案被否了，三个月后别人提了一样的被通过了
-- [ ] 技术方案文档写了没人读
-- [ ] 用AI生成了方案文档，被说"太表面了"
-- [ ] "这个方案在上个公司用过，可以的" — 不一定适用
+- [x] 你没想好但被点名 — "I need to think about it more"
+- [x] 有人引入不相关的东西 — "I don't think that applies here"
+- [x] 互相推拉没结果 — "Let's agree to disagree and do a spike"
+- [x] 两个方案选哪个 — "What's the tradeoff?"
+- [x] 决定不做 — "The cost outweighs the benefit"
+- [x] 留技术债 — "We can refactor later"
+- [x] 讨论了半小时发现两个方案其实一样
+- [x] 资深的工程师坚持用自己会的技术栈
+- [x] 你提的方案被否了，三个月后别人提了一样的被通过了
+- [x] 技术方案文档写了没人读
+- [x] 用AI生成了方案文档，被说"太表面了"
+- [x] "这个方案在上个公司用过，可以的" — 不一定适用
 
 ## 21-alignment-discussion 对齐会
 
@@ -466,12 +466,12 @@
 - [x] 你做完了你的部分但对方没做，项目delay了
 - [x] "我以为上次已经决定了" — "没有，你理解错了"
 - [x] 确认下一步 — "Let's make Friday happen"
-- [ ] 之前的决定被推翻 — "I thought we decided on X last week"
-- [ ] 跨团队信息差 — "Your team is doing X but my team is doing Y"
-- [ ] 对齐了半天没结论 — "We need a follow-up meeting"
-- [ ] 对齐会开完了但没人写会议纪要
-- [ ] 会议上大家都说"好的好的"，但其实谁都不打算做
-- [ ] 对齐会变成互相甩锅大会
+- [x] 之前的决定被推翻 — "I thought we decided on X last week"
+- [x] 跨团队信息差 — "Your team is doing X but my team is doing Y"
+- [x] 对齐了半天没结论 — "We need a follow-up meeting"
+- [x] 对齐会开完了但没人写会议纪要
+- [x] 会议上大家都说"好的好的"，但其实谁都不打算做
+- [x] 对齐会变成互相甩锅大会
 
 ## 22-on-call-incident 线上事故
 
@@ -484,13 +484,13 @@
 - [x] AI帮忙分析了日志
 - [x] 凌晨被on-call叫醒
 - [x] 线上挂了发现是别人的代码问题
-- [ ] 发通告说"我们知道了"
-- [ ] 紧急修好了但忘了通知大家
-- [ ] 回滚之后发现回滚也出了问题
-- [ ] postmortem变成了追责大会
-- [ ] 说好的"下次一定加监控" — 一直没有加
-- [ ] 线上bug修好了但root cause没找到
-- [ ] AI建议的hotfix引入了新的bug
+- [x] 发通告说"我们知道了"
+- [x] 紧急修好了但忘了通知大家
+- [x] 回滚之后发现回滚也出了问题
+- [x] postmortem变成了追责大会
+- [x] 说好的"下次一定加监控" — 一直没有加
+- [x] 线上bug修好了但root cause没找到
+- [x] AI建议的hotfix引入了新的bug
 
 ---
 

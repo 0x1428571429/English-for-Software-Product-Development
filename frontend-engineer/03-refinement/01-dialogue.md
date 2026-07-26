@@ -38,6 +38,31 @@
 > B: Fine. But users will complain.
 > A: Let's ship the basic version first. We can polish later.
 >
-> A: OK, so scope for this sprint: search by name and category. No price range. No autocomplete. Clear?
-> B: I guess.
-> C: Good. Finally.
+> (Later, new feature request comes in)
+> B: Actually, we also need AI-powered product recommendations.
+> C: That's a completely different feature. And we already agreed on scope.
+> B: But the users are asking for it. No one else has this feature.
+> C: I see your point, but there's no data to back this up. How many users asked?
+> B: Well, one client mentioned it.
+> C: So one client. Let's not build for one client.
+>
+> B: One more thing — UX wants the search bar at the top, PM wants it in the sidebar. What should I do?
+> A: Now I'm stuck in the middle. Can they agree on one thing before we start?
+> B: They both say their way is better.
+> A: Let's do a quick user test and decide based on data.
+>
+> (Another meeting, stakeholders join)
+> F: Hi, I'm the VP of Product. I just wanted to sit in on this session.
+> C: Great. So we just agreed on search by name and category only.
+> F: Wait, what about the AI recommendations? That's the whole point of this project.
+> C: That wasn't in the original spec.
+> F: It should be. Let's revise the scope.
+> C: This is why we never finish anything. Every time someone new shows up, the requirements change.
+>
+> A: OK, let's not argue. We need a decision by end of this meeting.
+> F: I want search, recommendations, and autocomplete.
+> A: That's three sprints of work, not one. Pick one.
+> F: Search then. But I want to see results in two weeks.
+> A: We'll do our best. But I can't commit to that timeline with a clear spec.
+> F: Fair enough. Let me get you a proper spec by Friday.
+> A: Deal.
