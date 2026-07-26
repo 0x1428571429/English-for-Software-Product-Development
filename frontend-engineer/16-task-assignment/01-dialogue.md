@@ -17,3 +17,11 @@
 > A: Actually, it's higher priority. Can you drop what you're doing and fix the login bug first?
 > B: Fine. But my other task will be delayed.
 > A: I know. I'll talk to the PM.
+>
+> (Later, A talks to C)
+> A: How's the migration going?
+> C: I'm stuck. The task is not well defined. I don't even know where to start.
+> A: The previous dev wrote some notes. Let me share them with you.
+> C: That would help. Also, can I ask AI to help with some parts?
+> A: Yeah, use AI for the boilerplate. But the core logic needs a human.
+> C: Got it.

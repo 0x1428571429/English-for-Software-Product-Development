@@ -29,3 +29,13 @@
 > B: I know. But the users are asking.
 > A: Can we put it in the next sprint and actually plan it properly?
 > B: Fine. I'll add it to the backlog.
+>
+> (Two days later)
+> B: Hey, how's the dashboard coming along? I need an update for the stakeholders.
+> A: I said I'll give you an update EOD. I'm still working on it.
+> B: OK, just checking. The client is asking every day.
+> A: I understand. But asking me every two hours doesn't make it faster.
+>
+> (Next week)
+> B: I showed the AI analysis to the stakeholders. It says the requirements are unclear. They agreed to write a better spec.
+> A: Finally. We could have saved a week if we did this before.

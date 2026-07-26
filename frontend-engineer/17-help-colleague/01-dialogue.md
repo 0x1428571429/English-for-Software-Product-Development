@@ -17,3 +17,13 @@
 > B: Yeah, AI isn't always right. Sometimes a fresh pair of eyes is better.
 > A: Thanks for the help. I owe you one.
 > B: No problem. That's what I'm here for.
+>
+> (Next day, same colleague)
+> B: Hey, can you help me with something? I've been on this for hours.
+> A: Sure, let me see.
+> B: I'm trying to debug an API issue but all the responses are 500. I asked AI but it wasn't helpful.
+> A: Did you check if the server is running?
+> B: ...no. Let me check.
+> A: 😄
+> B: Yep, that was it. I'm an idiot.
+> A: You're not. We've all done it.

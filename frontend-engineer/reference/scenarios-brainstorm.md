@@ -12,33 +12,24 @@
 
 ## 01-daily-standup 每日站会
 
-### 已写场景（对应文件）
-| 文件 | 覆盖的幺蛾子 |
-|------|------------|
-| 02-still-on-it.md | 说没做完 / 被追问 / 说不清卡在哪 |
-| 03-wrapped-up-pr-up.md | 做完了 / PR没人审 / CI挂了 / 安排review |
-| 04-waiting-on-blocked.md | 被block / 催了但没@人 / keep me posted |
-| 05-rabbit-hole.md | 越搞越糟 / AI帮倒忙 / 砍需求 |
-| 06-forgot-no-clue.md | 忘了做什么 / 不知状况 / 甩锅 |
-| 07-cant-say-no.md | 不敢拒绝 / 活太多 / 帮挡需求 |
-| 08-env-didnt-check.md | 环境挂了 / 没确认恢复 |
-| 09-close-standup.md | 散会前突然想起 / "real quick" / 沉默 |
-
-### 待写幺蛾子
-- [ ] 做完了但是没测完
-- [ ] review别人的代码花了很多时间
-- [ ] 这个task之前没人做过，没有参考
+- [x] 说没做完/被追问 — "You said that yesterday"
+- [x] 做完了/PR没人审 — "PR was up yesterday. No one reviewed it."
+- [x] CI挂了 — "CI build is failing, looks like a flaky test"
+- [x] 被block/催了但没@人 — "I pinged them" "Did you @ them?"
+- [x] 越搞越糟/AI帮倒忙 — "AI created more problems than it solved"
+- [x] 不敢拒绝PM加需求 — "I said I'll see what I can do"
+- [x] 忘了做什么/甩锅 — "Let me check my notes" / "I didn't see it"
+- [x] 环境挂了/没确认恢复 — "I didn't check today"
+- [x] 散会前突然想起 — "Oh wait, one more thing"
+- [x] "Real quick"但实际要聊很久 — "It'll be quick" "It always is"
+- [x] 沉默没人说话 — (silence) / "Anyone else?"
+- [x] 分配任务收尾 — "Let's move"
+- [x] 请假回来不知状况 — "I was out yesterday, catching up"
 - [ ] 时区问题，有人没睡醒
-- [ ] 有人开会时背景嘈杂（小孩/宠物/外卖）
-- [ ] 有人没开摄像头但大家要求开
-- [ ] 有人喝醉了/没睡醒状态明显不对
 - [ ] "It works on my machine" — 但别人跑不起来
 - [ ] 有人迟到，进来问"what did I miss"
 - [ ] 有人替别人汇报，说错了
 - [ ] 有人用AI写了站会更新，但跟实际情况对不上
-- [ ] 说出"blocker"但实际没有自己尝试解决
-- [ ] 没人说话，主持人一个个点名
-- [ ] 有人把站会当成了sprint review讲得太细
 
 ## 02-sprint-planning 迭代排期
 
