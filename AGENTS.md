@@ -36,22 +36,22 @@
 #### "Still on it"
 还没做完，最简短的说法
 
-还可以说：
+Also say:
 - Not done yet
 - Still working through it
 
 ❌ I haven't start fix it — 语法错了
 
-#### 关联表达
+#### Related conversation
 
 > A: Need any help?
 > B: Not yet. If I'm still stuck by EOD I'll reach out.
 
-还可以说：
+Also say:
 - Let me try a bit more
 - I'll ping you if I need help
 
-#### 何时用
+#### When to use
 
 - 站会上回答进度
 - Slack 上回复同事
@@ -245,3 +245,4 @@ frontend-engineer/
 - [ ] 对话里人人都不靠谱？（有人甩锅、有人不敢拒绝、有人敷衍）
 - [ ] 有发音提醒？
 - [ ] 真实工程师日常会这么说？
+- [ ] 解析文件引导标题用英文（Also say / When to use / Common mistakes）？
