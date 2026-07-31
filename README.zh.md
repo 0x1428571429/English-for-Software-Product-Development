@@ -79,6 +79,30 @@
 
 ---
 
+## 导入欧路词典
+
+习惯用手机 App 背单词？我们提供了一份可直接导入 **欧路词典** 的课本：
+
+> [output/eudic_import.txt](output/eudic_import.txt)
+
+**导入步骤：**
+
+1. 打开欧路词典 → 生词本 → 导入生词
+2. 选择 `output/eudic_import.txt`
+3. 打开"背单词"，选择导入的课本即可开始
+
+课本包含 **1100+ 条**内容，按章节分为 22 个单元——每一句对话、每个表达、每个词汇都配了中文释义，格式为 `英文,中文`。
+
+**内容更新后重新生成：**
+
+```bash
+python3 scripts/build_eudic.py
+```
+
+新增对话翻译写到 `scripts/dialogue_data.json`。
+
+---
+
 ## 项目结构
 
 ```
@@ -91,6 +115,11 @@ frontend-engineer/          前端工程师视角（22 章）
     ├── pronunciation.md          易读错词总表
     ├── high-frequency-expressions.md  高频表达速查
     └── scenarios-brainstorm.md   幺蛾子清单（完整索引）
+scripts/
+├── build_eudic.py               生成欧路课本（output/eudic_import.txt）
+└── dialogue_data.json           对话翻译数据
+output/
+└── eudic_import.txt             欧路课本（导入 App 用）
 ```
 
 ---

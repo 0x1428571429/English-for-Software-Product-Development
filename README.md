@@ -79,6 +79,30 @@ Each chapter is a folder containing one full dialogue and multiple analysis file
 
 ---
 
+## Import to Eudic (欧路词典)
+
+Prefer to study with a flashcard app on your phone? We provide a ready-made textbook for **欧路词典 (Eudic)**:
+
+> [output/eudic_import.txt](output/eudic_import.txt)
+
+**Import steps:**
+
+1. Open Eudic → 生词本 (Wordbook) → 导入生词 (Import words)
+2. Select `output/eudic_import.txt`
+3. Open 背单词 (Vocabulary review) and pick the imported textbook
+
+The textbook contains **1,100+ entries** grouped into 22 units (one per chapter) — every dialogue line, expression, and vocabulary term with a Chinese translation, in `word,meaning` format.
+
+**Regenerate after content changes:**
+
+```bash
+python3 scripts/build_eudic.py
+```
+
+New dialogue translations go into `scripts/dialogue_data.json`.
+
+---
+
 ## Project Structure
 
 ```
@@ -91,6 +115,11 @@ frontend-engineer/          22 chapters
     ├── pronunciation.md          Pronunciation table
     ├── high-frequency-expressions.md  Quick reference
     └── scenarios-brainstorm.md   Master scenario list
+scripts/
+├── build_eudic.py               Generate Eudic textbook (output/eudic_import.txt)
+└── dialogue_data.json           Dialogue line translations
+output/
+└── eudic_import.txt             Eudic textbook (import this into the app)
 ```
 
 ---
