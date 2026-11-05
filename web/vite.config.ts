@@ -11,7 +11,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      registerType: 'prompt',
+      // A training session is short, and a stale service worker would hide
+      // fixes/data corrections for days. Auto-update on the next navigation.
+      registerType: 'autoUpdate',
       injectRegister: 'auto',
       devOptions: { enabled: false },
       workbox: {
