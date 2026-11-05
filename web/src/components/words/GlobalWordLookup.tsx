@@ -51,6 +51,7 @@ export function GlobalWordLookup() {
   const shownKey = useRef('')
   const pinnedRef = useRef(false)
   const lastMove = useRef(0)
+  const lastPointerDown = useRef(0)
   const items = useFavoritesStore((state) => state.items)
   const add = useFavoritesStore((state) => state.add)
   const remove = useFavoritesStore((state) => state.remove)
@@ -115,6 +116,8 @@ export function GlobalWordLookup() {
       }
 
       const now = performance.now()
+      // 刚点过按钮/链接时不要因为鼠标停在同一位置而弹卡片。
+      if (now - lastPointerDown.current < 400) return
       if (now - lastMove.current < 40) return
       lastMove.current = now
 
@@ -173,7 +176,14 @@ export function GlobalWordLookup() {
       else close()
     }
 
+    const onPointerDown = (event: PointerEvent) => {
+      if (panelRef.current?.contains(event.target as Node)) return
+      lastPointerDown.current = performance.now()
+      clearHoverTimer()
+    }
+
     document.addEventListener('mousemove', onMove, { passive: true })
+    document.addEventListener('pointerdown', onPointerDown, { capture: true })
     document.addEventListener('mouseleave', onLeave)
     document.addEventListener('scroll', onScroll, { passive: true, capture: true })
     document.addEventListener('keydown', onKey)
@@ -182,6 +192,7 @@ export function GlobalWordLookup() {
     window.addEventListener('resize', onResize)
     return () => {
       document.removeEventListener('mousemove', onMove)
+      document.removeEventListener('pointerdown', onPointerDown, true)
       document.removeEventListener('mouseleave', onLeave)
       document.removeEventListener('scroll', onScroll, true)
       document.removeEventListener('keydown', onKey)

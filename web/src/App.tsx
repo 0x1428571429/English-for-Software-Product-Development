@@ -1,4 +1,4 @@
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { CorpusProvider } from './data/CorpusContext'
 import { AppShell } from './components/layout/AppShell'
 import { DashboardPage } from './pages/DashboardPage'
@@ -21,7 +21,7 @@ export default function App() {
   return (
     <HashRouter>
       <CorpusProvider>
-        <GlobalWordLookup />
+        <RouteWordLookup />
         <AppShell>
           <Routes>
             <Route path="/" element={<DashboardPage />} />
@@ -45,4 +45,13 @@ export default function App() {
       </CorpusProvider>
     </HashRouter>
   )
+}
+
+/**
+ * 查词卡片是全局 portal，路由变化时用 key 强制重挂载，
+ * 避免固定卡片停在上一页的位置。
+ */
+function RouteWordLookup() {
+  const location = useLocation()
+  return <GlobalWordLookup key={`${location.pathname}${location.search}`} />
 }
