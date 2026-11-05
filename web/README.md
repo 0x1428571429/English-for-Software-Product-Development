@@ -73,7 +73,7 @@ npm run preview    # 预览生产构建
 npm run tts:proxy  # 本地 Edge TTS 代理（可选，默认 127.0.0.1:8787）
 ```
 
-要求 Node 22+。语料、词表、角色 manifest 在构建时生成，不提交到 git。架构与扩展方式见 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)，模块约定见 [`src/features/README.md`](src/features/README.md)，TTS 选型见 [`docs/TTS.md`](docs/TTS.md)，打字音效来源与许可证见 [`docs/SOUND.md`](docs/SOUND.md)，需求任务板见 [`docs/BACKLOG.md`](docs/BACKLOG.md)。
+要求 Node 22+。语料、词表、角色 manifest 在构建时生成，不提交到 git。架构与扩展方式见 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)，模块约定见 [`src/features/README.md`](src/features/README.md)，TTS 选型见 [`docs/TTS.md`](docs/TTS.md)，打字音效来源与许可证见 [`docs/SOUND.md`](docs/SOUND.md)，需求任务板见 [`docs/BACKLOG.md`](docs/BACKLOG.md)，发布前测试清单见 [`docs/QA.md`](docs/QA.md)。
 
 ## 部署
 
