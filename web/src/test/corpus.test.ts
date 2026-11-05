@@ -50,7 +50,9 @@ describe('generated corpus', () => {
 
   it('has at least one card in every chapter', () => {
     const counts = new Map<string, number>()
-    for (const card of corpus.cards) counts.set(card.chapterId, (counts.get(card.chapterId) ?? 0) + 1)
+    for (const card of corpus.cards) {
+      if (card.chapterId) counts.set(card.chapterId, (counts.get(card.chapterId) ?? 0) + 1)
+    }
     for (const chapter of corpus.chapters) {
       expect(counts.get(chapter.id) ?? 0, chapter.id).toBeGreaterThan(0)
     }
