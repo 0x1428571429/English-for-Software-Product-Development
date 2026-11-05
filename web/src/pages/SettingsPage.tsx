@@ -544,18 +544,19 @@ function Toggle({
         <p className="mt-0.5 text-xs text-muted">{description}</p>
       </div>
       <button
+        type="button"
         onClick={() => onChange(!checked)}
-        className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors ${
+        className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${
           checked ? 'border-accent/50 bg-accent/30' : 'border-line bg-panel-2'
         }`}
         role="switch"
         aria-checked={checked}
+        aria-label={label}
       >
         <span
-          className={`absolute top-0.5 h-4.5 w-4.5 rounded-full bg-cream transition-transform ${
-            checked ? 'translate-x-5' : 'translate-x-0.5'
+          className={`absolute left-0.5 top-0.5 h-[18px] w-[18px] rounded-full bg-cream shadow-sm transition-transform ${
+            checked ? 'translate-x-5' : 'translate-x-0'
           }`}
-          style={{ height: 18, width: 18 }}
         />
       </button>
     </div>

@@ -22,10 +22,11 @@
 | R-13 | 功能模块化，便于后续按模块重构 | 新功能放 `src/features/<module>/`，模块自带纯逻辑、测试、README 和唯一公共入口；现有 pages 保持不动，记录迁移映射 | `src/features/README.md`、`docs/ARCHITECTURE.md` | done |
 | R-14 | 更自然的 TTS，免费/薅羊毛优先 | 调研并落地 Edge 逆向 WebSocket（v2 token）+ 本地 Node 代理，新增「在线 · Edge Natural」引擎、音色选择、IndexedDB 音频缓存与自动回退；纯浏览器直连因握手头限制返回 403，代理方案已端到端验证 | `docs/TTS.md`、`src/features/tts/`、`scripts/edge-tts-proxy.mjs`、`src/lib/speech.ts`、`src/pages/SettingsPage.tsx` | done |
 | R-15 | 小字太多、整体字号偏小 | 建立统一字号阶梯并抬升下限：9/10px 元信息统一到 12px，11px 提示提升到 13px，`text-xs` 13px、`text-sm` 15px；统计图表刻度 12px；已在桌面与 390px 移动端检查主要页面 | `src/index.css`、`docs/ARCHITECTURE.md`、各页面 | done |
-| R-16 | 查词触发方式不清楚，需要高亮 | 悬停 0.3 秒才出卡片并给命中词加 tag 式高亮；双击立即查词、取消原生选中并固定卡片；排除输入框、按钮双击、链接等会抢交互的位置；滚动/缩放时收起；面板底部提示触发方式 | `src/components/words/GlobalWordLookup.tsx` | done |
+| R-16 | 查词触发方式不清楚，需要高亮 | 悬停 0.3 秒才出卡片并给命中词加 tag 式高亮；双击立即查词、取消原生选中并固定卡片；排除输入框、按钮双击、链接等会抢交互的位置；滚动/缩放时收起；点过按钮后 400ms 内不因鼠标停留误弹；路由切换时强制重挂载并收起卡片；面板底部提示触发方式 | `src/components/words/GlobalWordLookup.tsx`、`src/App.tsx` | done |
 | R-17 | 打字时要有好听的键盘音效，调研开源项目 | 调研 thock / thock-mania / daktilo / KeyEcho 等；采用 thock 的 4 套 CC0 采样；按下+回弹双采样、音高/音量随机化、180Hz 高通让默认 Clicky 更清脆；设置页开关/试听/音量，训练页快速静音；只在输入框发声；WAV 进 PWA 预缓存 | `src/features/typing/sound.ts`、`src/pages/SettingsPage.tsx`、`src/store/useSettingsStore.ts`、`public/sounds/`、`docs/SOUND.md` | done |
 | R-18 | README / 项目描述要有产品截图 | 截取今日、剧情大厅、剧情场景、选择、查词、打字、音效设置 7 张桌面截图，转 JPEG 控制体积；根 README 与 `web/README.md` 用相对路径展示 | `web/docs/screenshots/`、`README.md`、`web/README.md` | done |
 | R-19 | 想用 TypingClub 站点的音效素材 | 核查其 Terms of Service：站点内容为专有知识产权，禁止复制、改作和再分发；未下载/打包其素材，仅作为清脆反馈的交互参考，继续使用 CC0 的 thock 采样 | `docs/SOUND.md` | blocked |
+| R-20 | 剧情中途刷新会回到本集开头 | QA 发现：一集内已做出的选择、信任值、认知收益只存在组件 state；浏览器刷新或误触返回后重置为 0/N，需要从头再选。考虑按 `episodeId` 把 `beatId / trust / history` 存进 story store（含版本迁移与「重新开始」清理），或至少在离开前提示 | `store/useStoryStore.ts`、`pages/StoryEpisodePage.tsx` | todo |
 
 ## 已完成（第一季）
 
