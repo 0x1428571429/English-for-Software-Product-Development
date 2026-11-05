@@ -13,6 +13,14 @@
   --color-danger: #f87171;
   --font-sans: "Inter", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  /* 字号阶梯：小字下限 12px，常规提示 13px，正文/控件 15px。
+     同时补足行高，避免中文和英文混排时挤在一起。 */
+  --text-2xs: 0.75rem;
+  --text-2xs--line-height: 1.0625rem;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.4375rem;
 }
 
 :root {
@@ -58,9 +66,11 @@ button {
   cursor: pointer;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 .safe-bottom {

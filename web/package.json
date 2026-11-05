@@ -17,7 +17,8 @@
     "test:e2e": "playwright test",
     "preview": "vite preview",
     "cast": "node scripts/build-cast.mjs",
-    "words": "node scripts/build-word-map.mjs"
+    "words": "node scripts/build-word-map.mjs",
+    "tts:proxy": "node scripts/edge-tts-proxy.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -47,6 +48,7 @@
     "typescript": "~7.0.2",
     "vite": "^8.3.5",
     "vite-plugin-pwa": "^2.0.0",
-    "vitest": "^5.1.0"
+    "vitest": "^5.1.0",
+    "ws": "^8.22.1"
   }
 }

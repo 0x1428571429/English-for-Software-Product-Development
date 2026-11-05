@@ -33,10 +33,14 @@ web/
 │   │   ├── words/           # 全局查词
 │   │   ├── layout/          # AppShell / 导航
 │   │   └── ui/              # Button / Badge 等
-│   ├── pages/               # 路由页面
+│   ├── features/            # 按功能划分的模块（新功能优先放这里）
+│   │   ├── typing/          # 打字 / 填字：纯逻辑 + 页面 + 测试 + README
+│   │   └── tts/             # Edge TTS：协议、IndexedDB 音频缓存、测试
+│   ├── pages/               # 第一版按页面类型组织的路由页面
 │   └── test/                # Vitest 单元测试
 ├── docs/
 │   ├── ARCHITECTURE.md      # 本文件
+│   ├── TTS.md               # TTS 调研、Edge 逆向协议与本地代理
 │   └── BACKLOG.md           # 需求任务板（持续更新）
 └── public/cast/manifest.json # 构建生成，可供画廊/导出使用
 ```
@@ -47,6 +51,34 @@ web/
 - **规则集中**：剧集解锁只走 `episodeLock()`，挑战判定只走 `challengePassed()`，结局只走 `endingFor()`。
 - **构建期校验**：角色头像、词表、语料在 `predev` / `prebuild` / `pretest` / `pretypecheck` 自动生成并校验。
 - **可测试**：所有关键规则都是纯函数，测试不需要浏览器。
+
+### 1.1 模块化约定
+
+新功能放在 `src/features/<module>/`，不再继续堆进 `pages/` 和 `lib/`：
+
+- `index.ts` 是唯一公共入口，`App.tsx` 只从这里导入页面；
+- `<logic>.ts` 放纯逻辑（不依赖 React、不读写存储），测试与它同目录；
+- `<Name>Page.tsx` 只做会话编排和渲染；
+- 模块自己的 `README.md` 写清边界、数据流和扩展点；
+- 持久化统一走 `src/store/` 的 action，模块不直接碰 IndexedDB。
+
+现有的 `pages/*` 保持不动，后续可按模块逐页迁移；迁移映射见 `src/features/README.md`。
+
+第一个按此约定实现的模块是 `features/typing`：`cloze.ts` 负责分词、选空、校验和提示，`sound.ts` 负责按键分类与 Web Audio 播放，`TypingPage.tsx` 负责会话。音效素材的许可证与调研记录见 [`SOUND.md`](SOUND.md)。
+
+### 1.2 字号规范
+
+字号在 `src/index.css` 的 `@theme` 里统一定义，页面不要再用 `text-[9px]` / `text-[10px]` / `text-[11px]` 这类任意值：
+
+| Token | 大小 | 用途 |
+|-------|------|------|
+| `text-2xs` | 12px | 徽章、图表刻度、极短元信息 |
+| `text-xs` | 13px | 说明文字、卡片副标题、辅助信息 |
+| `text-sm` | 15px | 正文、按钮、导航、表单 |
+| `text-base` / `text-lg` | 16px / 18px | 强调正文、卡片标题 |
+| `text-2xl` 及以上 | ≥24px | 页面标题、训练题干 |
+
+中文和英文混排时保持至少 1.5 倍行高；小字不要贴边，标签容器要允许换行或截断。
 
 ## 2. 剧情数据模型
 
@@ -205,6 +237,7 @@ StoryChoice {
 |------|------|------|
 | `/` | Dashboard | 今日训练 |
 | `/drill` | Drill | 限时反射 |
+| `/typing` | TypingPage | 打字 / 填字（`features/typing`） |
 | `/scenario` | Scenario | 场景→表达 |
 | `/dialogue/:chapterId` | Dialogue | 对话/角色扮演 |
 | `/listen` | Listening | 听力发音 |
@@ -229,6 +262,9 @@ StoryChoice {
 | `favorites.test.ts` | 收藏 ID 归一化、增删改色、导入过滤 |
 | `backup.test.ts` | 备份格式、旧备份、四模块 round-trip、未知模块跳过、坏文件拒绝 |
 | `reporting.test.ts` | 四个汇报场景、四段结构、框架映射 |
+| `features/typing/cloze.test.ts` | 挖空选择、标点保留、确定性、渐进提示、单词校验、评分建议 |
+| `features/typing/sound.test.ts` | 按键分类、修饰键忽略、press/release 采样映射、Backspace 回弹回退 |
+| `features/tts/edge.test.ts` | v2 token 格式与稳定性、WebSocket URL、SSML 转义、合成消息、二进制帧解析、缓存 key |
 | `stats.test.ts` | 统计聚合 |
 
 运行：

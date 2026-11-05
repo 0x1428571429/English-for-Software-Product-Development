@@ -24,6 +24,18 @@
 
 它把章节变成限时「中 → 英」反射训练、场景选择题、对话角色扮演、听力/发音练习，并用 FSRS 间隔重复和反应时间统计，训练「脱口而出」而不是「看得懂」。源码与本地开发说明在 [`web/`](web/)。
 
+![今日训练](web/docs/screenshots/home.jpg)
+
+### 界面截图
+
+| 剧情大厅 | 赛博朋克剧情场景 | 选择与角色信任 |
+| --- | --- | --- |
+| ![剧情大厅](web/docs/screenshots/story.jpg) | ![剧情场景](web/docs/screenshots/episode-scene.jpg) | ![剧情选择](web/docs/screenshots/episode-choice.jpg) |
+
+| 悬停 / 双击查词 | 打字 · 填字 | 打字音效设置 |
+| --- | --- | --- |
+| ![查词](web/docs/screenshots/word-lookup.jpg) | ![打字训练](web/docs/screenshots/typing.jpg) | ![音效设置](web/docs/screenshots/settings-sound.jpg) |
+
 ---
 
 ## 特色

@@ -18,6 +18,14 @@
 | R-09 | 不靠谱、不负责的同事 | 固定角色 Kevin：抢功、消失、甩锅；写进专精剧集与暗线，选择要处理「人不靠谱但系统要继续跑」 | `data/story.ts` | done |
 | R-10 | 很专业但很傻逼的同事 | 固定角色 Victor：Principal Engineer，技术强、架构洁癖、四十分钟证明你不行但不给替代方案；专精剧集里用「先止血再重写」应对 | `data/story.ts` | done |
 | R-11 | 任务拆分与上下文 | 维护本任务板；每个需求记录上下文、落点、验收；跨会话可恢复 | `docs/BACKLOG.md` | done |
+| R-12 | 打字 / 填字，帮助记忆 | 新增「填字」与「整句打字」两种模式：句子挖空 1–3 个关键词、逐空校验、首字母渐进提示、整句逐词差异；结果计入 FSRS；功能按独立模块组织，便于后续重构 | `src/features/typing/`、`src/App.tsx`、`src/components/layout/AppShell.tsx`、`src/pages/DashboardPage.tsx` | done |
+| R-13 | 功能模块化，便于后续按模块重构 | 新功能放 `src/features/<module>/`，模块自带纯逻辑、测试、README 和唯一公共入口；现有 pages 保持不动，记录迁移映射 | `src/features/README.md`、`docs/ARCHITECTURE.md` | done |
+| R-14 | 更自然的 TTS，免费/薅羊毛优先 | 调研并落地 Edge 逆向 WebSocket（v2 token）+ 本地 Node 代理，新增「在线 · Edge Natural」引擎、音色选择、IndexedDB 音频缓存与自动回退；纯浏览器直连因握手头限制返回 403，代理方案已端到端验证 | `docs/TTS.md`、`src/features/tts/`、`scripts/edge-tts-proxy.mjs`、`src/lib/speech.ts`、`src/pages/SettingsPage.tsx` | done |
+| R-15 | 小字太多、整体字号偏小 | 建立统一字号阶梯并抬升下限：9/10px 元信息统一到 12px，11px 提示提升到 13px，`text-xs` 13px、`text-sm` 15px；统计图表刻度 12px；已在桌面与 390px 移动端检查主要页面 | `src/index.css`、`docs/ARCHITECTURE.md`、各页面 | done |
+| R-16 | 查词触发方式不清楚，需要高亮 | 悬停 0.3 秒才出卡片并给命中词加 tag 式高亮；双击立即查词、取消原生选中并固定卡片；排除输入框、按钮双击、链接等会抢交互的位置；滚动/缩放时收起；面板底部提示触发方式 | `src/components/words/GlobalWordLookup.tsx` | done |
+| R-17 | 打字时要有好听的键盘音效，调研开源项目 | 调研 thock / thock-mania / daktilo / KeyEcho 等；采用 thock 的 4 套 CC0 采样；按下+回弹双采样、音高/音量随机化、180Hz 高通让默认 Clicky 更清脆；设置页开关/试听/音量，训练页快速静音；只在输入框发声；WAV 进 PWA 预缓存 | `src/features/typing/sound.ts`、`src/pages/SettingsPage.tsx`、`src/store/useSettingsStore.ts`、`public/sounds/`、`docs/SOUND.md` | done |
+| R-18 | README / 项目描述要有产品截图 | 截取今日、剧情大厅、剧情场景、选择、查词、打字、音效设置 7 张桌面截图，转 JPEG 控制体积；根 README 与 `web/README.md` 用相对路径展示 | `web/docs/screenshots/`、`README.md`、`web/README.md` | done |
+| R-19 | 想用 TypingClub 站点的音效素材 | 核查其 Terms of Service：站点内容为专有知识产权，禁止复制、改作和再分发；未下载/打包其素材，仅作为清脆反馈的交互参考，继续使用 CC0 的 thock 采样 | `docs/SOUND.md` | blocked |
 
 ## 已完成（第一季）
 

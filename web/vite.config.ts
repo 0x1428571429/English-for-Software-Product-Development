@@ -17,7 +17,7 @@ export default defineConfig({
       injectRegister: 'auto',
       devOptions: { enabled: false },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,json,svg,png,ico,woff2}'],
+        globPatterns: ['**/*.{js,css,html,json,svg,png,ico,woff2,wav}'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         cleanupOutdatedCaches: true,
         navigateFallback: 'index.html',

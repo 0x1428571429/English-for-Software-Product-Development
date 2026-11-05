@@ -74,8 +74,8 @@ export function StatsPage() {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={reviewSeries} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
               <CartesianGrid stroke="var(--color-line)" strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="date" tick={{ fill: 'var(--color-muted)', fontSize: 10 }} tickLine={false} axisLine={false} interval={4} />
-              <YAxis tick={{ fill: 'var(--color-muted)', fontSize: 10 }} tickLine={false} axisLine={false} allowDecimals={false} />
+              <XAxis dataKey="date" tick={{ fill: 'var(--color-muted)', fontSize: 12 }} tickLine={false} axisLine={false} interval={4} />
+              <YAxis tick={{ fill: 'var(--color-muted)', fontSize: 12 }} tickLine={false} axisLine={false} allowDecimals={false} />
               <Tooltip
                 contentStyle={{ background: 'var(--color-panel)', border: '1px solid var(--color-line)', borderRadius: 12, color: 'var(--color-cream)' }}
                 labelStyle={{ color: 'var(--color-muted)' }}
@@ -95,8 +95,8 @@ export function StatsPage() {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={reviewSeries} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
               <CartesianGrid stroke="var(--color-line)" strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="date" tick={{ fill: 'var(--color-muted)', fontSize: 10 }} tickLine={false} axisLine={false} interval={4} />
-              <YAxis tick={{ fill: 'var(--color-muted)', fontSize: 10 }} tickLine={false} axisLine={false} />
+              <XAxis dataKey="date" tick={{ fill: 'var(--color-muted)', fontSize: 12 }} tickLine={false} axisLine={false} interval={4} />
+              <YAxis tick={{ fill: 'var(--color-muted)', fontSize: 12 }} tickLine={false} axisLine={false} />
               <Tooltip
                 contentStyle={{ background: 'var(--color-panel)', border: '1px solid var(--color-line)', borderRadius: 12, color: 'var(--color-cream)' }}
                 labelStyle={{ color: 'var(--color-muted)' }}
@@ -142,7 +142,7 @@ export function StatsPage() {
                 hint={`秒答率 ${percent(experiment.fastRate ?? 0)}`}
               />
             </div>
-            <p className="mt-3 text-[11px] leading-5 text-muted">
+            <p className="mt-3 text-xs leading-5 text-muted">
               这是单组前后测，不是随机对照实验；练习效应会让结果偏乐观。但它能直接回答训练目标：同一个中文场景，现在是不是更快说对。
             </p>
           </>
@@ -172,7 +172,7 @@ export function StatsPage() {
             ))}
           </div>
         </div>
-        <div className="mt-2 flex items-center gap-2 text-[10px] text-muted">
+        <div className="mt-2 flex items-center gap-2 text-2xs text-muted">
           <span>少</span>
           {HEAT_COLORS.map((color) => (
             <span key={color} className={`h-3 w-3 rounded-sm ${color}`} />
@@ -211,9 +211,9 @@ function ExperimentMetric({
 }) {
   return (
     <div className="rounded-xl border border-line bg-panel-2/40 p-3">
-      <p className="text-[11px] text-muted">{label}</p>
+      <p className="text-xs text-muted">{label}</p>
       <p className="mt-1 text-xl font-semibold text-cream">{value}</p>
-      {hint && <p className="mt-0.5 text-[11px] text-accent">{hint}</p>}
+      {hint && <p className="mt-0.5 text-xs text-accent">{hint}</p>}
     </div>
   )
 }
@@ -233,10 +233,10 @@ function StatCard({
     <div className="card-surface p-4">
       <div className="flex items-center gap-2 text-muted">
         <Icon size={15} />
-        <span className="text-[11px]">{label}</span>
+        <span className="text-xs">{label}</span>
       </div>
       <p className="mt-2 text-2xl font-semibold text-cream">{value}</p>
-      <p className="mt-0.5 text-[11px] text-muted">{hint}</p>
+      <p className="mt-0.5 text-xs text-muted">{hint}</p>
     </div>
   )
 }
