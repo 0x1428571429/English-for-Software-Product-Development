@@ -43,7 +43,7 @@ It turns the chapters into timed Chinese → English recall drills, scenario que
 - **No textbook English** — Every expression is under 8 words. No one talks like that to their teammates.
 - **AI is everywhere** — AI is embedded in every scenario, not a separate chapter. You discuss AI-generated code, debug together, and review AI output with colleagues.
 - **Nobody is perfect** — Someone shifts blame, someone can't say no, someone cuts corners, AI makes things worse. Real problems make real content.
-- **No product names** — No ChatGPT, GPT, or Claude. Just AI.
+- **No product names** — Just "AI".
 
 ---
 
