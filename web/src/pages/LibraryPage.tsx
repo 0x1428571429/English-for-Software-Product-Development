@@ -63,7 +63,7 @@ export function LibraryPage() {
                 >
                   <div className="flex items-center gap-2">
                     <Badge tone="muted">{card.kind}</Badge>
-                    {card.chapterId && <span className="text-[11px] text-muted">{index.chapterById.get(card.chapterId)?.titleZh}</span>}
+                    {card.chapterId && <span className="text-xs text-muted">{index.chapterById.get(card.chapterId)?.titleZh}</span>}
                   </div>
                   <p className="mt-1.5 text-sm text-cream">{card.promptZh}</p>
                   <p className="mt-0.5 text-xs text-muted">{card.primaryAnswer}</p>
@@ -100,7 +100,7 @@ export function LibraryPage() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-[11px] text-muted">{String(chapter.order).padStart(2, '0')}</p>
+                    <p className="text-xs text-muted">{String(chapter.order).padStart(2, '0')}</p>
                     <h2 className="mt-0.5 truncate text-base font-medium text-cream">{chapter.titleZh}</h2>
                     <p className="mt-0.5 text-xs text-muted">{chapter.titleEn}</p>
                   </div>

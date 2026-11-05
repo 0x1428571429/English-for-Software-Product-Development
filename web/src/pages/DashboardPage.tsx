@@ -5,6 +5,7 @@ import {
   BookOpenText,
   Flame,
   Headphones,
+  Keyboard,
   MessagesSquare,
   Sparkles,
   Target,
@@ -108,7 +109,7 @@ export function DashboardPage() {
           <ProgressRing value={goalProgress} size={104} stroke={8}>
             <div className="text-center">
               <p className="text-2xl font-semibold text-cream">{stat.reviews}</p>
-              <p className="text-[11px] text-muted">/ {settings.dailyGoal} 张</p>
+              <p className="text-xs text-muted">/ {settings.dailyGoal} 张</p>
             </div>
           </ProgressRing>
           <div className="space-y-1 text-xs text-muted md:text-center">
@@ -122,7 +123,14 @@ export function DashboardPage() {
         </div>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-3">
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ModeCard
+          to="/typing"
+          icon={Keyboard}
+          title="打字 · 填字"
+          description="挖空补关键词，或整句默写；拼出来才记得住"
+          meta="边打边记"
+        />
         <ModeCard
           to="/scenario"
           icon={MessagesSquare}
@@ -166,12 +174,12 @@ export function DashboardPage() {
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-cream">{item.titleZh}</p>
-                  <p className="mt-1 text-[11px] text-muted">
+                  <p className="mt-1 text-xs text-muted">
                     {item.studied}/{item.total} 张 · 正确率 {item.studied ? percent(item.accuracy) : '—'}
                   </p>
                 </div>
                 <ProgressRing value={item.mastery} size={44} stroke={4}>
-                  <span className="text-[10px] text-cream">{Math.round(item.mastery * 100)}</span>
+                  <span className="text-2xs text-cream">{Math.round(item.mastery * 100)}</span>
                 </ProgressRing>
               </div>
             </Link>
@@ -190,7 +198,7 @@ export function DashboardPage() {
         />
       </section>
 
-      <p className="pb-2 text-center text-[11px] text-muted">
+      <p className="pb-2 text-center text-xs text-muted">
         语料 {corpus.report.cards} 张卡 · {corpus.report.dialogueLines} 句对话 · {corpus.report.expressions} 个表达 ·
         内容版本 {corpus.contentVersion}
       </p>
@@ -217,7 +225,7 @@ function ModeCard({
         <span className="rounded-xl border border-line bg-panel-2 p-2 text-accent">
           <Icon size={18} />
         </span>
-        <span className="text-[11px] text-muted">{meta}</span>
+        <span className="text-xs text-muted">{meta}</span>
       </div>
       <h3 className="mt-3 text-sm font-medium text-cream">{title}</h3>
       <p className="mt-1 text-xs leading-5 text-muted">{description}</p>
@@ -242,9 +250,9 @@ function MiniStat({
         <Icon size={16} />
       </span>
       <div>
-        <p className="text-[11px] text-muted">{label}</p>
+        <p className="text-xs text-muted">{label}</p>
         <p className="text-lg font-semibold text-cream">{value}</p>
-        <p className="text-[10px] text-muted">{hint}</p>
+        <p className="text-2xs text-muted">{hint}</p>
       </div>
     </div>
   )

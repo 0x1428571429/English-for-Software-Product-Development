@@ -3,7 +3,13 @@ import { persist } from 'zustand/middleware'
 import { isNew, newCardSnapshot, reviewCard, type GradeValue, type SrsSnapshot } from '../lib/srs'
 import { createAppStorage } from '../lib/storage'
 
-export type PracticeMode = 'reflection' | 'scenario' | 'roleplay' | 'listening' | 'pronunciation'
+export type PracticeMode =
+  | 'reflection'
+  | 'scenario'
+  | 'roleplay'
+  | 'listening'
+  | 'pronunciation'
+  | 'typing'
 
 export interface CardProgress {
   fsrs: SrsSnapshot

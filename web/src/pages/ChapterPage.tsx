@@ -50,7 +50,7 @@ export function ChapterPage() {
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.2em] text-muted">{chapter.titleEn}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">{chapter.titleEn}</p>
           <h1 className="mt-1 text-3xl font-semibold">{chapter.titleZh}</h1>
           <div className="mt-2 flex flex-wrap gap-1.5">
             <Badge tone="accent">{cards.length} 张卡</Badge>
@@ -75,7 +75,7 @@ export function ChapterPage() {
               tab === item.key ? 'border-b-2 border-accent text-cream' : 'text-muted hover:text-cream'
             }`}
           >
-            {item.label} <span className="text-[11px] text-muted">{item.count}</span>
+            {item.label} <span className="text-xs text-muted">{item.count}</span>
           </button>
         ))}
       </div>
@@ -123,7 +123,7 @@ export function ChapterPage() {
               </summary>
               {expression.alternatives.length > 0 && (
                 <div className="mt-3">
-                  <p className="text-[11px] uppercase tracking-wide text-muted">也可以说</p>
+                  <p className="text-xs uppercase tracking-wide text-muted">也可以说</p>
                   <ul className="mt-1 space-y-1">
                     {expression.alternatives.map((alternative) => (
                       <li key={alternative} className="text-sm text-cream/90">
@@ -135,7 +135,7 @@ export function ChapterPage() {
               )}
               {expression.usageZh.length > 0 && (
                 <div className="mt-3">
-                  <p className="text-[11px] uppercase tracking-wide text-muted">什么时候说</p>
+                  <p className="text-xs uppercase tracking-wide text-muted">什么时候说</p>
                   <ul className="mt-1 space-y-1">
                     {expression.usageZh.map((usage) => (
                       <li key={usage} className="text-xs text-muted">
@@ -147,7 +147,7 @@ export function ChapterPage() {
               )}
               {expression.related.length > 0 && (
                 <div className="mt-3 space-y-1.5 rounded-xl border border-line/70 bg-ink/40 p-3">
-                  <p className="text-[11px] uppercase tracking-wide text-muted">关联对话</p>
+                  <p className="text-xs uppercase tracking-wide text-muted">关联对话</p>
                   {expression.related.map((line, i) => (
                     <div key={`${line.en}-${i}`} className="text-sm">
                       <span className="text-muted">{line.speaker ? `${line.speaker}: ` : ''}</span>
@@ -159,7 +159,7 @@ export function ChapterPage() {
               )}
               {expression.pairs.length > 0 && (
                 <div className="mt-3">
-                  <p className="text-[11px] uppercase tracking-wide text-muted">更多说法</p>
+                  <p className="text-xs uppercase tracking-wide text-muted">更多说法</p>
                   <ul className="mt-1 space-y-1">
                     {expression.pairs.map((pair) => (
                       <li key={`${pair.en}-${pair.zh}`} className="text-xs">
@@ -200,7 +200,7 @@ export function ChapterPage() {
         <div className="card-surface overflow-x-auto">
           <table className="w-full min-w-[520px] text-left text-sm">
             <thead>
-              <tr className="border-b border-line text-[11px] uppercase tracking-wide text-muted">
+              <tr className="border-b border-line text-xs uppercase tracking-wide text-muted">
                 <th className="px-3 py-2 font-medium">单词</th>
                 <th className="px-3 py-2 font-medium">常见误读</th>
                 <th className="px-3 py-2 font-medium">正确发音</th>

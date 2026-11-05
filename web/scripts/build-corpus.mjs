@@ -749,7 +749,9 @@ for (const chapter of chapters) {
           kind: 'expression',
           chapterId: chapter.id,
           promptZh: meaningZh,
-          contextZh: `${chapter.titleZh} · ${blockTitle}`,
+          // Never put the English heading in the context: it is the answer
+          // shown above the prompt and gives the cloze/reflection away.
+          contextZh: chapter.titleZh,
           contextEn: null,
           primaryAnswer: blockTitle,
           acceptedAnswers: block.alternatives,
@@ -769,7 +771,7 @@ for (const chapter of chapters) {
           kind: 'expression',
           chapterId: chapter.id,
           promptZh: pair.zh,
-          contextZh: meaningZh ?? `${chapter.titleZh} · ${blockTitle}`,
+          contextZh: meaningZh ?? chapter.titleZh,
           contextEn: null,
           primaryAnswer: pair.en,
           acceptedAnswers: [],
@@ -797,7 +799,7 @@ for (const chapter of chapters) {
           kind: 'expression',
           chapterId: chapter.id,
           promptZh: example.zh,
-          contextZh: `${chapter.titleZh} · ${example.section}`,
+          contextZh: chapter.titleZh,
           contextEn: null,
           primaryAnswer: example.en,
           acceptedAnswers: [],

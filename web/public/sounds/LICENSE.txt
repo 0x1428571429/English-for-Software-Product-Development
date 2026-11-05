@@ -1,0 +1,12 @@
+Typing sounds bundled in web/public/sounds/
+
+Source: thock (https://github.com/ArahKarya/thock)
+Files: src-tauri/sounds/{thock,clicky,tactile,typewriter}/*.wav
+License: CC0-1.0 (public domain dedication)
+Author: Thock project
+
+The packs are procedurally synthesized by thock's tools/gen_sounds.py.
+Only the key/space/enter/backspace press and release samples used by the
+typing trainer are bundled here; mouse and modifier samples are omitted.
+
+CC0-1.0: https://creativecommons.org/publicdomain/zero/1.0/

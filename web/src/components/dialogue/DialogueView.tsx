@@ -87,7 +87,7 @@ export function DialogueView({
               >
                 <div className="w-20 shrink-0 pt-1 text-right">
                   <span className="text-xs font-medium text-cream/80">{line.speaker}</span>
-                  {line.timestamp && <span className="ml-1 text-[10px] text-muted">{line.timestamp}</span>}
+                  {line.timestamp && <span className="ml-1 text-2xs text-muted">{line.timestamp}</span>}
                 </div>
                 <div className="min-w-0 flex-1 rounded-xl rounded-tl-sm border border-line/70 bg-panel px-3 py-2">
                   <p className="text-sm leading-6 text-cream">{line.text}</p>
@@ -141,7 +141,7 @@ export function DialogueView({
               className={`flex gap-2 ${alignRight ? 'flex-row-reverse' : ''} ${highlightLineId === line.id ? 'rounded-xl bg-accent/10 p-1' : ''}`}
               onClick={() => onLineClick?.(line)}
             >
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line bg-panel-2 text-[11px] font-medium text-muted">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line bg-panel-2 text-xs font-medium text-muted">
                 {line.speaker === '?' ? '·' : line.speaker}
               </div>
               <div

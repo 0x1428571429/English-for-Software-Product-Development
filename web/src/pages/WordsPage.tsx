@@ -72,7 +72,7 @@ export function WordsPage() {
             在任意英文上停留，就能看到释义并收藏。这里统一管理你的单词、表达和标记；数据存在本机
             IndexedDB，可在设置里一键导出。
           </p>
-          <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-muted">
+          <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted">
             <span className="rounded-full border border-line px-3 py-1">共 {counts.all} 条</span>
             <span className="rounded-full border border-warn/30 px-3 py-1 text-warn">
               重点 {Object.values(items).filter((item) => item.color === 'yellow').length}
@@ -104,7 +104,7 @@ export function WordsPage() {
             <button
               key={value}
               onClick={() => setKind(value)}
-              className={`rounded-full border px-2.5 py-1 text-[11px] transition-colors ${
+              className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${
                 kind === value
                   ? 'border-accent/50 bg-accent/10 text-accent'
                   : 'border-line text-muted hover:text-cream'
@@ -150,14 +150,14 @@ export function WordsPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-baseline gap-2">
                     <h2 className="text-lg font-medium text-cream">{item.title}</h2>
-                    {item.ipa && <span className="font-mono text-[11px] text-accent/80">{item.ipa}</span>}
-                    <span className="text-[9px] uppercase tracking-[0.14em] text-muted">
+                    {item.ipa && <span className="font-mono text-xs text-accent/80">{item.ipa}</span>}
+                    <span className="text-2xs uppercase tracking-[0.14em] text-muted">
                       {KIND_LABEL[item.kind]}
                     </span>
                   </div>
                   {item.zh && <p className="mt-1 text-sm leading-6 text-cream/80">{item.zh}</p>}
                   {item.example && (
-                    <p className="mt-1.5 rounded-lg border border-line/60 bg-ink/40 px-2 py-1.5 text-[11px] leading-4 text-muted">
+                    <p className="mt-1.5 rounded-lg border border-line/60 bg-ink/40 px-2 py-1.5 text-xs leading-4 text-muted">
                       {item.example}
                     </p>
                   )}
@@ -166,7 +166,7 @@ export function WordsPage() {
                       <button
                         key={value}
                         onClick={() => setFavoriteColor(item.id, value)}
-                        className={`rounded-full border px-2 py-0.5 text-[10px] ${
+                        className={`rounded-full border px-2 py-0.5 text-2xs ${
                           item.color === value
                             ? 'border-cream/50 text-cream'
                             : 'border-line text-muted hover:text-cream'

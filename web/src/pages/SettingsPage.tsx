@@ -3,6 +3,8 @@ import { Download, RotateCcw, Upload, Volume2 } from 'lucide-react'
 import { useCorpus } from '../data/CorpusContext'
 import { useSettingsStore, type TtsAccent, type TtsEngine } from '../store/useSettingsStore'
 import { englishVoices, loadVoices, refreshVoices, speak, voiceQuality } from '../lib/speech'
+import { EDGE_VOICES } from '../features/tts'
+import { TYPING_SOUND_PACKS, previewTypingSound } from '../features/typing'
 import {
   clearAllData,
   createBackup,
@@ -15,13 +17,15 @@ import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 
 const TTS_ENGINES: { value: TtsEngine; label: string; hint: string }[] = [
-  { value: 'auto', label: '自动（推荐）', hint: '有自然的系统英文音色就用系统，否则用百度在线' },
+  { value: 'auto', label: '自动（推荐）', hint: '优先自然系统音色；配置了 Edge 代理时用 Edge，否则用百度在线' },
+  { value: 'edge', label: '在线 · Edge Natural', hint: '微软 Edge 同款自然音色，免费；非官方接口，失败会自动回退' },
   { value: 'baidu', label: '在线 · 百度', hint: '美音，国内可直接访问，长句稳定' },
   { value: 'google', label: '在线 · Google', hint: '更自然，但需要能访问 Google' },
   { value: 'browser', label: '系统音色', hint: '使用电脑里安装的英文语音包' },
 ]
 
 const VOICE_COMPARE: { label: string; engine: TtsEngine; accent: TtsAccent }[] = [
+  { label: 'Edge · 美音', engine: 'edge', accent: 'us' },
   { label: '百度 · 美音', engine: 'baidu', accent: 'us' },
   { label: 'Google · 美音', engine: 'google', accent: 'us' },
   { label: 'Google · 英音', engine: 'google', accent: 'uk' },
@@ -165,7 +169,7 @@ export function SettingsPage() {
               <option value={8}>8 秒（宽松）</option>
               <option value={0}>不限时</option>
             </select>
-            <span className="mt-1 block text-[11px] text-muted">超时自动揭示，不计入正确</span>
+            <span className="mt-1 block text-xs text-muted">超时自动揭示，不计入正确</span>
           </label>
         </div>
       </section>
@@ -197,7 +201,7 @@ export function SettingsPage() {
                   <span className={`text-sm ${active ? 'text-accent' : 'text-cream'}`}>
                     {engine.label}
                   </span>
-                  <span className="mt-0.5 block text-[11px] leading-4 text-muted">
+                  <span className="mt-0.5 block text-xs leading-4 text-muted">
                     {engine.hint}
                   </span>
                 </button>
@@ -205,7 +209,7 @@ export function SettingsPage() {
             })}
           </div>
           <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-[11px] text-muted">口音</span>
+            <span className="text-xs text-muted">口音</span>
             <select
               value={settings.ttsAccent}
               onChange={(event) => settings.update({ ttsAccent: event.target.value as TtsAccent })}
@@ -215,8 +219,41 @@ export function SettingsPage() {
               <option value="us">美音</option>
               <option value="uk">英音</option>
             </select>
-            <span className="text-[11px] text-muted">百度只有美音；系统音色取决于安装的语音包</span>
+            <span className="text-xs text-muted">百度只有美音；系统音色取决于安装的语音包</span>
           </div>
+
+          {(settings.ttsEngine === 'edge' || settings.ttsEngine === 'auto') && (
+            <div className="block pt-1">
+              <span className="text-xs text-muted">Edge 音色</span>
+              <select
+                value={settings.ttsEdgeVoice}
+                onChange={(event) => settings.update({ ttsEdgeVoice: event.target.value })}
+                className="mt-1 w-full rounded-xl border border-line bg-panel px-3 py-2.5 text-sm text-cream outline-none focus:border-accent/60"
+              >
+                {EDGE_VOICES.map((voice) => (
+                  <option key={voice.id} value={voice.id}>
+                    {voice.label}
+                  </option>
+                ))}
+              </select>
+              <span className="mt-1 block text-xs leading-4 text-muted">
+                自动模式只在系统没有自然英文音色时使用 Edge；失败会回退到百度 / Google / 系统音色。
+              </span>
+              <label className="mt-3 block">
+                <span className="text-xs text-muted">Edge 代理地址（可选）</span>
+                <input
+                  value={settings.ttsEdgeProxy}
+                  onChange={(event) => settings.update({ ttsEdgeProxy: event.target.value })}
+                  placeholder="http://127.0.0.1:8787"
+                  className="mt-1 w-full rounded-xl border border-line bg-panel px-3 py-2.5 text-sm text-cream outline-none placeholder:text-muted/60 focus:border-accent/60"
+                />
+                <span className="mt-1 block text-xs leading-4 text-muted">
+                  浏览器直连会被微软握手校验拦截（403）。本地运行 <code>npm run tts:proxy</code>，
+                  把地址填到这里即可；留空则尝试直连并自动回退。
+                </span>
+              </label>
+            </div>
+          )}
         </div>
 
         <div className="rounded-xl border border-line bg-panel-2/30 p-3">
@@ -224,19 +261,19 @@ export function SettingsPage() {
             <Button variant="secondary" size="sm" onClick={() => preview(settings.ttsEngine)}>
               <Volume2 size={14} /> 试听当前
             </Button>
-            <span className="text-[11px] text-muted">对比音色：</span>
+            <span className="text-xs text-muted">对比音色：</span>
             {VOICE_COMPARE.map((item) => (
               <button
                 key={`${item.engine}-${item.accent}`}
                 type="button"
                 onClick={() => preview(item.engine, item.accent)}
-                className="rounded-full border border-line px-2.5 py-1 text-[11px] text-muted transition-colors hover:border-accent/40 hover:text-accent"
+                className="rounded-full border border-line px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent/40 hover:text-accent"
               >
                 {item.label}
               </button>
             ))}
           </div>
-          <p className="mt-2 text-[11px] leading-4 text-muted">
+          <p className="mt-2 text-xs leading-4 text-muted">
             试听句：Still on it. Almost there. That's not a bug. That's how the business logic works.
           </p>
         </div>
@@ -304,6 +341,75 @@ export function SettingsPage() {
       </section>
 
       <section className="card-surface space-y-4 p-5">
+        <div>
+          <h2 className="text-sm font-medium text-cream">打字音效</h2>
+          <p className="mt-1 text-xs leading-5 text-muted">
+            只在打字 / 填字训练的输入框里播放，本地加载，不会上传输入内容。音效来自开源项目 thock（CC0）。
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <Toggle
+            label="启用打字音效"
+            description="按键按下和回弹都会发声；可在训练页右上角快速静音"
+            checked={settings.typingSoundEnabled}
+            onChange={(checked) => settings.update({ typingSoundEnabled: checked })}
+          />
+
+          <div className="space-y-2">
+            <span className="text-xs text-muted">音效包（点一下试听）</span>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {TYPING_SOUND_PACKS.map((pack) => {
+                const active = settings.typingSoundPack === pack.value
+                return (
+                  <button
+                    key={pack.value}
+                    type="button"
+                    onClick={() => {
+                      settings.update({ typingSoundPack: pack.value, typingSoundEnabled: true })
+                      void previewTypingSound(pack.value, settings.typingSoundVolume)
+                    }}
+                    className={`rounded-xl border p-3 text-left transition-colors ${
+                      active ? 'border-accent/60 bg-accent/10' : 'border-line bg-panel hover:border-accent/30'
+                    }`}
+                  >
+                    <span className={`text-sm ${active ? 'text-accent' : 'text-cream'}`}>{pack.label}</span>
+                    <span className="mt-0.5 block text-xs leading-4 text-muted">{pack.hint}</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <label className="flex min-w-56 flex-1 items-center gap-3 text-xs text-muted">
+              音量
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.05}
+                value={settings.typingSoundVolume}
+                onChange={(event) => settings.update({ typingSoundVolume: Number(event.target.value) })}
+                className="min-w-24 flex-1 accent-[var(--color-accent)]"
+              />
+              <span className="w-9 text-right tabular-nums">{Math.round(settings.typingSoundVolume * 100)}%</span>
+            </label>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => {
+                settings.update({ typingSoundEnabled: true })
+                void previewTypingSound(settings.typingSoundPack, settings.typingSoundVolume)
+              }}
+            >
+              <Volume2 size={14} /> 试听当前
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="card-surface space-y-4 p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="text-sm font-medium text-cream">数据备份与存储</h2>
@@ -319,17 +425,17 @@ export function SettingsPage() {
 
         <div className="grid gap-2 sm:grid-cols-3">
           <div className="rounded-xl border border-line/70 bg-ink/40 p-3">
-            <p className="text-[10px] text-muted">存储模块</p>
+            <p className="text-2xs text-muted">存储模块</p>
             <p className="mt-0.5 text-lg font-semibold text-cream">{stats?.keys.length ?? 0}</p>
           </div>
           <div className="rounded-xl border border-line/70 bg-ink/40 p-3">
-            <p className="text-[10px] text-muted">已用空间</p>
+            <p className="text-2xs text-muted">已用空间</p>
             <p className="mt-0.5 text-lg font-semibold text-cream">
               {stats ? formatBytes(stats.usage) : '—'}
             </p>
           </div>
           <div className="rounded-xl border border-line/70 bg-ink/40 p-3">
-            <p className="text-[10px] text-muted">可用配额</p>
+            <p className="text-2xs text-muted">可用配额</p>
             <p className="mt-0.5 text-lg font-semibold text-cream">
               {stats?.quota ? formatBytes(stats.quota) : '—'}
             </p>
@@ -359,7 +465,7 @@ export function SettingsPage() {
           </Button>
         </div>
         {message && <p className="text-sm text-accent">{message}</p>}
-        <p className="text-[11px] leading-5 text-muted">
+        <p className="text-xs leading-5 text-muted">
           备份格式：<code className="rounded bg-panel-2 px-1 py-0.5">efspd-backup / formatVersion 1</code>。
           每个模块独立版本号，升级时只迁移对应模块，不会互相覆盖。
         </p>
@@ -415,7 +521,7 @@ function NumberField({
         }}
         className="mt-1 w-full rounded-xl border border-line bg-panel px-3 py-2.5 text-sm text-cream outline-none focus:border-accent/60"
       />
-      <span className="mt-1 block text-[11px] text-muted">{hint}</span>
+      <span className="mt-1 block text-xs text-muted">{hint}</span>
     </label>
   )
 }
