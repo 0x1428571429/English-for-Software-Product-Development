@@ -15,6 +15,7 @@ import {
 } from '../lib/backup'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
+import { isTauri, saveTextFile } from '../lib/desktop'
 
 const TTS_ENGINES: { value: TtsEngine; label: string; hint: string }[] = [
   { value: 'auto', label: '自动（推荐）', hint: '优先自然系统音色；配置了 Edge 代理时用 Edge，否则用百度在线' },
@@ -80,13 +81,28 @@ export function SettingsPage() {
     return <div className="py-24 text-center text-muted">正在加载语料…</div>
   }
 
-  const download = () => {
+  const download = async () => {
     const payload = createBackup()
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
+    const contents = JSON.stringify(payload, null, 2)
+    const filename = `blurt-backup-${new Date().toISOString().slice(0, 10)}.json`
+
+    // 桌面壳里 WebView2 的下载行为不可靠，直接用原生保存对话框。
+    if (isTauri()) {
+      try {
+        const path = await saveTextFile(filename, contents)
+        setMessage(path ? `全部数据已导出到 ${path}` : '已取消导出。')
+        refreshStats()
+      } catch {
+        setMessage('导出失败：无法写入所选位置。')
+      }
+      return
+    }
+
+    const blob = new Blob([contents], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.download = `reflex-english-backup-${new Date().toISOString().slice(0, 10)}.json`
+    link.download = filename
     link.click()
     URL.revokeObjectURL(url)
     setMessage('全部数据已导出（进度、设置、剧情、生词本）。')
@@ -104,7 +120,7 @@ export function SettingsPage() {
       )
       refreshStats()
     } catch {
-      setMessage('文件解析失败。请确认这是反射英语导出的 JSON 备份。')
+      setMessage('文件解析失败。请确认这是脱口导出的 JSON 备份。')
     }
   }
 
@@ -443,7 +459,7 @@ export function SettingsPage() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Button variant="secondary" onClick={download}>
+          <Button variant="secondary" onClick={() => void download()}>
             <Download size={16} /> 导出全部数据
           </Button>
           <Button variant="secondary" onClick={() => fileRef.current?.click()}>

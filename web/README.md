@@ -1,6 +1,6 @@
-# 反射英语 · Web Trainer
+# 脱口 · Web Trainer（Blurt）
 
-把本仓库的 Markdown 语料变成一个可安装的英语反射训练应用：看到中文工作场景，限时说出地道英文，用间隔重复把「想起来」练成「脱口而出」。
+把本仓库的 Markdown 语料变成一个可安装的英语反应训练应用：看到中文工作场景，限时说出地道英文，用间隔重复把「想起来」练成「脱口而出」。
 
 - 在线体验：<https://0x1428571429.github.io/English-for-Software-Product-Development/>
 - 语料来源：仓库根目录 `frontend-engineer/` 与 `scripts/dialogue_data.json`
@@ -70,10 +70,25 @@ npm run lint       # oxlint
 npm run test       # vitest（含剧情图可达性、两条路径通关模拟）
 npm run build      # 构建到 dist/
 npm run preview    # 预览生产构建
+npm run desktop:dev    # Tauri 桌面版开发（需要 Rust + MSVC）
+npm run desktop:build  # 打包桌面版 exe / NSIS 安装包
 npm run tts:proxy  # 本地 Edge TTS 代理（可选，默认 127.0.0.1:8787）
 ```
 
-要求 Node 22+。语料、词表、角色 manifest 在构建时生成，不提交到 git。架构与扩展方式见 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)，模块约定见 [`src/features/README.md`](src/features/README.md)，TTS 选型见 [`docs/TTS.md`](docs/TTS.md)，打字音效来源与许可证见 [`docs/SOUND.md`](docs/SOUND.md)，需求任务板见 [`docs/BACKLOG.md`](docs/BACKLOG.md)，发布前测试清单见 [`docs/QA.md`](docs/QA.md)。
+要求 Node 22+。语料、词表、角色 manifest 在构建时生成，不提交到 git。架构与扩展方式见 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)，模块约定见 [`src/features/README.md`](src/features/README.md)，TTS 选型见 [`docs/TTS.md`](docs/TTS.md)，打字音效来源与许可证见 [`docs/SOUND.md`](docs/SOUND.md)，需求任务板见 [`docs/BACKLOG.md`](docs/BACKLOG.md)，发布前测试清单见 [`docs/QA.md`](docs/QA.md)，桌面版见 [`docs/DESKTOP.md`](docs/DESKTOP.md)。
+
+## 桌面版（Tauri）
+
+除了浏览器 / PWA，也可以用 Tauri v2 + 系统 WebView 打包成原生桌面应用：
+
+```bash
+cd web
+npm install
+npm run desktop:dev    # 开发窗口
+npm run desktop:build  # 生成 exe + NSIS 安装包
+```
+
+桌面版复用同一套前端与数据逻辑，构建时自动关闭 Service Worker；备份导出改为原生保存对话框。前置依赖、产物路径与平台差异见 [`docs/DESKTOP.md`](docs/DESKTOP.md)。
 
 ## 部署
 

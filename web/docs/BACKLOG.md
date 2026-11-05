@@ -28,6 +28,7 @@
 | R-19 | 想用 TypingClub 站点的音效素材 | 核查其 Terms of Service：站点内容为专有知识产权，禁止复制、改作和再分发；未下载/打包其素材，仅作为清脆反馈的交互参考，继续使用 CC0 的 thock 采样 | `docs/SOUND.md` | blocked |
 | R-20 | 剧情中途刷新会回到本集开头 | QA 发现：一集内已做出的选择、信任值、认知收益只存在组件 state；浏览器刷新或误触返回后重置为 0/N，需要从头再选。考虑按 `episodeId` 把 `beatId / trust / history` 存进 story store（含版本迁移与「重新开始」清理），或至少在离开前提示 | `store/useStoryStore.ts`、`pages/StoryEpisodePage.tsx` | todo |
 | R-21 | 把每次发布前的测试记录下来，下次复用 | 新增 QA 手册：环境准备、冒烟路由、13 个功能模块的勾选清单、回归约束、生产/PWA 验证、2026-11-05 测试记录与已知限制 | `docs/QA.md`、`README.md` | done |
+| R-22 | 做一个 Rust + WebView 的桌面应用版本 | 接入 Tauri v2：复用现有前端，桌面构建关闭 PWA/Service Worker；备份导出改为 Rust 原生保存对话框；提供 `desktop:dev` / `desktop:build`、NSIS 安装包、图标与最小权限；文档记录与 Web 版的差异和限制 | `src-tauri/`、`src/lib/desktop.ts`、`vite.config.ts`、`docs/DESKTOP.md` | done |
 
 ## 已完成（第一季）
 

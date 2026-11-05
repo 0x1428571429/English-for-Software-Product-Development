@@ -46,10 +46,10 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen md:flex">
-      <aside className="hidden w-60 shrink-0 border-r border-line/70 px-4 py-6 md:flex md:flex-col">
+      <aside className="hidden w-60 shrink-0 border-r border-line/70 px-4 py-6 md:sticky md:top-0 md:flex md:h-screen md:flex-col md:overflow-y-auto">
         <div className="px-2">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">English Reflex</p>
-          <h1 className="mt-1 text-xl font-semibold text-cream">反射英语</h1>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">Blurt</p>
+          <h1 className="mt-1 text-xl font-semibold text-cream">脱口</h1>
           <p className="mt-1 text-xs leading-5 text-muted">把真实工作场景练成脱口而出。</p>
         </div>
         <nav className="mt-8 space-y-1">
@@ -75,8 +75,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-30 border-b border-line/60 bg-ink/85 backdrop-blur md:hidden">
           <div className="flex items-center justify-between px-4 py-3">
             <div>
-              <p className="text-2xs uppercase tracking-[0.2em] text-muted">English Reflex</p>
-              <p className="text-base font-semibold">反射英语</p>
+              <p className="text-2xs uppercase tracking-[0.2em] text-muted">Blurt</p>
+              <p className="text-base font-semibold">脱口</p>
             </div>
             <div className="flex items-center gap-1">
               {SECONDARY.map((item) => (

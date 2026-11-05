@@ -20,7 +20,7 @@
 
 ## Web 训练应用
 
-语料同时驱动一个免费、可安装的 Web 应用：**[反射英语 · Web Trainer](https://0x1428571429.github.io/English-for-Software-Product-Development/)**。
+语料同时驱动一个免费、可安装的 Web 应用：**[脱口（Blurt）· Web Trainer](https://0x1428571429.github.io/English-for-Software-Product-Development/)**。
 
 它把章节变成限时「中 → 英」反射训练、场景选择题、对话角色扮演、听力/发音练习，并用 FSRS 间隔重复和反应时间统计，训练「脱口而出」而不是「看得懂」。源码与本地开发说明在 [`web/`](web/)。
 
