@@ -139,6 +139,7 @@ export interface CorpusReport {
   scenariosWithOptions: number
   cards: number
   cardsByKind: Record<string, number>
+  skippedUntranslatedExamples: number
   perChapter: ChapterReportRow[]
   warnings: string[]
 }
