@@ -13,7 +13,7 @@ import {
 import { Flame, Target, Timer, TrendingUp } from 'lucide-react'
 import { useCorpus } from '../data/CorpusContext'
 import { useProgressStore } from '../store/useProgressStore'
-import { chapterMastery, heatmapWeeks, lastNDays, median, percent } from '../lib/stats'
+import { chapterMastery, heatmapWeeks, lastNDays, learningExperiment, median, percent } from '../lib/stats'
 import { formatMs } from '../lib/textMatch'
 import { Badge } from '../components/ui/Badge'
 
@@ -31,6 +31,7 @@ export function StatsPage() {
     () => (corpus && index ? chapterMastery(corpus.chapters, index.allCards, progress) : []),
     [corpus, index, progress],
   )
+  const experiment = useMemo(() => learningExperiment(progress), [progress])
 
   if (loading || !corpus || !index) {
     return <div className="py-24 text-center text-muted">正在加载语料…</div>
@@ -107,6 +108,47 @@ export function StatsPage() {
         </div>
       </section>
 
+      <section id="experiment" className="card-surface p-4 md:p-5">
+        <div className="flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h2 className="text-sm font-medium text-cream">训练实验 · 同一张卡前后对比</h2>
+            <p className="mt-0.5 text-xs text-muted">
+              第一次作答 vs 最近一次；至少复习 2 次才计入。单组前后测，看的是同一批表达有没有变快、变准。
+            </p>
+          </div>
+          <Badge tone={experiment.cards >= 3 ? 'accent' : 'muted'}>{experiment.cards} 张卡片</Badge>
+        </div>
+        {experiment.cards < 3 ? (
+          <p className="mt-4 rounded-xl border border-line bg-panel-2/40 p-4 text-xs leading-5 text-muted">
+            再复习几张卡片，这里会自动比较「第一次」和「最近一次」的反应时间与正确率。每次复习都会记录反应时间，不需要额外做测试。
+          </p>
+        ) : (
+          <>
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <ExperimentMetric label="首次中位反应" value={formatMs(experiment.firstMedianMs ?? 0)} />
+              <ExperimentMetric
+                label="最近中位反应"
+                value={formatMs(experiment.recentMedianMs ?? 0)}
+                hint={
+                  experiment.speedGain != null
+                    ? `${experiment.speedGain >= 0 ? '快了' : '慢了'} ${Math.abs(Math.round(experiment.speedGain * 100))}%`
+                    : undefined
+                }
+              />
+              <ExperimentMetric label="首次正确率" value={percent(experiment.firstAccuracy ?? 0)} />
+              <ExperimentMetric
+                label="最近正确率"
+                value={percent(experiment.recentAccuracy ?? 0)}
+                hint={`秒答率 ${percent(experiment.fastRate ?? 0)}`}
+              />
+            </div>
+            <p className="mt-3 text-[11px] leading-5 text-muted">
+              这是单组前后测，不是随机对照实验；练习效应会让结果偏乐观。但它能直接回答训练目标：同一个中文场景，现在是不是更快说对。
+            </p>
+          </>
+        )}
+      </section>
+
       <section className="card-surface p-4 md:p-5">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-sm font-medium text-cream">12 周热力图</h2>
@@ -154,6 +196,24 @@ export function StatsPage() {
           ))}
         </div>
       </section>
+    </div>
+  )
+}
+
+function ExperimentMetric({
+  label,
+  value,
+  hint,
+}: {
+  label: string
+  value: string
+  hint?: string
+}) {
+  return (
+    <div className="rounded-xl border border-line bg-panel-2/40 p-3">
+      <p className="text-[11px] text-muted">{label}</p>
+      <p className="mt-1 text-xl font-semibold text-cream">{value}</p>
+      {hint && <p className="mt-0.5 text-[11px] text-accent">{hint}</p>}
     </div>
   )
 }

@@ -93,8 +93,75 @@ export function chapterMastery(
   })
 }
 
-export function lastNDays(n: number, daily: Record<string, DailyStat>): { date: string; stat: DailyStat }[] {
-  const result = []
+export interface ExperimentCard {
+  total: number
+  recentMs: number[]
+  lastRating: number
+  firstMs?: number
+  firstRating?: number
+}
+
+export interface LearningExperiment {
+  cards: number
+  firstMedianMs: number | null
+  recentMedianMs: number | null
+  /** Fractional reduction in median response time; 0.35 means 35% faster. */
+  speedGain: number | null
+  firstAccuracy: number | null
+  recentAccuracy: number | null
+  fastRate: number | null
+}
+
+/**
+ * Within-item pre/post measurement: for every card reviewed at least twice,
+ * compare the very first response with the most recent one. This is a single-
+ * group pre/post design (not a randomized controlled trial), but it directly
+ * answers the training question: after repetition, is the same expression
+ * recalled faster and more accurately?
+ */
+export function learningExperiment(
+  progress: Record<string, ExperimentCard>,
+  fastThresholdMs = 2000,
+): LearningExperiment {
+  const items = Object.values(progress).filter(
+    (item) => item.total >= 2 && item.firstMs != null && item.recentMs.length > 0,
+  )
+  if (!items.length) {
+    return {
+      cards: 0,
+      firstMedianMs: null,
+      recentMedianMs: null,
+      speedGain: null,
+      firstAccuracy: null,
+      recentAccuracy: null,
+      fastRate: null,
+    }
+  }
+
+  const firstTimes = items.map((item) => item.firstMs as number)
+  const recentTimes = items.map((item) => item.recentMs[item.recentMs.length - 1])
+  const firstMedianMs = median(firstTimes)
+  const recentMedianMs = median(recentTimes)
+  const firstCorrect = items.filter((item) => (item.firstRating ?? 0) >= 3).length
+  const recentCorrect = items.filter((item) => item.lastRating >= 3).length
+  const fast = items.filter(
+    (item) =>
+      item.lastRating >= 3 &&
+      item.recentMs[item.recentMs.length - 1] <= fastThresholdMs,
+  ).length
+
+  return {
+    cards: items.length,
+    firstMedianMs,
+    recentMedianMs,
+    speedGain: firstMedianMs > 0 ? 1 - recentMedianMs / firstMedianMs : null,
+    firstAccuracy: firstCorrect / items.length,
+    recentAccuracy: recentCorrect / items.length,
+    fastRate: fast / items.length,
+  }
+}
+
+export function lastNDays(n: number, daily: Record<string, DailyStat>): { date: string; stat: DailyStat }[] {  const result = []
   for (let i = n - 1; i >= 0; i -= 1) {
     const date = new Date()
     date.setDate(date.getDate() - i)
