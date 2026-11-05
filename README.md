@@ -18,6 +18,14 @@ Each chapter starts with a **real conversation**, then breaks it down expression
 
 ---
 
+## Web Trainer
+
+The corpus also powers a free, installable web app: **[反射英语 · Web Trainer](https://0x1428571429.github.io/English-for-Software-Product-Development/)**.
+
+It turns the chapters into timed Chinese → English recall drills, scenario questions, dialogue role-play, listening/pronunciation practice, and spaced repetition (FSRS) — with reaction-time stats so you can train automatic recall, not just recognition. Source code and local development instructions are in [`web/`](web/).
+
+---
+
 ## Features
 
 - **No textbook English** — Every expression is under 8 words. No one talks like that to their teammates.
