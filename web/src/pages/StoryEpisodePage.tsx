@@ -110,9 +110,9 @@ function StoryGate({ episode, onRestart }: { episode: StoryEpisode; onRestart: (
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-line bg-ink/60">
             <Lock size={22} className="text-muted" />
           </div>
-          <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-warn">Episode locked</p>
+          <p className="mt-4 text-xs uppercase tracking-[0.22em] text-warn">Episode locked</p>
           <h1 className="mt-2 text-2xl font-semibold text-cream">{episode.titleZh}</h1>
-          <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-muted">{title}</p>
+          <p className="mt-1 text-2xs uppercase tracking-[0.18em] text-muted">{title}</p>
           <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
           <p className="mt-3 rounded-xl border border-line/70 bg-ink/40 p-3 text-xs leading-5 text-cream/75">
             先把前面的剧集打完。每集首通 +20，挑战通过再 +20。重玩不会重复刷分。
@@ -286,7 +286,7 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
             <ArrowLeft size={18} />
           </Link>
           <div className="min-w-0">
-            <p className="truncate text-[10px] uppercase tracking-[0.2em] text-muted">
+            <p className="truncate text-2xs uppercase tracking-[0.2em] text-muted">
               EP.{String(episode.order).padStart(2, '0')} · {episode.titleEn}
             </p>
             <h1 className="truncate text-sm font-medium text-cream sm:text-base">{episode.titleZh}</h1>
@@ -324,7 +324,7 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
               style={{ width: `${Math.min(100, (history.length / Math.max(1, totalChoices)) * 100)}%` }}
             />
           </div>
-          <span className="flex items-center gap-1.5 text-[10px] text-muted">
+          <span className="flex items-center gap-1.5 text-2xs text-muted">
             <span>{history.length}/{totalChoices} 选择</span>
             <span className="rounded-full border border-accent/30 bg-accent/10 px-1.5 py-0.5 text-accent">
               认知 {insight}
@@ -333,7 +333,7 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
         </div>
 
         <div className="hidden justify-center px-3 pt-2 sm:flex">
-          <span className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-line/60 bg-ink/45 px-2.5 py-1 text-[10px] text-muted backdrop-blur">
+          <span className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-line/60 bg-ink/45 px-2.5 py-1 text-2xs text-muted backdrop-blur">
             <Target size={11} className="shrink-0 text-warn" />
             <span className="truncate">{episode.challenge.zh}</span>
           </span>
@@ -390,7 +390,7 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
                 <span className="text-sm font-medium text-cream">
                   {beat.speaker === 'narration' ? '旁白' : beat.speaker === 'you' ? '你' : speaking?.name}
                 </span>
-                {speaking && <span className="text-[11px] text-muted">{speaking.roleZh}</span>}
+                {speaking && <span className="text-xs text-muted">{speaking.roleZh}</span>}
                 {beat.speaker !== 'narration' && (
                   <button
                     onClick={(event) => {
@@ -437,14 +437,14 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
                             : 'hover:border-accent/60 hover:bg-accent/[0.06]'
                         }`}
                       >
-                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-line text-[10px] text-muted group-hover:border-accent/50 group-hover:text-accent">
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-line text-2xs text-muted group-hover:border-accent/50 group-hover:text-accent">
                           {insightLocked ? <Lock size={10} /> : index + 1}
                         </span>
                         <span className="min-w-0">
                           <span className="block text-sm font-medium leading-5 text-cream">{choice.en}</span>
-                          {showZh && <span className="mt-0.5 block text-[11px] leading-4 text-muted">{choice.zh}</span>}
+                          {showZh && <span className="mt-0.5 block text-xs leading-4 text-muted">{choice.zh}</span>}
                           {insightLocked && (
-                            <span className="mt-1 inline-block rounded-full border border-warn/40 bg-warn/10 px-1.5 py-0.5 text-[10px] text-warn">
+                            <span className="mt-1 inline-block rounded-full border border-warn/40 bg-warn/10 px-1.5 py-0.5 text-2xs text-warn">
                               需要认知 {choice.requiresInsight}
                             </span>
                           )}
@@ -488,10 +488,10 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
                     </div>
                     <p className="mt-1.5 text-xs leading-5 text-cream/80">{feedback.noteZh}</p>
                     {insightGain > 0 && (
-                      <p className="mt-1 text-[11px] text-accent">+{insightGain} 认知 · 这个道理你记住了</p>
+                      <p className="mt-1 text-xs text-accent">+{insightGain} 认知 · 这个道理你记住了</p>
                     )}
                     {feedback.insight && insightGain === 0 && (
-                      <p className="mt-1 text-[11px] text-muted">这条道理你已经学过，不再重复加认知。</p>
+                      <p className="mt-1 text-xs text-muted">这条道理你已经学过，不再重复加认知。</p>
                     )}
                     {feedback.trust && Object.keys(feedback.trust).length > 0 && (
                       <div className="mt-2 flex flex-wrap gap-2">
@@ -501,7 +501,7 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
                           return (
                             <span
                               key={characterId}
-                              className={`rounded-full border px-2 py-0.5 text-[10px] ${
+                              className={`rounded-full border px-2 py-0.5 text-2xs ${
                                 delta >= 0 ? 'border-accent/30 text-accent' : 'border-danger/30 text-danger'
                               }`}
                             >
@@ -520,7 +520,7 @@ function StoryPlayer({ episode, onRestart }: { episode: StoryEpisode; onRestart:
               )}
 
               {!beat.choices?.length && !selected && !ending && (
-                <div className="mt-3 flex items-center justify-end gap-1 text-[10px] text-muted/70">
+                <div className="mt-3 flex items-center justify-end gap-1 text-2xs text-muted/70">
                   {typed.done ? '点击继续' : '点击跳过'}
                   <ArrowRight size={12} className={typed.done ? 'story-bounce' : ''} />
                 </div>
@@ -625,7 +625,7 @@ function MissionBriefing({
               {episode.track && (
                 <Badge tone="accent">{episode.track === 'frontend' ? '前端路径' : '全栈路径'}</Badge>
               )}
-              <span className="text-[10px] uppercase tracking-[0.2em] text-muted">{episode.titleEn}</span>
+              <span className="text-2xs uppercase tracking-[0.2em] text-muted">{episode.titleEn}</span>
             </div>
             <h2 className="mt-2 text-2xl font-semibold text-cream sm:text-3xl">{episode.titleZh}</h2>
             <p className="mt-1 text-sm leading-6 text-muted">{episode.taglineZh}</p>
@@ -639,7 +639,7 @@ function MissionBriefing({
               <h3 className="text-xs font-medium uppercase tracking-[0.16em]">本集任务</h3>
             </div>
             <p className="mt-1.5 text-sm leading-6 text-cream">{episode.challenge.zh}</p>
-            <p className="mt-1 text-[11px] text-muted">
+            <p className="mt-1 text-xs text-muted">
               达成条件：至少 {episode.challenge.minGood} 个好选择
               {episode.challenge.maxBad !== undefined ? `，最多 ${episode.challenge.maxBad} 个坏选择` : ''}
               。挑战通过额外 +20 绩效。部分选项需要认知，认知来自你之前真正理解过的选择。
@@ -655,13 +655,13 @@ function MissionBriefing({
               <div className="mt-2 grid gap-2 sm:grid-cols-2">
                 {knowledge.map((card) => (
                   <div key={card.id} className="rounded-lg border border-line/70 bg-ink/40 p-2.5">
-                    <p className="text-[11px] font-medium text-cream">{card.titleZh}</p>
-                    <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-muted">{card.titleEn}</p>
-                    <p className="mt-1 text-[11px] leading-4 text-cream/70">{card.summaryZh}</p>
+                    <p className="text-xs font-medium text-cream">{card.titleZh}</p>
+                    <p className="mt-0.5 text-2xs uppercase tracking-[0.12em] text-muted">{card.titleEn}</p>
+                    <p className="mt-1 text-xs leading-4 text-cream/70">{card.summaryZh}</p>
                   </div>
                 ))}
               </div>
-              <p className="mt-2 text-[10px] text-muted">
+              <p className="mt-2 text-2xs text-muted">
                 通关后完整知识卡会进入「职场 → 职业手册」，可随时复习。
               </p>
             </section>
@@ -683,8 +683,8 @@ function MissionBriefing({
                         <Volume2 size={12} />
                       </button>
                     </div>
-                    <p className="mt-0.5 text-[11px] leading-4 text-muted">{focus.zh}</p>
-                    <p className="mt-1 text-[10px] leading-4 text-accent/70">{focus.noteZh}</p>
+                    <p className="mt-0.5 text-xs leading-4 text-muted">{focus.zh}</p>
+                    <p className="mt-1 text-2xs leading-4 text-accent/70">{focus.noteZh}</p>
                   </div>
                 ))}
               </div>
@@ -698,8 +698,8 @@ function MissionBriefing({
                     <div className="mx-auto h-20 w-14">
                       <StoryPortrait character={character} mood="neutral" />
                     </div>
-                    <p className="mt-1 text-[11px] font-medium text-cream">{character.name}</p>
-                    <p className="text-[9px] leading-3 text-muted">{character.roleZh}</p>
+                    <p className="mt-1 text-xs font-medium text-cream">{character.name}</p>
+                    <p className="text-2xs leading-4 text-muted">{character.roleZh}</p>
                   </div>
                 ))}
               </div>
@@ -713,7 +713,7 @@ function MissionBriefing({
             <Button variant="secondary" onClick={onRead}>
               <BookOpen size={14} /> 先读剧本
             </Button>
-            <span className="text-[10px] text-muted">Enter / 空格推进 · 数字键选择 · Esc 返回</span>
+            <span className="text-2xs text-muted">Enter / 空格推进 · 数字键选择 · Esc 返回</span>
           </div>
         </div>
       </div>
@@ -739,7 +739,7 @@ function ReadingOverlay({
       <header className="flex items-center gap-2 border-b border-line/70 px-4 py-3">
         <BookOpen size={16} className="text-accent" />
         <div className="min-w-0">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-muted">Reading mode</p>
+          <p className="text-2xs uppercase tracking-[0.2em] text-muted">Reading mode</p>
           <h2 className="truncate text-sm font-medium text-cream">
             {episode.titleZh} · 剧本
           </h2>
@@ -747,7 +747,7 @@ function ReadingOverlay({
         <div className="ml-auto flex items-center gap-1.5">
           <button
             onClick={onToggleZh}
-            className="rounded-full border border-line/80 px-2.5 py-1.5 text-[11px] text-muted hover:text-cream"
+            className="rounded-full border border-line/80 px-2.5 py-1.5 text-xs text-muted hover:text-cream"
           >
             {showZh ? '隐藏中文' : '显示中文'}
           </button>
@@ -763,7 +763,7 @@ function ReadingOverlay({
       <div className="flex-1 overflow-y-auto px-4 py-5">
         <div className="mx-auto max-w-3xl space-y-5">
           <div className="rounded-xl border border-line/70 bg-panel/70 p-4">
-            <p className="text-[10px] uppercase tracking-[0.18em] text-muted">Task</p>
+            <p className="text-2xs uppercase tracking-[0.18em] text-muted">Task</p>
             <p className="mt-1 text-sm leading-6 text-cream">{episode.challenge.zh}</p>
           </div>
           {script.map((item) => {
@@ -772,8 +772,8 @@ function ReadingOverlay({
             return (
               <article key={item.id} className="border-l-2 border-line pl-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-accent/80">{speaker}</span>
-                  {character && <span className="text-[10px] text-muted">{character.roleZh}</span>}
+                  <span className="text-xs font-medium uppercase tracking-[0.14em] text-accent/80">{speaker}</span>
+                  {character && <span className="text-2xs text-muted">{character.roleZh}</span>}
                   <button
                     onClick={() => void speak(item.en)}
                     className="ml-auto rounded-full p-1 text-muted hover:text-accent"
@@ -786,9 +786,9 @@ function ReadingOverlay({
                 {showZh && <p className="mt-1 text-xs leading-5 text-muted">{item.zh}</p>}
                 {item.choices?.length ? (
                   <div className="mt-2 space-y-1.5 rounded-lg border border-line/60 bg-panel/60 p-2.5">
-                    <p className="text-[10px] uppercase tracking-[0.14em] text-muted">你的可能回应</p>
+                    <p className="text-2xs uppercase tracking-[0.14em] text-muted">你的可能回应</p>
                     {item.choices.map((choice) => (
-                      <p key={choice.id} className="text-[11px] leading-5 text-cream/70">
+                      <p key={choice.id} className="text-xs leading-5 text-cream/70">
                         <span className="text-accent/70">·</span> {choice.en}
                         {showZh && <span className="text-muted"> — {choice.zh}</span>}
                       </p>
@@ -823,7 +823,7 @@ function TrustBar({
           title={`${character.name} 信任度 ${trust[character.id] ?? 50}`}
         >
           <Heart size={9} style={{ color: character.color }} />
-          <span className="text-[10px] text-muted">{character.name}</span>
+          <span className="text-2xs text-muted">{character.name}</span>
           <span className="h-1 w-10 overflow-hidden rounded-full bg-panel-2">
             <span
               className="block h-full rounded-full transition-all duration-500"
@@ -885,7 +885,7 @@ function EndingOverlay({
         className={`animate-fade-up relative z-10 my-4 w-full max-w-2xl overflow-hidden rounded-2xl border bg-panel shadow-2xl ${toneClass}`}
       >
         <div className="relative border-b border-line/70 px-5 py-6 sm:px-7">
-          <p className={`text-[11px] uppercase tracking-[0.24em] ${toneText}`}>ENDING</p>
+          <p className={`text-xs uppercase tracking-[0.24em] ${toneText}`}>ENDING</p>
           <h2 className="mt-2 text-3xl font-semibold text-cream">{ending.titleZh}</h2>
           <p className="mt-1 text-xs uppercase tracking-[0.18em] text-muted">{ending.titleEn}</p>
           <div className="absolute right-4 top-4 hidden gap-1 sm:flex">
@@ -905,7 +905,7 @@ function EndingOverlay({
               <p className="inline-flex items-center gap-2 text-sm font-semibold text-danger">
                 <Lock size={16} /> FIRED · 你被开除了
               </p>
-              <p className="mt-1 text-[11px] leading-5 text-danger/80">
+              <p className="mt-1 text-xs leading-5 text-danger/80">
                 Security 会收走你的工牌，HR 会收走你的电脑。这一集可以重玩，换一种处理方式，结局会改写。
               </p>
             </div>
@@ -915,7 +915,7 @@ function EndingOverlay({
               <p className="inline-flex items-center gap-2 text-sm font-semibold text-warn">
                 <Trophy size={16} /> PROMOTION APPROVED · 升职成功
               </p>
-              <p className="mt-1 text-[11px] text-warn/80">
+              <p className="mt-1 text-xs text-warn/80">
                 新职级：{reward.rankTitleZh} · {careerRank(reward.rankLevel).salary}/月
               </p>
             </div>
@@ -925,7 +925,7 @@ function EndingOverlay({
               <p className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
                 <Trophy size={16} /> OFFER · VP of Engineering
               </p>
-              <p className="mt-1 text-[11px] text-accent/80">¥180k/月 · 带 40 人 · 新公司</p>
+              <p className="mt-1 text-xs text-accent/80">¥180k/月 · 带 40 人 · 新公司</p>
             </div>
           )}
           <p className="text-sm leading-6 text-cream/85">{ending.bodyZh}</p>
@@ -947,12 +947,12 @@ function EndingOverlay({
               <p className={`text-xs font-medium ${passed ? 'text-accent' : 'text-warn'}`}>
                 {passed ? '挑战通过' : '挑战未通过'}
               </p>
-              <span className="ml-auto text-[10px] text-muted">
+              <span className="ml-auto text-2xs text-muted">
                 目标：{episode.challenge.zh}
               </span>
             </div>
             {!passed && (
-              <p className="mt-1.5 text-[11px] leading-5 text-muted">
+              <p className="mt-1.5 text-xs leading-5 text-muted">
                 达成条件：至少 {episode.challenge.minGood} 个好选择
                 {episode.challenge.maxBad !== undefined ? `，最多 ${episode.challenge.maxBad} 个坏选择` : ''}
                 。这集可以重玩，挑战奖励只发一次。
@@ -965,13 +965,13 @@ function EndingOverlay({
               <div className="flex items-center gap-2">
                 <GraduationCap size={15} className="text-accent" />
                 <p className="text-xs font-medium text-accent">带走这集的知识卡</p>
-                <Link to="/career" className="ml-auto text-[10px] text-muted hover:text-cream">
+                <Link to="/career" className="ml-auto text-2xs text-muted hover:text-cream">
                   去职业手册
                 </Link>
               </div>
               <div className="mt-2 space-y-1.5">
                 {knowledge.map((card) => (
-                  <p key={card.id} className="text-[11px] leading-5 text-cream/75">
+                  <p key={card.id} className="text-xs leading-5 text-cream/75">
                     <span className="text-cream">{card.titleZh}</span>
                     <span className="text-muted"> — {card.summaryZh}</span>
                   </p>
@@ -983,14 +983,14 @@ function EndingOverlay({
           <div className="space-y-2 rounded-xl border border-line/70 bg-ink/40 p-3">
             {episode.characters.map((character) => (
               <div key={character.id} className="flex items-center gap-2">
-                <span className="w-12 text-[11px] text-muted">{character.name}</span>
+                <span className="w-12 text-xs text-muted">{character.name}</span>
                 <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-panel-2">
                   <div
                     className="h-full rounded-full"
                     style={{ width: `${trust[character.id] ?? 50}%`, background: character.color }}
                   />
                 </div>
-                <span className="w-7 text-right text-[10px] text-muted">{trust[character.id] ?? 50}</span>
+                <span className="w-7 text-right text-2xs text-muted">{trust[character.id] ?? 50}</span>
               </div>
             ))}
           </div>
@@ -1045,7 +1045,7 @@ function Confetti() {
 function Metric({ label, value, tone }: { label: string; value: string; tone: string }) {
   return (
     <div className="rounded-xl border border-line/70 bg-ink/40 p-2.5">
-      <p className="text-[10px] text-muted">{label}</p>
+      <p className="text-2xs text-muted">{label}</p>
       <p className={`mt-0.5 text-xl font-semibold ${tone}`}>{value}</p>
     </div>
   )

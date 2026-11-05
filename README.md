@@ -24,6 +24,18 @@ The corpus also powers a free, installable web app: **[反射英语 · Web Train
 
 It turns the chapters into timed Chinese → English recall drills, scenario questions, dialogue role-play, listening/pronunciation practice, and spaced repetition (FSRS) — with reaction-time stats so you can train automatic recall, not just recognition. Source code and local development instructions are in [`web/`](web/).
 
+![Dashboard](web/docs/screenshots/home.jpg)
+
+### Screenshots
+
+| Career story hub | Cyberpunk episode scene | Branching choices |
+| --- | --- | --- |
+| ![Story hub](web/docs/screenshots/story.jpg) | ![Episode scene](web/docs/screenshots/episode-scene.jpg) | ![Choices](web/docs/screenshots/episode-choice.jpg) |
+
+| Hover / double-click word lookup | Typing and fill-in-the-blank drill | Keyboard sound settings |
+| --- | --- | --- |
+| ![Word lookup](web/docs/screenshots/word-lookup.jpg) | ![Typing drill](web/docs/screenshots/typing.jpg) | ![Sound settings](web/docs/screenshots/settings-sound.jpg) |
+
 ---
 
 ## Features

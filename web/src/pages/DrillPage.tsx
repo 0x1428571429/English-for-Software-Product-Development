@@ -339,7 +339,11 @@ export function DrillPage() {
           </div>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-3">
+          <Link to="/typing" className="card-surface p-4 hover:border-accent/40">
+            <p className="text-sm font-medium text-cream">想练拼写？</p>
+            <p className="mt-1 text-xs text-muted">填字或整句默写，打字的过程帮助记忆。</p>
+          </Link>
           <Link to="/scenario" className="card-surface p-4 hover:border-accent/40">
             <p className="text-sm font-medium text-cream">想先看场景？</p>
             <p className="mt-1 text-xs text-muted">场景模式给你中文工作情境，选最自然的一句。</p>
@@ -574,10 +578,10 @@ export function DrillPage() {
                   }`}
                 >
                   <p className="text-sm font-medium text-cream">{item.label}</p>
-                  <p className="mt-0.5 text-[11px] text-muted">{item.hint}</p>
-                  <span className="absolute right-2 top-2 text-[10px] text-muted">{item.value}</span>
+                  <p className="mt-0.5 text-xs text-muted">{item.hint}</p>
+                  <span className="absolute right-2 top-2 text-2xs text-muted">{item.value}</span>
                   {item.value === suggestedGrade && (
-                    <span className="absolute bottom-2 right-2 text-[10px] text-accent">建议</span>
+                    <span className="absolute bottom-2 right-2 text-2xs text-accent">建议</span>
                   )}
                 </button>
               ))}
@@ -595,7 +599,7 @@ export function DrillPage() {
 function SummaryStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="card-surface p-4 text-center">
-      <p className="text-[11px] text-muted">{label}</p>
+      <p className="text-xs text-muted">{label}</p>
       <p className="mt-1 text-xl font-semibold text-cream">{value}</p>
     </div>
   )

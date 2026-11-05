@@ -1,4 +1,5 @@
 import { useSettingsStore, type TtsAccent, type TtsEngine } from '../store/useSettingsStore'
+import { cancelEdgeSynthesis, edgeAudioSource, edgeTtsSupported } from '../features/tts'
 
 export interface SpeakOptions {
   rate?: number
@@ -136,6 +137,11 @@ function resolveEngine(requested: TtsEngine, voices: SpeechSynthesisVoice[]): Tt
   if (typeof navigator !== 'undefined' && navigator.onLine === false) {
     return englishVoices(voices).length ? 'browser' : 'baidu'
   }
+  // Edge Read Aloud has the most natural free voices. It is an unofficial
+  // endpoint and browsers cannot set its handshake headers, so "auto" only
+  // picks it when a proxy is configured; failures fall through to
+  // Baidu/Google or the browser voice.
+  if (edgeTtsSupported() && currentSettings().ttsEdgeProxy.trim()) return 'edge'
   // Baidu is reachable from mainland China and handles full sentences;
   // Google Translate's voice is a little better where it is reachable.
   // Note: Youdao's public endpoint only handles short words reliably, so it
@@ -244,6 +250,22 @@ async function playOnline(
   await playUrl(url, rate, token)
 }
 
+async function playEdge(
+  text: string,
+  voice: string,
+  rate: number,
+  token: number,
+  signal?: AbortSignal,
+  proxyUrl = '',
+): Promise<void> {
+  const source = await edgeAudioSource(text, voice, signal, proxyUrl)
+  try {
+    await playUrl(source.url, rate, token)
+  } finally {
+    if (source.revoke) URL.revokeObjectURL(source.url)
+  }
+}
+
 function browserSpeak(text: string, options: SpeakOptions, token: number): Promise<void> {
   return new Promise((resolve) => {
     if (!ttsSupported() || !text.trim() || token !== playbackToken) {
@@ -291,6 +313,30 @@ async function speakInternal(
   const voices = cachedVoices.length ? cachedVoices : ttsSupported() ? window.speechSynthesis.getVoices() : []
   const engine = resolveEngine(requested, voices)
 
+  if (engine === 'edge') {
+    try {
+      await playEdge(
+        clean,
+        settings.ttsEdgeVoice,
+        rate,
+        token,
+        options.signal,
+        settings.ttsEdgeProxy,
+      )
+      return
+    } catch {
+      if (token !== playbackToken || options.signal?.aborted) return
+      // Unofficial endpoint changed or network blocked: try a public online
+      // voice before falling back to the (possibly robotic) local voice.
+      try {
+        await playOnline(clean, accent === 'uk' ? 'google' : 'baidu', accent, rate, token)
+        return
+      } catch {
+        if (token !== playbackToken) return
+      }
+    }
+  }
+
   if (isOnlineEngine(engine)) {
     try {
       await playOnline(clean, engine, accent, rate, token)
@@ -321,6 +367,7 @@ export async function speak(text: string, options: SpeakOptions = {}): Promise<v
 
 export function cancelSpeech(): void {
   playbackToken += 1
+  cancelEdgeSynthesis()
   stopOnlineAudio()
   if (ttsSupported()) window.speechSynthesis.cancel()
 }

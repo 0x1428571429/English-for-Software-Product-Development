@@ -161,7 +161,7 @@ export function StoryPage() {
           </div>
           {careerTrack && (
             <span
-              className="rounded-full border px-3 py-1 text-[11px]"
+              className="rounded-full border px-3 py-1 text-xs"
               style={{
                 borderColor: CAREER_TRACKS.find((item) => item.id === careerTrack)?.color,
                 color: CAREER_TRACKS.find((item) => item.id === careerTrack)?.color,
@@ -186,12 +186,12 @@ export function StoryPage() {
               >
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="text-sm font-medium text-cream">{item.titleZh}</h3>
-                  <span className="text-[10px] uppercase tracking-[0.16em] text-muted">
+                  <span className="text-2xs uppercase tracking-[0.16em] text-muted">
                     {item.titleEn}
                   </span>
                 </div>
-                <p className="mt-1 text-[11px] leading-5 text-muted">{item.taglineZh}</p>
-                <p className="mt-1.5 text-[11px] leading-5 text-cream/65">{item.descriptionZh}</p>
+                <p className="mt-1 text-xs leading-5 text-muted">{item.taglineZh}</p>
+                <p className="mt-1.5 text-xs leading-5 text-cream/65">{item.descriptionZh}</p>
                 <div className="mt-3 flex items-center gap-2">
                   {active ? (
                     <Badge tone="accent">
@@ -208,7 +208,7 @@ export function StoryPage() {
                     </Button>
                   )}
                   {locked && (
-                    <span className="text-[10px] text-muted">已进入另一条专精线</span>
+                    <span className="text-2xs text-muted">已进入另一条专精线</span>
                   )}
                 </div>
               </div>
@@ -226,19 +226,19 @@ export function StoryPage() {
           <div className="mt-3 flex items-end justify-between gap-3">
             <div>
               <p className="text-2xl font-semibold text-cream">{rank.titleZh}</p>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-muted">{rank.titleEn}</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-muted">{rank.titleEn}</p>
             </div>
-            <p className="font-mono text-lg text-accent">{rank.salary}<span className="text-[10px] text-muted">/月</span></p>
+            <p className="font-mono text-lg text-accent">{rank.salary}<span className="text-2xs text-muted">/月</span></p>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-panel-2">
             <div className="h-full rounded-full bg-accent transition-all duration-700" style={{ width: `${progress}%` }} />
           </div>
-          <p className="mt-2 text-[11px] leading-5 text-muted">
+          <p className="mt-2 text-xs leading-5 text-muted">
             {nextRank
               ? `下一级：${careerRank(nextRank.level, track).titleZh}（${nextRank.salary}/月）。绩效点 ${careerPoints}/${nextRank.minPoints}，晋升靠剧情挑战。`
               : '你已到本季最高职级。猎头应该很快会来找你。'}
           </p>
-          <div className="mt-3 flex flex-wrap items-center gap-1.5 text-[11px]">
+          <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs">
             <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-accent">
               认知 {insight}
             </span>
@@ -256,7 +256,7 @@ export function StoryPage() {
           <p className="mt-3 text-2xl font-semibold text-cream">
             {nextPromotionRank ? `下一站：${nextPromotionRank.titleZh}` : '技术 VP 已到手'}
           </p>
-          <p className="mt-2 text-[11px] leading-5 text-muted">
+          <p className="mt-2 text-xs leading-5 text-muted">
             {nextPromotionRank
               ? `完成「${nextPromotion?.titleZh}」的挑战，晋升到 ${nextPromotionRank.titleZh}（${nextPromotionRank.salary}/月）。`
               : '跳槽线已解锁。终面只看一件事：你值不值这个价。'}
@@ -265,7 +265,7 @@ export function StoryPage() {
             {CAREER_RANKS.map((item) => (
               <span
                 key={item.level}
-                className={`rounded-full border px-2 py-0.5 text-[10px] ${
+                className={`rounded-full border px-2 py-0.5 text-2xs ${
                   item.level <= rank.level ? 'border-accent/30 text-accent' : 'border-line text-muted/60'
                 }`}
               >
@@ -286,7 +286,7 @@ export function StoryPage() {
                 {streak}
                 <span className="ml-1 text-xs font-normal text-muted">天连续</span>
               </p>
-              <p className="mt-1 flex items-center gap-1 text-[11px] text-warn">
+              <p className="mt-1 flex items-center gap-1 text-xs text-warn">
                 <Flame size={12} /> 绝不错过两次
               </p>
             </div>
@@ -300,7 +300,7 @@ export function StoryPage() {
               </Button>
             )}
           </div>
-          <p className="mt-3 text-[11px] leading-5 text-muted">
+          <p className="mt-3 text-xs leading-5 text-muted">
             今天只做一件小事：打开一集，把第一句英文说出口。2 分钟就算完成。
           </p>
         </div>
@@ -326,7 +326,7 @@ export function StoryPage() {
             </div>
           </div>
         </div>
-        <div className="flex shrink-0 items-center gap-2 text-[11px] text-muted">
+        <div className="flex shrink-0 items-center gap-2 text-xs text-muted">
           <span className="rounded-full border border-line px-2.5 py-1">信任值</span>
           <ArrowRight size={12} />
           <span className="rounded-full border border-line px-2.5 py-1">挑战目标</span>
@@ -349,12 +349,12 @@ export function StoryPage() {
                 <div>
                   <div className="flex flex-wrap items-baseline gap-2">
                     <h2 className="text-lg font-semibold text-cream">{arc.titleZh}</h2>
-                    <span className="text-[11px] uppercase tracking-[0.16em] text-muted">{arc.titleEn}</span>
+                    <span className="text-xs uppercase tracking-[0.16em] text-muted">{arc.titleEn}</span>
                   </div>
                   <p className="text-xs text-muted">{arc.taglineZh}</p>
                 </div>
               </div>
-              <span className="text-[11px] text-muted">
+              <span className="text-xs text-muted">
                 已通关 {arcCompleted}/{episodes.length}
               </span>
             </div>
@@ -377,7 +377,7 @@ export function StoryPage() {
         <div className="flex items-center gap-2">
           <Users size={16} className="text-accent" />
           <h2 className="text-lg font-semibold text-cream">固定角色</h2>
-          <span className="text-[11px] text-muted">同一个世界，同一批人，每次都会记得你做过什么。</span>
+          <span className="text-xs text-muted">同一个世界，同一批人，每次都会记得你做过什么。</span>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {Object.values(STORY_CHARACTERS).map((character) => (
@@ -475,21 +475,21 @@ function EpisodeCard({
             </div>
           ))}
         </div>
-        <span className="absolute left-3 top-3 z-20 rounded-full border border-line bg-ink/70 px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted">
+        <span className="absolute left-3 top-3 z-20 rounded-full border border-line bg-ink/70 px-2 py-0.5 text-2xs uppercase tracking-widest text-muted">
           EP.{String(episode.order).padStart(2, '0')} {kindLabel}
         </span>
         {trackLabel && (
-          <span className="absolute bottom-3 left-3 z-20 rounded-full border border-line bg-ink/80 px-2 py-0.5 text-[10px] text-cream/80">
+          <span className="absolute bottom-3 left-3 z-20 rounded-full border border-line bg-ink/80 px-2 py-0.5 text-2xs text-cream/80">
             {trackLabel}
           </span>
         )}
         {locked && lock ? (
-          <span className="absolute right-3 top-3 z-20 inline-flex items-center gap-1 rounded-full border border-line bg-ink/80 px-2 py-0.5 text-[10px] text-muted">
+          <span className="absolute right-3 top-3 z-20 inline-flex items-center gap-1 rounded-full border border-line bg-ink/80 px-2 py-0.5 text-2xs text-muted">
             <Lock size={10} /> {lockTitle}
           </span>
         ) : record ? (
           <span
-            className={`absolute right-3 top-3 z-20 rounded-full border px-2 py-0.5 text-[10px] ${
+            className={`absolute right-3 top-3 z-20 rounded-full border px-2 py-0.5 text-2xs ${
               record.fired
                 ? 'border-danger/50 bg-danger/20 text-danger'
                 : record.endingId === 'good'
@@ -507,7 +507,7 @@ function EpisodeCard({
         <div className="flex items-start justify-between gap-2">
           <div>
             <h3 className="text-lg font-medium text-cream">{episode.titleZh}</h3>
-            <p className="text-[11px] uppercase tracking-[0.16em] text-muted">{episode.titleEn}</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-muted">{episode.titleEn}</p>
           </div>
           {!locked && (
             <ArrowUpRight size={18} className="mt-1 shrink-0 text-muted transition-colors group-hover:text-accent" />
@@ -515,12 +515,12 @@ function EpisodeCard({
         </div>
         <p className="text-xs leading-5 text-muted">{episode.taglineZh}</p>
         <div className="rounded-lg border border-line/60 bg-ink/40 px-2.5 py-1.5">
-          <p className="flex items-start gap-1.5 text-[11px] leading-4 text-cream/75">
+          <p className="flex items-start gap-1.5 text-xs leading-4 text-cream/75">
             <Target size={12} className="mt-0.5 shrink-0 text-accent" />
             <span>{episode.challenge.zh}</span>
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] text-muted">
+        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-muted">
           <span className="inline-flex items-center gap-1">
             <Sparkles size={12} className="text-accent" /> {choiceCount} 个选择点
           </span>
@@ -545,7 +545,7 @@ function EpisodeCard({
         <div className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-2 bg-ink/70 px-4 text-center backdrop-blur-[2px]">
           <Lock size={22} className="text-muted" />
           <p className="text-sm font-medium text-cream">{lockTitle}</p>
-          <p className="text-[11px] leading-5 text-muted">{lockBody}</p>
+          <p className="text-xs leading-5 text-muted">{lockBody}</p>
         </div>
       )}
     </div>
@@ -568,10 +568,10 @@ function CastCard({ character }: { character: StoryCharacter }) {
       <div className="min-w-0">
         <div className="flex items-baseline gap-2">
           <h3 className="text-sm font-medium text-cream">{character.name}</h3>
-          <span className="text-[10px] uppercase tracking-[0.14em] text-muted">{character.roleZh}</span>
+          <span className="text-2xs uppercase tracking-[0.14em] text-muted">{character.roleZh}</span>
         </div>
-        <p className="mt-0.5 text-[11px] leading-4 text-accent/80">{character.taglineZh}</p>
-        <p className="mt-1.5 text-[11px] leading-4 text-muted">{character.bioZh}</p>
+        <p className="mt-0.5 text-xs leading-4 text-accent/80">{character.taglineZh}</p>
+        <p className="mt-1.5 text-xs leading-4 text-muted">{character.bioZh}</p>
       </div>
     </div>
   )

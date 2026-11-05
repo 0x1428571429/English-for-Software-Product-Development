@@ -189,7 +189,7 @@ export function ListeningPage() {
         <div className="card-surface overflow-x-auto">
           <table className="w-full min-w-[560px] text-left text-sm">
             <thead>
-              <tr className="border-b border-line text-[11px] uppercase tracking-wide text-muted">
+              <tr className="border-b border-line text-xs uppercase tracking-wide text-muted">
                 <th className="px-3 py-2 font-medium">单词</th>
                 <th className="px-3 py-2 font-medium">常见误读</th>
                 <th className="px-3 py-2 font-medium">正确发音</th>
@@ -221,7 +221,7 @@ export function ListeningPage() {
                             return nextSet
                           })
                         }}
-                        className={`rounded-full border px-2 py-0.5 text-[11px] ${
+                        className={`rounded-full border px-2 py-0.5 text-xs ${
                           practiced.has(item.id)
                             ? 'border-accent/40 bg-accent/10 text-accent'
                             : 'border-line text-muted hover:text-cream'

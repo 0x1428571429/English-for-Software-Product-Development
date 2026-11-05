@@ -7,6 +7,7 @@ import {
   CalendarCheck,
   Clapperboard,
   GraduationCap,
+  Keyboard,
   MessagesSquare,
   Settings,
   Sparkles,
@@ -24,6 +25,7 @@ const NAV = [
 ]
 
 const SECONDARY = [
+  { to: '/typing', label: '打字', icon: Keyboard },
   { to: '/words', label: '生词', icon: Bookmark },
   { to: '/career', label: '职场', icon: GraduationCap },
   { to: '/stats', label: '统计', icon: BarChart3 },
@@ -35,7 +37,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [params] = useSearchParams()
   const focus = params.get('focus') === '1'
   const isSession =
-    (focus && (location.pathname === '/drill' || location.pathname === '/scenario')) ||
+    (focus && (location.pathname === '/drill' || location.pathname === '/scenario' || location.pathname === '/typing')) ||
     location.pathname.startsWith('/story/')
 
   if (isSession) {
@@ -46,7 +48,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen md:flex">
       <aside className="hidden w-60 shrink-0 border-r border-line/70 px-4 py-6 md:flex md:flex-col">
         <div className="px-2">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-muted">English Reflex</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">English Reflex</p>
           <h1 className="mt-1 text-xl font-semibold text-cream">反射英语</h1>
           <p className="mt-1 text-xs leading-5 text-muted">把真实工作场景练成脱口而出。</p>
         </div>
@@ -56,14 +58,14 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
         <div className="mt-8 border-t border-line/70 pt-4">
-          <p className="px-3 pb-2 text-[11px] uppercase tracking-[0.18em] text-muted">More</p>
+          <p className="px-3 pb-2 text-xs uppercase tracking-[0.18em] text-muted">More</p>
           <nav className="space-y-1">
             {SECONDARY.map((item) => (
               <SideLink key={item.to} {...item} />
             ))}
           </nav>
         </div>
-        <div className="mt-auto px-3 pt-8 text-[11px] leading-5 text-muted">
+        <div className="mt-auto px-3 pt-8 text-xs leading-5 text-muted">
           <p>先开口，再揭示。</p>
           <p>5 秒内说出来才算「秒答」。</p>
         </div>
@@ -73,7 +75,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-30 border-b border-line/60 bg-ink/85 backdrop-blur md:hidden">
           <div className="flex items-center justify-between px-4 py-3">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted">English Reflex</p>
+              <p className="text-2xs uppercase tracking-[0.2em] text-muted">English Reflex</p>
               <p className="text-base font-semibold">反射英语</p>
             </div>
             <div className="flex items-center gap-1">
@@ -109,7 +111,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 end={item.end}
                 className={({ isActive }) =>
                   clsx(
-                    'flex flex-col items-center gap-0.5 py-2 text-[10px] transition-colors',
+                    'flex flex-col items-center gap-0.5 py-2 text-2xs transition-colors',
                     isActive ? 'text-accent' : 'text-muted',
                   )
                 }

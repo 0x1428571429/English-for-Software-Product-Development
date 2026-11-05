@@ -65,7 +65,7 @@ export function CareerPage() {
             剧情里遇到的专业知识，通关后会收进这里。汇报训练把「结论先行」拆成四段，
             填完就能得到一份可以直接说出口的英文汇报。
           </p>
-          <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-muted">
+          <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted">
             <span className="rounded-full border border-line px-3 py-1">知识卡 {entries.length}</span>
             <span className="rounded-full border border-accent/30 px-3 py-1 text-accent">
               已解锁 {unlocked}
@@ -84,7 +84,7 @@ export function CareerPage() {
         <TabButton active={tab === 'reporting'} onClick={() => setParams({ tab: 'reporting' })} icon={MessageSquareText}>
           汇报训练
         </TabButton>
-        <Link to="/story" className="ml-auto self-center text-[11px] text-muted hover:text-cream">
+        <Link to="/story" className="ml-auto self-center text-xs text-muted hover:text-cream">
           回剧情模式 <ChevronRight size={12} className="inline" />
         </Link>
       </div>
@@ -157,29 +157,29 @@ function Handbook({ entries }: { entries: KnowledgeEntry[] }) {
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-2">
                 <h2 className="text-sm font-medium text-cream">{card.titleZh}</h2>
-                <span className="text-[9px] uppercase tracking-[0.14em] text-muted">{card.titleEn}</span>
+                <span className="text-2xs uppercase tracking-[0.14em] text-muted">{card.titleEn}</span>
               </div>
-              <p className="mt-1 text-[11px] leading-5 text-muted">{card.summaryZh}</p>
+              <p className="mt-1 text-xs leading-5 text-muted">{card.summaryZh}</p>
               {card.track && (
-                <span className="mt-1 inline-block rounded-full border border-line px-2 py-0.5 text-[9px] text-muted">
+                <span className="mt-1 inline-block rounded-full border border-line px-2 py-0.5 text-2xs text-muted">
                   {card.track === 'frontend' ? '前端路径' : '全栈路径'}
                 </span>
               )}
               {unlocked ? (
                 <ul className="mt-2 space-y-1">
                   {card.pointsZh.map((point) => (
-                    <li key={point} className="flex gap-1.5 text-[11px] leading-5 text-cream/75">
+                    <li key={point} className="flex gap-1.5 text-xs leading-5 text-cream/75">
                       <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70" />
                       {point}
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="mt-2 rounded-lg border border-line/60 bg-ink/40 px-2 py-1.5 text-[10px] leading-4 text-muted">
+                <p className="mt-2 rounded-lg border border-line/60 bg-ink/40 px-2 py-1.5 text-2xs leading-4 text-muted">
                   通关《{episode.titleZh}》解锁。{card.pointsZh.length} 个要点。
                 </p>
               )}
-              <p className="mt-2 text-[10px] text-muted">
+              <p className="mt-2 text-2xs text-muted">
                 来源：EP.{String(episode.order).padStart(2, '0')} {episode.titleZh}
               </p>
             </div>
@@ -229,7 +229,7 @@ function ReportingLab() {
         <div className="flex flex-wrap items-center gap-2">
           <MessageSquareText size={15} className="text-accent" />
           <h2 className="text-sm font-medium text-cream">选一个真实汇报场景</h2>
-          <span className="text-[11px] text-muted">先填中文要点，再照着英文骨架说</span>
+          <span className="text-xs text-muted">先填中文要点，再照着英文骨架说</span>
         </div>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {REPORTING_SCENARIOS.map((item) => (
@@ -240,7 +240,7 @@ function ReportingLab() {
                 setValues({})
                 setCopied(false)
               }}
-              className={`rounded-full border px-3 py-1.5 text-[11px] transition-colors ${
+              className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
                 item.id === scenario.id
                   ? 'border-accent/50 bg-accent/10 text-accent'
                   : 'border-line text-muted hover:text-cream'
@@ -257,12 +257,12 @@ function ReportingLab() {
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div>
               <h2 className="text-lg font-medium text-cream">{scenario.titleZh}</h2>
-              <p className="text-[10px] uppercase tracking-[0.16em] text-muted">{scenario.titleEn}</p>
+              <p className="text-2xs uppercase tracking-[0.16em] text-muted">{scenario.titleEn}</p>
             </div>
             <Badge tone="accent">{scenario.frameworkZh}</Badge>
           </div>
-          <p className="mt-2 text-[11px] leading-5 text-muted">{scenario.situationZh}</p>
-          <div className="mt-2 grid gap-1.5 text-[11px] text-muted sm:grid-cols-2">
+          <p className="mt-2 text-xs leading-5 text-muted">{scenario.situationZh}</p>
+          <div className="mt-2 grid gap-1.5 text-xs text-muted sm:grid-cols-2">
             <p><span className="text-cream/70">听众：</span>{scenario.audienceZh}</p>
             <p><span className="text-cream/70">目标：</span>{scenario.goalZh}</p>
           </div>
@@ -270,12 +270,12 @@ function ReportingLab() {
           <div className="mt-4 space-y-3">
             {scenario.sections.map((section, index) => (
               <label key={section.key} className="block">
-                <span className="flex items-center gap-2 text-[11px] text-cream/80">
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full border border-line text-[9px] text-muted">
+                <span className="flex items-center gap-2 text-xs text-cream/80">
+                  <span className="flex h-4 w-4 items-center justify-center rounded-full border border-line text-2xs text-muted">
                     {index + 1}
                   </span>
                   {section.labelZh}
-                  <span className="text-[9px] uppercase tracking-[0.12em] text-muted">{section.labelEn}</span>
+                  <span className="text-2xs uppercase tracking-[0.12em] text-muted">{section.labelEn}</span>
                 </span>
                 <textarea
                   value={values[section.key] ?? ''}
@@ -313,7 +313,7 @@ function ReportingLab() {
             <pre className="mt-2 whitespace-pre-wrap rounded-xl border border-line/70 bg-ink/50 p-3 font-sans text-xs leading-6 text-cream/85">
               {generated}
             </pre>
-            <p className="mt-2 text-[10px] leading-4 text-muted">
+            <p className="mt-2 text-2xs leading-4 text-muted">
               括号里的内容不会自动变成英文。先用中文把逻辑填清楚，再换英文关键词；
               这份骨架保证你永远不会从「事情是这样的」开始。
             </p>
@@ -325,7 +325,7 @@ function ReportingLab() {
               {scenario.phrases.map((phrase) => (
                 <div key={phrase.en} className="rounded-lg border border-line/60 bg-ink/40 p-2.5">
                   <div className="flex items-start gap-2">
-                    <p className="min-w-0 flex-1 text-[11px] font-medium leading-5 text-cream">{phrase.en}</p>
+                    <p className="min-w-0 flex-1 text-xs font-medium leading-5 text-cream">{phrase.en}</p>
                     <button
                       onClick={() => void speak(phrase.en)}
                       className="shrink-0 rounded-full border border-line p-1 text-muted hover:text-accent"
@@ -334,8 +334,8 @@ function ReportingLab() {
                       <Volume2 size={11} />
                     </button>
                   </div>
-                  <p className="mt-0.5 text-[10px] leading-4 text-muted">{phrase.zh}</p>
-                  <p className="mt-1 text-[10px] leading-4 text-accent/70">{phrase.noteZh}</p>
+                  <p className="mt-0.5 text-2xs leading-4 text-muted">{phrase.zh}</p>
+                  <p className="mt-1 text-2xs leading-4 text-accent/70">{phrase.noteZh}</p>
                 </div>
               ))}
             </div>
@@ -350,16 +350,16 @@ function ReportingLab() {
               <GraduationCap size={14} />
               <h3 className="text-xs font-medium text-cream">{item.titleZh}</h3>
             </div>
-            <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-muted">{item.titleEn}</p>
-            <p className="mt-1.5 text-[11px] leading-4 text-cream/75">{item.formulaZh}</p>
-            <p className="mt-1 text-[10px] leading-4 text-muted">{item.descriptionZh}</p>
-            <p className="mt-1.5 text-[10px] leading-4 text-accent/70">适合：{item.bestForZh}</p>
+            <p className="mt-1 text-2xs uppercase tracking-[0.12em] text-muted">{item.titleEn}</p>
+            <p className="mt-1.5 text-xs leading-4 text-cream/75">{item.formulaZh}</p>
+            <p className="mt-1 text-2xs leading-4 text-muted">{item.descriptionZh}</p>
+            <p className="mt-1.5 text-2xs leading-4 text-accent/70">适合：{item.bestForZh}</p>
           </div>
         ))}
       </section>
 
       {framework && (
-        <p className="text-center text-[10px] text-muted">
+        <p className="text-center text-2xs text-muted">
           当前场景使用：{framework.titleZh} · {framework.formulaZh}
         </p>
       )}

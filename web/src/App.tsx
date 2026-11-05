@@ -14,6 +14,7 @@ import { StoryPage } from './pages/StoryPage'
 import { StoryEpisodePage } from './pages/StoryEpisodePage'
 import { WordsPage } from './pages/WordsPage'
 import { CareerPage } from './pages/CareerPage'
+import { TypingPage } from './features/typing'
 import { GlobalWordLookup } from './components/words/GlobalWordLookup'
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/drill" element={<DrillPage />} />
+            <Route path="/typing" element={<TypingPage />} />
             <Route path="/story" element={<StoryPage />} />
             <Route path="/story/:episodeId" element={<StoryEpisodePage />} />
             <Route path="/scenario" element={<ScenarioPage />} />

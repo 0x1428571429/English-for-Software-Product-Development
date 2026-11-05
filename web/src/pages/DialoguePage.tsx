@@ -41,7 +41,7 @@ export function DialoguePage() {
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-[11px] text-muted">{String(chapter.order).padStart(2, '0')}</p>
+                    <p className="text-xs text-muted">{String(chapter.order).padStart(2, '0')}</p>
                     <h2 className="mt-0.5 text-base font-medium text-cream">{chapter.titleZh}</h2>
                     <p className="mt-0.5 text-xs text-muted">{chapter.titleEn}</p>
                   </div>
@@ -243,7 +243,7 @@ function Roleplay({
 
       {previous && (
         <div className="rounded-xl border border-line/60 bg-ink/40 p-3 text-sm">
-          <p className="text-[11px] text-muted">{previous.speaker}</p>
+          <p className="text-xs text-muted">{previous.speaker}</p>
           <p className="mt-0.5 text-cream/90">{previous.text}</p>
           {showTranslation && previous.zh && <p className="mt-0.5 text-xs text-muted">{previous.zh}</p>}
         </div>
