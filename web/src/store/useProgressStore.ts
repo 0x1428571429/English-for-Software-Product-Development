@@ -12,6 +12,10 @@ export interface CardProgress {
   lastRating: GradeValue
   lastReviewedAt: string
   recentMs: number[]
+  /** Response time and grade on the very first exposure (for pre/post analysis). */
+  firstMs?: number
+  firstRating?: GradeValue
+  firstReviewedAt?: string
 }
 
 export interface DailyStat {
@@ -114,6 +118,9 @@ export const useProgressStore = create<ProgressState>()(
           recentMs: [],
         }
         const recentMs = [...previous.recentMs, Math.max(0, Math.round(responseMs))].slice(-10)
+        const firstMs = previous.firstMs ?? Math.max(0, Math.round(responseMs))
+        const firstRating = previous.firstRating ?? rating
+        const firstReviewedAt = previous.firstReviewedAt ?? now.toISOString()
         const nextCard: CardProgress = {
           ...previous,
           fsrs: reviewed,
@@ -123,6 +130,9 @@ export const useProgressStore = create<ProgressState>()(
           lastRating: rating,
           lastReviewedAt: now.toISOString(),
           recentMs,
+          firstMs,
+          firstRating,
+          firstReviewedAt,
         }
 
         const daily = state.daily[today] ?? emptyDaily()

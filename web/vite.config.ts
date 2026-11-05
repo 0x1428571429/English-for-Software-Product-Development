@@ -24,6 +24,7 @@ export default defineConfig({
         name: '反射英语 — 工程师工作英语训练',
         short_name: '反射英语',
         description: '用真实工作场景训练英语的下意识反应。',
+        lang: 'zh-CN',
         theme_color: '#0b0d10',
         background_color: '#0b0d10',
         display: 'standalone',

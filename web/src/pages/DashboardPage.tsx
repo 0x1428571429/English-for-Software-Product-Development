@@ -59,6 +59,9 @@ export function DashboardPage() {
           </h1>
           <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
             看到中文场景，先大声说出英文，再揭示答案。5 秒内说出来才算真正「下意识」。
+            <span className="mt-1 block text-xs text-muted/80">
+              每天一组；统计页会自动比较同一张卡的第一次和最近一次，记录你有没有变快。
+            </span>
           </p>
         </div>
         <div className="flex items-center gap-2 text-sm text-muted">
