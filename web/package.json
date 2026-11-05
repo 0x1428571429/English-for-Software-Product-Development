@@ -5,16 +5,19 @@
   "type": "module",
   "scripts": {
     "data": "node scripts/build-corpus.mjs",
-    "predev": "npm run data",
+    "predev": "npm run data && npm run cast && npm run words",
     "dev": "vite",
-    "prebuild": "npm run data",
+    "prebuild": "npm run data && npm run cast && npm run words",
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b",
+    "pretypecheck": "npm run data && npm run cast && npm run words",
     "lint": "oxlint",
-    "pretest": "npm run data",
+    "pretest": "npm run data && npm run cast && npm run words",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cast": "node scripts/build-cast.mjs",
+    "words": "node scripts/build-word-map.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
