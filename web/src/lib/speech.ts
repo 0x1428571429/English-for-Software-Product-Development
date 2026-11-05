@@ -15,6 +15,7 @@ let cachedVoices: SpeechSynthesisVoice[] = []
 let voicesPromise: Promise<SpeechSynthesisVoice[]> | null = null
 let playbackToken = 0
 let onlineAudio: HTMLAudioElement | null = null
+let activePlaybackCleanup: (() => void) | null = null
 
 export function ttsSupported(): boolean {
   return typeof window !== 'undefined' && 'speechSynthesis' in window
@@ -170,14 +171,65 @@ function audioElement(): HTMLAudioElement | null {
 }
 
 function stopOnlineAudio() {
+  // Resolve the pending play promise first so its event listeners cannot
+  // interfere with the next source.
+  activePlaybackCleanup?.()
+  activePlaybackCleanup = null
   if (!onlineAudio) return
   onlineAudio.pause()
-  onlineAudio.removeAttribute('src')
   try {
-    onlineAudio.load()
+    onlineAudio.currentTime = 0
   } catch {
     // ignore
   }
+}
+
+async function playUrl(url: string, rate: number, token: number): Promise<void> {
+  const audio = audioElement()
+  if (!url || !audio) throw new Error('audio-unavailable')
+  if (token !== playbackToken) return
+
+  audio.pause()
+  audio.src = url
+  audio.playbackRate = Math.min(1.5, Math.max(0.6, rate))
+  audio.load()
+
+  await new Promise<void>((resolve, reject) => {
+    let settled = false
+    let cleanup: (() => void) | null = null
+    const finish = (error?: Error) => {
+      if (settled) return
+      settled = true
+      if (cleanup && activePlaybackCleanup === cleanup) activePlaybackCleanup = null
+      audio.removeEventListener('ended', onEnded)
+      audio.removeEventListener('error', onError)
+      window.clearTimeout(timer)
+      if (error) reject(error)
+      else resolve()
+    }
+    const onEnded = () => finish()
+    const onError = () => finish(new Error('audio-error'))
+    const timer = window.setTimeout(() => {
+      // Give a long sentence room to finish; the timeout only protects the
+      // queue from an endpoint that never fires ended/error.
+      if (audio.duration && Number.isFinite(audio.duration)) {
+        window.setTimeout(() => finish(), Math.max(500, audio.duration * 1000 + 2000))
+      } else {
+        finish(new Error('audio-timeout'))
+      }
+    }, 12000)
+    cleanup = () => finish()
+    activePlaybackCleanup = cleanup
+    audio.addEventListener('ended', onEnded, { once: true })
+    audio.addEventListener('error', onError, { once: true })
+    if (token !== playbackToken) {
+      finish()
+      return
+    }
+    void audio.play().catch((error: unknown) => {
+      finish(error instanceof Error ? error : new Error('audio-play-failed'))
+    })
+  })
 }
 
 async function playOnline(
@@ -188,47 +240,8 @@ async function playOnline(
   token: number,
 ): Promise<void> {
   const url = onlineUrl(engine, text, accent)
-  const audio = audioElement()
-  if (!url || !audio) throw new Error('online-tts-unavailable')
-  if (token !== playbackToken) return
-
-  audio.pause()
-  audio.src = url
-  audio.playbackRate = Math.min(1.5, Math.max(0.6, rate))
-  audio.load()
-
-  await new Promise<void>((resolve, reject) => {
-    let settled = false
-    const finish = (error?: Error) => {
-      if (settled) return
-      settled = true
-      audio.removeEventListener('ended', onEnded)
-      audio.removeEventListener('error', onError)
-      window.clearTimeout(timer)
-      if (error) reject(error)
-      else resolve()
-    }
-    const onEnded = () => finish()
-    const onError = () => finish(new Error('online-tts-error'))
-    const timer = window.setTimeout(() => {
-      // Give a long sentence room to finish; the timeout only protects the
-      // queue from an endpoint that never fires ended/error.
-      if (audio.duration && Number.isFinite(audio.duration)) {
-        window.setTimeout(() => finish(), Math.max(500, audio.duration * 1000 + 2000))
-      } else {
-        finish(new Error('online-tts-timeout'))
-      }
-    }, 12000)
-    audio.addEventListener('ended', onEnded, { once: true })
-    audio.addEventListener('error', onError, { once: true })
-    if (token !== playbackToken) {
-      finish()
-      return
-    }
-    void audio.play().catch((error: unknown) => {
-      finish(error instanceof Error ? error : new Error('online-tts-play-failed'))
-    })
-  })
+  if (!url) throw new Error('online-tts-unavailable')
+  await playUrl(url, rate, token)
 }
 
 function browserSpeak(text: string, options: SpeakOptions, token: number): Promise<void> {
@@ -328,6 +341,25 @@ export async function speakSequence(
       await new Promise((resolve) => window.setTimeout(resolve, options.gapMs))
     }
   }
+}
+
+/**
+ * Play a single word. The dictionary endpoint is reliable for words (unlike
+ * its sentence mode) and gives a clear US/UK pronunciation; if it is
+ * unavailable, fall back to the configured engine.
+ */
+export async function speakWord(word: string, options: SpeakOptions = {}): Promise<void> {
+  const settings = currentSettings()
+  const accent = options.accent ?? settings.ttsAccent
+  cancelSpeech()
+  const token = playbackToken
+  try {
+    await playOnline(word, 'youdao', accent, options.rate ?? settings.ttsRate, token)
+    return
+  } catch {
+    if (token !== playbackToken) return
+  }
+  await speak(word, options)
 }
 
 export interface RecognitionResult {

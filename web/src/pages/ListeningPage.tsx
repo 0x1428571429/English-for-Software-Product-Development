@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Headphones, Play, RotateCcw, Volume2, Check } from 'lucide-react'
 import { useCorpus } from '../data/CorpusContext'
 import { useSettingsStore } from '../store/useSettingsStore'
-import { speak } from '../lib/speech'
+import { speak, speakWord } from '../lib/speech'
 import { matchAnswer, type MatchResult } from '../lib/textMatch'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
@@ -205,9 +205,10 @@ export function ListeningPage() {
                   <td className="px-3 py-2.5">
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() => void speak(item.word, { rate: 0.85, voiceURI: settings.ttsVoiceURI })}
+                        onClick={() => void speakWord(item.word, { rate: 0.85, voiceURI: settings.ttsVoiceURI })}
                         className="rounded p-1 text-muted hover:text-accent"
-                        aria-label="播放"
+                        aria-label="播放发音"
+                        title="单词优先用有道词典发音，失败时回退到所选引擎"
                       >
                         <Volume2 size={15} />
                       </button>
