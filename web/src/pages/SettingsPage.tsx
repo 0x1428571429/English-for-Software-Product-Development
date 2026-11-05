@@ -2,8 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import { Download, RotateCcw, Upload, Volume2 } from 'lucide-react'
 import { useCorpus } from '../data/CorpusContext'
 import { useSettingsStore, type TtsAccent, type TtsEngine } from '../store/useSettingsStore'
-import { useProgressStore, type ProgressExport } from '../store/useProgressStore'
 import { englishVoices, loadVoices, refreshVoices, speak, voiceQuality } from '../lib/speech'
+import {
+  clearAllData,
+  createBackup,
+  formatBytes,
+  importBackup,
+  storageStats,
+  type StorageStats,
+} from '../lib/backup'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 
@@ -26,14 +33,20 @@ const PREVIEW_TEXT = "Still on it. Almost there. That's not a bug. That's how th
 export function SettingsPage() {
   const { corpus, loading } = useCorpus()
   const settings = useSettingsStore()
-  const exportProgress = useProgressStore((state) => state.exportProgress)
-  const importProgress = useProgressStore((state) => state.importProgress)
-  const resetAll = useProgressStore((state) => state.resetAll)
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
   const [voicesLoaded, setVoicesLoaded] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
-  const [confirmReset, setConfirmReset] = useState(false)
+  const [confirmClear, setConfirmClear] = useState(false)
+  const [stats, setStats] = useState<StorageStats | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
+
+  const refreshStats = () => {
+    void storageStats().then(setStats)
+  }
+
+  useEffect(() => {
+    refreshStats()
+  }, [])
 
   useEffect(() => {
     void loadVoices().then((all) => {
@@ -64,31 +77,42 @@ export function SettingsPage() {
   }
 
   const download = () => {
-    const payload = exportProgress()
+    const payload = createBackup()
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.download = `reflex-english-progress-${new Date().toISOString().slice(0, 10)}.json`
+    link.download = `reflex-english-backup-${new Date().toISOString().slice(0, 10)}.json`
     link.click()
     URL.revokeObjectURL(url)
-    setMessage('进度已导出。')
+    setMessage('全部数据已导出（进度、设置、剧情、生词本）。')
+    refreshStats()
   }
 
   const handleFile = async (file: File) => {
     try {
       const text = await file.text()
-      const payload = JSON.parse(text) as ProgressExport
-      if (payload.app !== 'efspd-trainer' || !payload.cards) {
-        setMessage('这个文件不是有效的反射英语进度备份。')
-        return
-      }
-      if (!window.confirm('导入会覆盖当前进度。建议先导出备份。继续？')) return
-      importProgress(payload)
-      setMessage('进度已导入。')
+      const payload = JSON.parse(text) as unknown
+      if (!window.confirm('导入会覆盖对应模块的当前数据。建议先导出备份。继续？')) return
+      const result = importBackup(payload)
+      setMessage(
+        `已导入：${result.imported.join('、') || '无'}${result.skipped.length ? `；已跳过未知模块：${result.skipped.join('、')}` : ''}。`,
+      )
+      refreshStats()
     } catch {
-      setMessage('文件解析失败，请确认是导出的 JSON。')
+      setMessage('文件解析失败。请确认这是反射英语导出的 JSON 备份。')
     }
+  }
+
+  const handleClearAll = async () => {
+    if (!confirmClear) {
+      setConfirmClear(true)
+      return
+    }
+    await clearAllData()
+    setConfirmClear(false)
+    setMessage('全部本地数据已清空。')
+    refreshStats()
   }
 
   return (
@@ -280,16 +304,44 @@ export function SettingsPage() {
       </section>
 
       <section className="card-surface space-y-4 p-5">
-        <h2 className="text-sm font-medium text-cream">进度备份</h2>
-        <p className="text-xs leading-5 text-muted">
-          进度保存在本机浏览器。换设备或清理浏览器前，先导出 JSON；导入会覆盖当前进度。
-        </p>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 className="text-sm font-medium text-cream">数据备份与存储</h2>
+            <p className="mt-1 text-xs leading-5 text-muted">
+              进度、设置、剧情和生词本保存在本机 IndexedDB。换设备或清理浏览器前，先导出完整 JSON。
+              导入兼容旧版「仅进度」备份，未知模块会被跳过，不会破坏现有数据。
+            </p>
+          </div>
+          <Badge tone={stats?.supported ? 'accent' : 'warn'}>
+            {stats?.supported ? 'IndexedDB 已启用' : '降级到 localStorage'}
+          </Badge>
+        </div>
+
+        <div className="grid gap-2 sm:grid-cols-3">
+          <div className="rounded-xl border border-line/70 bg-ink/40 p-3">
+            <p className="text-[10px] text-muted">存储模块</p>
+            <p className="mt-0.5 text-lg font-semibold text-cream">{stats?.keys.length ?? 0}</p>
+          </div>
+          <div className="rounded-xl border border-line/70 bg-ink/40 p-3">
+            <p className="text-[10px] text-muted">已用空间</p>
+            <p className="mt-0.5 text-lg font-semibold text-cream">
+              {stats ? formatBytes(stats.usage) : '—'}
+            </p>
+          </div>
+          <div className="rounded-xl border border-line/70 bg-ink/40 p-3">
+            <p className="text-[10px] text-muted">可用配额</p>
+            <p className="mt-0.5 text-lg font-semibold text-cream">
+              {stats?.quota ? formatBytes(stats.quota) : '—'}
+            </p>
+          </div>
+        </div>
+
         <div className="flex flex-wrap gap-2">
           <Button variant="secondary" onClick={download}>
-            <Download size={16} /> 导出进度
+            <Download size={16} /> 导出全部数据
           </Button>
           <Button variant="secondary" onClick={() => fileRef.current?.click()}>
-            <Upload size={16} /> 导入进度
+            <Upload size={16} /> 导入备份
           </Button>
           <input
             ref={fileRef}
@@ -302,22 +354,15 @@ export function SettingsPage() {
               event.target.value = ''
             }}
           />
-          <Button
-            variant={confirmReset ? 'danger' : 'ghost'}
-            onClick={() => {
-              if (!confirmReset) {
-                setConfirmReset(true)
-                return
-              }
-              resetAll()
-              setConfirmReset(false)
-              setMessage('进度已重置。')
-            }}
-          >
-            <RotateCcw size={16} /> {confirmReset ? '确认清空？' : '重置进度'}
+          <Button variant={confirmClear ? 'danger' : 'ghost'} onClick={() => void handleClearAll()}>
+            <RotateCcw size={16} /> {confirmClear ? '再点一次确认清空' : '清空全部数据'}
           </Button>
         </div>
         {message && <p className="text-sm text-accent">{message}</p>}
+        <p className="text-[11px] leading-5 text-muted">
+          备份格式：<code className="rounded bg-panel-2 px-1 py-0.5">efspd-backup / formatVersion 1</code>。
+          每个模块独立版本号，升级时只迁移对应模块，不会互相覆盖。
+        </p>
       </section>
 
       <section className="card-surface space-y-3 p-5">

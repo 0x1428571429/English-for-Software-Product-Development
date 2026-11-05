@@ -2,8 +2,11 @@ import type { ReactNode } from 'react'
 import { NavLink, useLocation, useSearchParams } from 'react-router-dom'
 import {
   BarChart3,
+  Bookmark,
   BookOpenText,
   CalendarCheck,
+  Clapperboard,
+  GraduationCap,
   MessagesSquare,
   Settings,
   Sparkles,
@@ -13,6 +16,7 @@ import { clsx } from 'clsx'
 
 const NAV = [
   { to: '/', label: '今日', icon: CalendarCheck, end: true },
+  { to: '/story', label: '剧情', icon: Clapperboard },
   { to: '/drill', label: '反射', icon: Sparkles },
   { to: '/scenario', label: '场景', icon: MessagesSquare },
   { to: '/dialogue', label: '对话', icon: BookOpenText },
@@ -20,6 +24,8 @@ const NAV = [
 ]
 
 const SECONDARY = [
+  { to: '/words', label: '生词', icon: Bookmark },
+  { to: '/career', label: '职场', icon: GraduationCap },
   { to: '/stats', label: '统计', icon: BarChart3 },
   { to: '/settings', label: '设置', icon: Settings },
 ]
@@ -28,7 +34,9 @@ export function AppShell({ children }: { children: ReactNode }) {
   const location = useLocation()
   const [params] = useSearchParams()
   const focus = params.get('focus') === '1'
-  const isSession = focus && (location.pathname === '/drill' || location.pathname === '/scenario')
+  const isSession =
+    (focus && (location.pathname === '/drill' || location.pathname === '/scenario')) ||
+    location.pathname.startsWith('/story/')
 
   if (isSession) {
     return <div className="min-h-screen">{children}</div>
@@ -93,7 +101,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </main>
 
         <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-line/70 bg-ink/95 backdrop-blur md:hidden">
-          <div className="grid grid-cols-5">
+          <div className="grid grid-cols-6">
             {NAV.map((item) => (
               <NavLink
                 key={item.to}
@@ -101,12 +109,12 @@ export function AppShell({ children }: { children: ReactNode }) {
                 end={item.end}
                 className={({ isActive }) =>
                   clsx(
-                    'flex flex-col items-center gap-1 py-2.5 text-[11px] transition-colors',
+                    'flex flex-col items-center gap-0.5 py-2 text-[10px] transition-colors',
                     isActive ? 'text-accent' : 'text-muted',
                   )
                 }
               >
-                <item.icon size={19} />
+                <item.icon size={18} />
                 {item.label}
               </NavLink>
             ))}

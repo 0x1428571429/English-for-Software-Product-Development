@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { isNew, newCardSnapshot, reviewCard, type GradeValue, type SrsSnapshot } from '../lib/srs'
+import { createAppStorage } from '../lib/storage'
 
 export type PracticeMode = 'reflection' | 'scenario' | 'roleplay' | 'listening' | 'pronunciation'
 
@@ -194,6 +195,7 @@ export const useProgressStore = create<ProgressState>()(
     }),
     {
       name: 'efspd.progress.v1',
+      storage: createAppStorage(),
       version: 1,
       partialize: (state) => ({
         schemaVersion: state.schemaVersion,
