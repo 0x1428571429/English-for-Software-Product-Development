@@ -1,3 +1,4 @@
+use tauri::webview::{PermissionKind, PermissionResponse};
 use tauri_plugin_dialog::DialogExt;
 
 /// 打开原生保存对话框并写入备份 JSON。
@@ -32,6 +33,12 @@ async fn save_backup(
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
+        // 口语评测需要 getUserMedia；WebView2 默认会弹原生权限框或拒绝。
+        // 只放行麦克风，其余权限继续走平台默认行为。
+        .on_permission_request(|_webview, kind| match kind {
+            PermissionKind::Microphone => PermissionResponse::Allow,
+            _ => PermissionResponse::Default,
+        })
         .invoke_handler(tauri::generate_handler![save_backup])
         .run(tauri::generate_context!())
         .expect("error while running blurt");

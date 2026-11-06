@@ -24,6 +24,7 @@ export interface SettingsSnapshot {
   typingSoundPack: TypingSoundPack
   typingSoundVolume: number
   asrEnabled: boolean
+  speakingEvalEnabled: boolean
   theme: ThemeMode
   showTranslation: boolean
 }
@@ -52,6 +53,7 @@ const DEFAULTS = {
   typingSoundPack: 'clicky' as TypingSoundPack,
   typingSoundVolume: 0.5,
   asrEnabled: false,
+  speakingEvalEnabled: false,
   theme: 'dark' as ThemeMode,
   showTranslation: true,
 }
@@ -80,6 +82,7 @@ export const useSettingsStore = create<SettingsState>()(
           typingSoundPack: state.typingSoundPack,
           typingSoundVolume: state.typingSoundVolume,
           asrEnabled: state.asrEnabled,
+          speakingEvalEnabled: state.speakingEvalEnabled,
           theme: state.theme,
           showTranslation: state.showTranslation,
         }
@@ -103,6 +106,7 @@ export const useSettingsStore = create<SettingsState>()(
           typingSoundPack: snapshot.typingSoundPack ?? state.typingSoundPack,
           typingSoundVolume: snapshot.typingSoundVolume ?? state.typingSoundVolume,
           asrEnabled: snapshot.asrEnabled ?? state.asrEnabled,
+          speakingEvalEnabled: snapshot.speakingEvalEnabled ?? state.speakingEvalEnabled,
           theme: snapshot.theme ?? state.theme,
           showTranslation: snapshot.showTranslation ?? state.showTranslation,
         })),
@@ -138,6 +142,7 @@ export const useSettingsStore = create<SettingsState>()(
         typingSoundPack: state.typingSoundPack,
         typingSoundVolume: state.typingSoundVolume,
         asrEnabled: state.asrEnabled,
+        speakingEvalEnabled: state.speakingEvalEnabled,
         theme: state.theme,
         showTranslation: state.showTranslation,
       }),

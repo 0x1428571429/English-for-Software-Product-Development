@@ -38,7 +38,7 @@ describe('unified backup', () => {
   })
 
   it('round-trips progress, settings, story, and favorites', () => {
-    useSettingsStore.getState().update({ dailyGoal: 42, ttsRate: 1.1 })
+    useSettingsStore.getState().update({ dailyGoal: 42, ttsRate: 1.1, speakingEvalEnabled: true })
     useStoryStore.getState().importStory({
       careerPoints: 320,
       rankLevel: 6,
@@ -64,6 +64,7 @@ describe('unified backup', () => {
     expect(result.imported).toEqual(['progress', 'settings', 'story', 'favorites'])
     expect(useSettingsStore.getState().dailyGoal).toBe(42)
     expect(useSettingsStore.getState().ttsRate).toBe(1.1)
+    expect(useSettingsStore.getState().speakingEvalEnabled).toBe(true)
     expect(useStoryStore.getState().careerPoints).toBe(320)
     expect(useStoryStore.getState().rankLevel).toBe(6)
     expect(useStoryStore.getState().careerTrack).toBe('fullstack')

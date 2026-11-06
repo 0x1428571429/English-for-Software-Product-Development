@@ -18,6 +18,13 @@ import { buildQueue } from '../lib/session'
 import { GRADES, isNew, type GradeValue } from '../lib/srs'
 import { formatMs, matchAnswer, type MatchResult } from '../lib/textMatch'
 import { asrSupported, speak, startRecognition } from '../lib/speech'
+import {
+  SpeakingRecorder,
+  analyzeSpeech,
+  summarizeSpeaking,
+  type SpeechAnalysis,
+  type SpeakingMetrics,
+} from '../features/speaking'
 import { median, percent, todayStat } from '../lib/stats'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
@@ -31,6 +38,15 @@ interface ResultRow {
   promptZh: string
   answer: string
   newCard: boolean
+  speaking?: SpeakingMetrics
+}
+
+interface SpeakingResult {
+  analysis: SpeechAnalysis
+  firstWordMs: number | null
+  speechMs: number
+  pauseCount: number
+  audioUrl: string | null
 }
 
 export function DrillPage() {
@@ -56,17 +72,89 @@ export function DrillPage() {
   const [message, setMessage] = useState<string | null>(null)
   const [listening, setListening] = useState(false)
   const [asrTranscript, setAsrTranscript] = useState('')
+  const [speakingResult, setSpeakingResult] = useState<SpeakingResult | null>(null)
+  const [speakingStatus, setSpeakingStatus] = useState<'off' | 'preparing' | 'ready' | 'recording' | 'error'>('off')
+  const [speakingError, setSpeakingError] = useState<string | null>(null)
 
   const shownAtRef = useRef(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const recognitionRef = useRef<{ stop: () => void; abort: () => void } | null>(null)
   const autoStartedRef = useRef(false)
+  const recorderRef = useRef<SpeakingRecorder | null>(null)
+  const recorderPromiseRef = useRef<Promise<SpeakingRecorder | null> | null>(null)
+  const speakingAudioUrlRef = useRef<string | null>(null)
+  const speakingResultRef = useRef<SpeakingResult | null>(null)
+  const startingRef = useRef(false)
+  const captureTokenRef = useRef(0)
   const current = queue[cardIndex]
   const currentIsNew = current ? isNew(progress[current.id]?.fsrs) : false
   const today = todayStat(daily)
 
+  const clearSpeakingResult = useCallback(() => {
+    speakingResultRef.current = null
+    setSpeakingResult(null)
+    if (speakingAudioUrlRef.current) {
+      URL.revokeObjectURL(speakingAudioUrlRef.current)
+      speakingAudioUrlRef.current = null
+    }
+  }, [])
+
+  const ensureRecorder = useCallback(async (): Promise<SpeakingRecorder | null> => {
+    if (!settings.speakingEvalEnabled) return null
+    if (recorderRef.current) return recorderRef.current
+    if (recorderPromiseRef.current) return recorderPromiseRef.current
+
+    setSpeakingStatus('preparing')
+    setSpeakingError(null)
+    const promise = SpeakingRecorder.create()
+      .then((recorder) => {
+        recorderRef.current = recorder
+        setSpeakingStatus('ready')
+        return recorder
+      })
+      .catch((error: unknown) => {
+        setSpeakingError(error instanceof Error ? error.message : '麦克风启动失败。')
+        setSpeakingStatus('error')
+        return null
+      })
+
+    recorderPromiseRef.current = promise
+    const recorder = await promise
+    if (!recorder) recorderPromiseRef.current = null
+    return recorder
+  }, [settings.speakingEvalEnabled])
+
+  const beginQueue = useCallback(
+    async (cards: Card[]) => {
+      if (!cards.length || startingRef.current) return
+      startingRef.current = true
+      try {
+        setMessage(null)
+        if (settings.speakingEvalEnabled) {
+          setMessage('正在准备麦克风…')
+          const recorder = await ensureRecorder()
+          setMessage(recorder ? null : '麦克风不可用，本组继续，但不会记录开口数据。')
+        }
+        setQueue(cards)
+        setCardIndex(0)
+        setResults([])
+        setInput('')
+        setMatch(null)
+        setTimedOut(false)
+        setResponseMs(0)
+        setAsrTranscript('')
+        clearSpeakingResult()
+        captureTokenRef.current += 1
+        setPhase('prompt')
+      } finally {
+        startingRef.current = false
+      }
+    },
+    [clearSpeakingResult, ensureRecorder, settings.speakingEvalEnabled],
+  )
+
   const startSession = useCallback(
-    (mode: 'due' | 'new' | 'weak' | 'all' = 'due') => {
+    async (mode: 'due' | 'new' | 'weak' | 'all' = 'due') => {
       if (!index) return
       const cards = index.allCards.filter((card) => !chapterId || card.chapterId === chapterId)
       const nextQueue = buildQueue({
@@ -83,26 +171,64 @@ export function DrillPage() {
         setPhase('setup')
         return
       }
-      setQueue(nextQueue)
-      setCardIndex(0)
-      setResults([])
-      setInput('')
-      setMatch(null)
-      setTimedOut(false)
-      setResponseMs(0)
-      setMessage(null)
-      shownAtRef.current = performance.now()
-      setPhase('prompt')
+      await beginQueue(nextQueue)
     },
-    [chapterId, index, progress, settings.newCardsPerDay, settings.sessionSize, today.newCards],
+    [
+      chapterId,
+      index,
+      progress,
+      settings.newCardsPerDay,
+      settings.sessionSize,
+      today.newCards,
+      beginQueue,
+    ],
   )
 
   useEffect(() => {
     if (focus && !autoStartedRef.current && index && phase === 'setup') {
       autoStartedRef.current = true
-      startSession('due')
+      void startSession('due')
     }
   }, [focus, index, phase, startSession])
+
+  useEffect(() => {
+    if (phase !== 'prompt') return
+    clearSpeakingResult()
+    shownAtRef.current = performance.now()
+    const recorder = recorderRef.current
+    if (!recorder) {
+      setSpeakingStatus(settings.speakingEvalEnabled ? 'error' : 'off')
+      return
+    }
+    try {
+      recorder.start()
+      setSpeakingStatus('recording')
+    } catch (error) {
+      setSpeakingError(error instanceof Error ? error.message : '录音启动失败。')
+      setSpeakingStatus('error')
+    }
+  }, [phase, cardIndex, settings.speakingEvalEnabled, clearSpeakingResult])
+
+  useEffect(() => {
+    return () => {
+      recognitionRef.current?.abort()
+      recorderRef.current?.dispose()
+      recorderRef.current = null
+      recorderPromiseRef.current = null
+      if (speakingAudioUrlRef.current) {
+        URL.revokeObjectURL(speakingAudioUrlRef.current)
+        speakingAudioUrlRef.current = null
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (settings.speakingEvalEnabled) return
+    recorderRef.current?.dispose()
+    recorderRef.current = null
+    recorderPromiseRef.current = null
+    setSpeakingStatus('off')
+  }, [settings.speakingEvalEnabled])
 
   useEffect(() => {
     if (phase !== 'prompt') return
@@ -132,22 +258,62 @@ export function DrillPage() {
   const elapsed = phase === 'prompt' && shownAtRef.current ? performance.now() - shownAtRef.current : responseMs
   const remaining = settings.timerSec > 0 ? Math.max(0, settings.timerSec * 1000 - elapsed) : null
 
+  const finishSpeaking = useCallback(async (promptShownAt: number, token: number): Promise<SpeakingMetrics | null> => {
+    const recorder = recorderRef.current
+    if (!recorder?.isRecording) return null
+    const recording = await recorder.stop()
+    const analysis = analyzeSpeech(recording.frames)
+    const firstWordMs =
+      analysis.speechStartMs == null
+        ? null
+        : Math.max(0, Math.round(recording.startedAt + analysis.speechStartMs - promptShownAt))
+    const speechMs = Math.round(analysis.speechMs)
+    const pauseCount = analysis.pauseCount
+    const audioUrl = recording.blob ? URL.createObjectURL(recording.blob) : null
+    // 用户可能已经评分并进入下一张；旧录音的结果不能覆盖新卡片。
+    if (captureTokenRef.current === token) {
+      if (speakingAudioUrlRef.current) URL.revokeObjectURL(speakingAudioUrlRef.current)
+      speakingAudioUrlRef.current = audioUrl
+      const next: SpeakingResult = { analysis, firstWordMs, speechMs, pauseCount, audioUrl }
+      speakingResultRef.current = next
+      setSpeakingResult(next)
+      setSpeakingStatus('ready')
+    } else if (audioUrl) {
+      URL.revokeObjectURL(audioUrl)
+    }
+    return { firstWordMs, speechMs, pauseCount }
+  }, [])
+
   const reveal = useCallback(
     (auto = false) => {
       if (!current || phase !== 'prompt') return
       const measured = performance.now() - shownAtRef.current
       setResponseMs(measured)
+      if (recorderRef.current?.isRecording) void finishSpeaking(shownAtRef.current, captureTokenRef.current)
       setTimedOut(auto)
-      setMatch(input.trim() ? matchAnswer(input, [current.primaryAnswer, ...current.acceptedAnswers]) : null)
+      // 定时器闭包可能持有旧的 input state；直接读 DOM，避免超时揭示时丢掉已输入内容。
+      const currentInput = inputRef.current?.value ?? input
+      setMatch(currentInput.trim() ? matchAnswer(currentInput, [current.primaryAnswer, ...current.acceptedAnswers]) : null)
       setPhase('revealed')
       if (settings.autoPlay) {
         void speak(current.primaryAnswer, { rate: settings.ttsRate, voiceURI: settings.ttsVoiceURI })
       }
     },
-    [current, input, phase, settings.autoPlay, settings.ttsRate, settings.ttsVoiceURI],
+    [
+      current,
+      input,
+      phase,
+      settings.autoPlay,
+      settings.ttsRate,
+      settings.ttsVoiceURI,
+      finishSpeaking,
+    ],
   )
 
   const advance = useCallback(() => {
+    if (recorderRef.current?.isRecording) void recorderRef.current.cancel()
+    captureTokenRef.current += 1
+    clearSpeakingResult()
     setInput('')
     setMatch(null)
     setTimedOut(false)
@@ -158,13 +324,13 @@ export function DrillPage() {
       return
     }
     setCardIndex((value) => value + 1)
-    shownAtRef.current = performance.now()
     setPhase('prompt')
-  }, [index, queue.length])
+  }, [cardIndex, clearSpeakingResult, queue.length])
 
   const grade = (rating: GradeValue) => {
     if (!current) return
     const isNewCard = isNew(progress[current.id]?.fsrs)
+    const captured = speakingResultRef.current
     recordReview({
       cardId: current.id,
       rating,
@@ -181,6 +347,13 @@ export function DrillPage() {
         promptZh: current.promptZh,
         answer: current.primaryAnswer,
         newCard: isNewCard,
+        speaking: captured
+          ? {
+              firstWordMs: captured.firstWordMs,
+              speechMs: captured.speechMs,
+              pauseCount: captured.pauseCount,
+            }
+          : undefined,
       },
     ])
     if (rating === 1 && queue.length < settings.sessionSize + 4) {
@@ -207,6 +380,8 @@ export function DrillPage() {
   }
 
   const finishNow = () => {
+    captureTokenRef.current += 1
+    if (recorderRef.current?.isRecording) void recorderRef.current.cancel()
     if (results.length) {
       finishSession({
         mode: 'reflection',
@@ -225,6 +400,10 @@ export function DrillPage() {
   }
 
   const startAsr = () => {
+    if (settings.speakingEvalEnabled) {
+      setMessage('口语评测已开启，看到卡片直接开口就行，不用再点语音输入。')
+      return
+    }
     if (!asrSupported()) {
       setMessage('当前浏览器不支持语音识别，已切换为键盘输入。')
       return
@@ -320,22 +499,31 @@ export function DrillPage() {
             <Badge tone="warn">{today.reviews} 张今日已练</Badge>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Button variant="primary" size="lg" onClick={() => startSession('due')}>
+            <Button variant="primary" size="lg" onClick={() => void startSession('due')}>
               开始（到期优先）
             </Button>
-            <Button variant="secondary" size="lg" onClick={() => startSession('new')}>
+            <Button variant="secondary" size="lg" onClick={() => void startSession('new')}>
               只练新卡
             </Button>
-            <Button variant="secondary" size="lg" onClick={() => startSession('all')}>
+            <Button variant="secondary" size="lg" onClick={() => void startSession('all')}>
               随机混练
             </Button>
           </div>
           {message && <p className="text-sm text-warn">{message}</p>}
+          {speakingError && <p className="text-sm text-warn">{speakingError}</p>}
           <div className="grid gap-2 text-xs text-muted sm:grid-cols-2">
             <p>· 每天最多引入 {settings.newCardsPerDay} 张新卡</p>
             <p>· 每组 {settings.sessionSize} 张，可随时结束</p>
             <p>· Enter 揭示 · 1-4 评分 · R 重播 · Esc 结束</p>
-            <p>· 语音输入：{settings.asrEnabled ? '已开启' : '可在设置中开启'}</p>
+            <p>· 口语评测：{settings.speakingEvalEnabled ? '已开启（自动录音）' : '可在设置中开启'}</p>
+            <p>
+              · 语音输入：
+              {settings.speakingEvalEnabled
+                ? '口语评测开启时关闭'
+                : settings.asrEnabled
+                  ? '已开启'
+                  : '可在设置中开启'}
+            </p>
           </div>
         </div>
 
@@ -363,6 +551,10 @@ export function DrillPage() {
     const durations = results.map((row) => row.responseMs).filter((value) => value > 0)
     const fastest = durations.length ? Math.min(...durations) : 0
     const weak = results.filter((row) => row.rating <= 2)
+    const speakingRows = results
+      .map((row) => row.speaking)
+      .filter((value): value is SpeakingMetrics => Boolean(value))
+    const speakingSummary = summarizeSpeaking(speakingRows)
     return (
       <div className="mx-auto max-w-3xl space-y-6 py-6">
         <div className="text-center">
@@ -375,10 +567,49 @@ export function DrillPage() {
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <SummaryStat label="复习卡片" value={`${results.length}`} />
-          <SummaryStat label="中位反应" value={durations.length ? formatMs(median(durations)) : '—'} />
+          <SummaryStat
+            label={settings.speakingEvalEnabled ? '中位揭示' : '中位反应'}
+            value={durations.length ? formatMs(median(durations)) : '—'}
+          />
           <SummaryStat label="最快反应" value={fastest ? formatMs(fastest) : '—'} />
           <SummaryStat label="新卡" value={`${results.filter((row) => row.newCard).length}`} />
         </div>
+
+        {speakingSummary.samples > 0 && (
+          <div className="card-surface p-5">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="text-sm font-medium text-cream">口语反应</h2>
+              <span className="text-xs text-muted">{speakingSummary.samples} 张有录音</span>
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-3 text-center">
+              <SpeakingStat
+                label="中位开口"
+                value={
+                  speakingSummary.medianFirstWordMs == null
+                    ? '—'
+                    : formatMs(speakingSummary.medianFirstWordMs)
+                }
+              />
+              <SpeakingStat
+                label="中位说话"
+                value={
+                  speakingSummary.medianSpeechMs == null ? '—' : formatMs(speakingSummary.medianSpeechMs)
+                }
+              />
+              <SpeakingStat
+                label="平均停顿"
+                value={
+                  speakingSummary.meanPauseCount == null
+                    ? '—'
+                    : `${Math.round(speakingSummary.meanPauseCount * 10) / 10} 次`
+                }
+              />
+            </div>
+            <p className="mt-3 text-2xs leading-5 text-muted">
+              首词延迟从卡片出现开始算；没检测到开口的卡片不计入中位开口。
+            </p>
+          </div>
+        )}
 
         {weak.length > 0 && (
           <div className="card-surface p-5">
@@ -395,7 +626,7 @@ export function DrillPage() {
         )}
 
         <div className="flex flex-wrap justify-center gap-3">
-          <Button variant="primary" onClick={() => startSession('due')}>
+          <Button variant="primary" onClick={() => void startSession('due')}>
             <Sparkles size={16} /> 再来一组
           </Button>
           {weak.length > 0 && (
@@ -405,11 +636,7 @@ export function DrillPage() {
                 const cardIds = new Set(weak.map((row) => row.cardId))
                 const cards = index.allCards.filter((card) => cardIds.has(card.id))
                 if (!cards.length) return
-                setQueue(cards)
-                setCardIndex(0)
-                setResults([])
-                setPhase('prompt')
-                shownAtRef.current = performance.now()
+                void beginQueue(cards)
               }}
             >
               <RotateCcw size={16} /> 只练错题
@@ -495,7 +722,7 @@ export function DrillPage() {
                 autoCapitalize="off"
                 spellCheck={false}
               />
-              {settings.asrEnabled && (
+              {settings.asrEnabled && !settings.speakingEvalEnabled && (
                 <button
                   onClick={startAsr}
                   className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-line bg-panel-2 p-2 text-muted hover:text-accent"
@@ -506,6 +733,22 @@ export function DrillPage() {
               )}
             </div>
             {asrTranscript && <p className="text-xs text-muted">识别：{asrTranscript}</p>}
+            {settings.speakingEvalEnabled && (
+              <p className={`flex items-center gap-2 text-xs ${speakingStatus === 'error' ? 'text-warn' : 'text-muted'}`}>
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    speakingStatus === 'recording' ? 'animate-pulse bg-danger' : 'bg-muted'
+                  }`}
+                />
+                {speakingStatus === 'recording'
+                  ? '录音中 · 看到卡片直接开口，不用按键'
+                  : speakingStatus === 'preparing'
+                    ? '正在准备麦克风…'
+                    : speakingStatus === 'error'
+                      ? (speakingError ?? '麦克风不可用')
+                      : '录音未启动，检查麦克风权限'}
+              </p>
+            )}
             <div className="flex flex-wrap items-center gap-3">
               <Button variant="primary" onClick={() => reveal(false)}>
                 <ChevronRight size={16} /> 揭示答案
@@ -538,11 +781,46 @@ export function DrillPage() {
                 </Button>
                 {responseMs > 0 && (
                   <span className="text-xs text-muted">
-                    反应 {formatMs(responseMs)} {timedOut && '· 超时'}
+                    揭示 {formatMs(responseMs)} {timedOut && '· 超时'}
+                  </span>
+                )}
+                {speakingResult && (
+                  <span className="text-xs text-muted">
+                    {speakingResult.firstWordMs == null
+                      ? '· 没检测到开口'
+                      : `· 开口 ${formatMs(speakingResult.firstWordMs)}`}
                   </span>
                 )}
               </div>
             </div>
+
+            {speakingResult && (
+              <div className="rounded-xl border border-line bg-panel p-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-xs text-muted">口语反应</p>
+                  {speakingResult.audioUrl && (
+                    <audio controls src={speakingResult.audioUrl} className="h-8 max-w-[240px]" />
+                  )}
+                </div>
+                <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+                  <SpeakingStat
+                    label="开口"
+                    value={
+                      speakingResult.firstWordMs == null ? '没检测到' : formatMs(speakingResult.firstWordMs)
+                    }
+                  />
+                  <SpeakingStat label="说话" value={formatMs(speakingResult.speechMs)} />
+                  <SpeakingStat label="停顿" value={`${speakingResult.pauseCount} 次`} />
+                </div>
+                <p className="mt-2 text-2xs text-muted">从卡片出现开始计时；300ms 以上的间隔算一次停顿。</p>
+              </div>
+            )}
+            {speakingStatus === 'recording' && (
+              <p className="text-xs text-muted">正在分析录音…</p>
+            )}
+            {speakingStatus === 'error' && speakingError && (
+              <p className="text-xs text-warn">{speakingError}</p>
+            )}
 
             {match && (
               <div className="rounded-xl border border-line bg-panel p-4">
@@ -601,6 +879,15 @@ function SummaryStat({ label, value }: { label: string; value: string }) {
     <div className="card-surface p-4 text-center">
       <p className="text-xs text-muted">{label}</p>
       <p className="mt-1 text-xl font-semibold text-cream">{value}</p>
+    </div>
+  )
+}
+
+function SpeakingStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-2xs text-muted">{label}</p>
+      <p className="mt-0.5 text-sm font-semibold text-cream">{value}</p>
     </div>
   )
 }

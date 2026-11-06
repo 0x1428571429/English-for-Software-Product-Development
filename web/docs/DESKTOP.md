@@ -52,7 +52,8 @@ npm run tauri -- build --no-bundle
 | Service Worker | 启用，可离线安装 | 关闭（Tauri 直接加载本地 dist，不需要 SW） |
 | 数据存储 | 浏览器 IndexedDB | WebView2 profile 内的 IndexedDB，与浏览器数据独立 |
 | 导出备份 | Blob 下载 | 原生保存对话框（Rust `save_backup` 命令），失败/取消有提示 |
-| 语音识别 | Chrome/Edge 支持 | WebView2 不支持 `webkitSpeechRecognition`，相关入口按特性检测自动隐藏 |
+| 语音识别 | Chrome/Edge 支持 | WebView2 视运行时版本而定，相关入口按特性检测自动隐藏 |
+| 口语评测 | 浏览器麦克风权限 | Rust `on_permission_request` 放行麦克风；录音只在本机内存分析，不上传 |
 | TTS | 系统音色 / 百度 / Google / Edge 代理 | 相同；Edge Natural 仍需要本地 `npm run tts:proxy`，未配置时自动回退百度或系统音色 |
 | 安装 | 浏览器安装 PWA | NSIS 安装包，当前用户安装，无需管理员 |
 
@@ -69,9 +70,11 @@ npm run tauri -- build --no-bundle
 2. `src/lib/desktop.ts` 检测 Tauri 环境。
 3. 设置页导出在桌面版调用 `save_backup`，由 Rust 弹原生保存框并写文件。
 4. `src-tauri/` 只包含窗口、图标、备份命令和最小权限，前端仍是一个普通 Vite 应用。
+5. 口语评测的麦克风权限在 Rust 侧用 `on_permission_request` 放行，避免 WebView2 原生权限框阻塞训练；录音只在本地内存分析。
 
 ## 已知限制
 
 - Edge TTS 代理尚未内置到桌面进程：需要单独运行 `npm run tts:proxy`，并在设置里填 `http://127.0.0.1:8787`。后续可以把代理端口用 Rust 重写或作为 sidecar 打包。
+- 口语评测的录音只保存在当前训练页内存里，离开页面即释放；首词延迟等指标目前只在本组结算显示，尚未写入长期统计。
 - WebView2 的语音识别能力取决于运行时版本；当前按不支持处理。
 - 还没有自动更新（Tauri updater）和代码签名，安装包首次运行可能触发 SmartScreen 提示。

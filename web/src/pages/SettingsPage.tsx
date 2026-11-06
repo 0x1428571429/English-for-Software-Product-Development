@@ -348,6 +348,12 @@ export function SettingsPage() {
             onChange={(checked) => settings.update({ showTranslation: checked })}
           />
           <Toggle
+            label="口语反应评测"
+            description="训练时自动录音，统计开口延迟、停顿和说话时长；只在本地分析，不上传。开启后训练页不再显示语音识别按钮。"
+            checked={settings.speakingEvalEnabled}
+            onChange={(checked) => settings.update({ speakingEvalEnabled: checked })}
+          />
+          <Toggle
             label="启用语音识别"
             description="仅 Chrome / Edge 支持；识别结果只作提示，最终仍由你自评"
             checked={settings.asrEnabled}

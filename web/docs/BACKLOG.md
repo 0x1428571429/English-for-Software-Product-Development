@@ -29,6 +29,7 @@
 | R-20 | 剧情中途刷新会回到本集开头 | QA 发现：一集内已做出的选择、信任值、认知收益只存在组件 state；浏览器刷新或误触返回后重置为 0/N，需要从头再选。考虑按 `episodeId` 把 `beatId / trust / history` 存进 story store（含版本迁移与「重新开始」清理），或至少在离开前提示 | `store/useStoryStore.ts`、`pages/StoryEpisodePage.tsx` | todo |
 | R-21 | 把每次发布前的测试记录下来，下次复用 | 新增 QA 手册：环境准备、冒烟路由、13 个功能模块的勾选清单、回归约束、生产/PWA 验证、2026-11-05 测试记录与已知限制 | `docs/QA.md`、`README.md` | done |
 | R-22 | 做一个 Rust + WebView 的桌面应用版本 | 接入 Tauri v2：复用现有前端，桌面构建关闭 PWA/Service Worker；备份导出改为 Rust 原生保存对话框；提供 `desktop:dev` / `desktop:build`、NSIS 安装包、图标与最小权限；文档记录与 Web 版的差异和限制 | `src-tauri/`、`src/lib/desktop.ts`、`vite.config.ts`、`docs/DESKTOP.md` | done |
+| R-23 | 口语反应评测：真正测「开口」而不是「按揭示」 | 录音 + 音量采样，统计首词延迟、说话时长、300ms 以上停顿，揭示后可回放；本组结算显示中位开口/说话/平均停顿；设置页开关；桌面端通过 Tauri 权限回调放行麦克风；分析逻辑独立成模块并覆盖单测 | `src/features/speaking/`、`src/pages/DrillPage.tsx`、`src/store/useSettingsStore.ts`、`src-tauri/src/lib.rs` | done |
 
 ## 已完成（第一季）
 
